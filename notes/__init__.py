@@ -29,6 +29,11 @@ def create_app(test_config=None):
         print(sys.version)
         print(f"Instance path: {app.instance_path}")
 
+    app.config['DATABASE'] = os.path.join(app.instance_path, 'notes.sqlite')
+
+    from . import commands
+    commands.init_app(app)
+
     from . import views
     app.register_blueprint(views.bp)
 
