@@ -10,8 +10,8 @@ def create_app(test_config=None):
     add our commands, add views, and return the app.
 
     Note that Flask has a system for putting config files into the instance
-    folder but we are opting to use environment variables instead, to avoid
-    having to managing configuration in different places.
+    path but we are opting to use environment variables instead, to avoid
+    having to manage configuration in different places.
 
     `instance_path` is where the database is stored.
     """
