@@ -1,3 +1,6 @@
 .env
 .venv
-instance/*
+instance/
+__pycache__
+*.egg-info/
+.pytest_cache/
