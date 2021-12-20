@@ -17,19 +17,24 @@ def create_app(test_config=None):
     """
     instance_path = os.getenv('INSTANCE_PATH', None)
 
-    if instance_path is None:
-        app = Flask(__name__)
-    else:
+    if instance_path:
         app = Flask(__name__, instance_path=instance_path)
+    else:
+        # Flask defaults to setting `instance_path` to a directory named
+        # `instance` next to the package.
+        app = Flask(__name__)
 
-    # ensure the instance folder exists
-    os.makedirs(app.instance_path, exist_ok=True)
+    if test_config:
+        app.config.update(test_config)
+    else:
+        # ensure the instance folder exists
+        os.makedirs(app.instance_path, exist_ok=True)
 
-    if app.config['ENV'] == 'development':
-        print(sys.version)
-        print(f"Instance path: {app.instance_path}")
+        if app.config['ENV'] == 'development':
+            print(sys.version)
+            print(f"Instance path: {app.instance_path}")
 
-    app.config['DATABASE'] = os.path.join(app.instance_path, 'notes.sqlite')
+        app.config['DATABASE'] = os.path.join(app.instance_path, 'notes.sqlite')
 
     from . import commands
     commands.init_app(app)
