@@ -37,6 +37,13 @@ python3 -m venv .venv
 Install the package in editable mode via pip:
 
 ```
+pip install -e .
+```
+
+If you'll be hacking on the code, you can also install the (optional)
+development dependencies:
+
+```
 pip install -e '.[dev]'
 ```
 
@@ -93,7 +100,7 @@ http://localhost:5000/
 To run the tests, install the test dependencies and run `pytest`:
 
 ```
-pip install '.[test]'
+pip install -e '.[test]'
 pytest
 ```
 
