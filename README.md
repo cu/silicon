@@ -125,26 +125,27 @@ HTTP basic authentication enabled.
 
 ## Why can't I add tags to a page? Or put pages into a heirarchy or namespaces?
 
-A previous iteration of this project supported these features, but I decided
-to remove them. I found that no matter how hard I tried, I ended up using
-tags and page heirarchies inconsistently across varous subjects. Some
-sections had a nice obvious heirarchical system, others lent themselves more
-to tags. Still others didn't fit either well.
+Previous iterations of this project supported these features. But I found
+that no matter how hard I tried, I ended up using tags and page heirarchies
+inconsistently across varous subjects. Some subjects lent themselves to a
+nice obvious heirarchical system, others worked better with tags. Still
+others didn't fit either well.
 
-Next I tried ditching tags altogether because managing an accurate list of
+First I dropped support for tags because managing an accurate list of
 relevant tags for each and every page, and reviewing them on every edit,
 became a chore that I grew to loathe. Plus on the development side of things,
-saving tags with each revision meant an extra layer of metadata. So I got rid
-of tags and only supported heirarchies (via namespaces).
+saving tags with each revision meant an extra layer of metadata. Since the FTS5
+search engine in SQLite is excellent, tags became a labor-intensive redundant
+feature.
 
-Until I got rid of those too. I found that I only ever used them in one
+Until I got rid of heirarchies too. I found that I only ever used them in one
 section (my notes on Python) and found myself having to look up the linking
-syntax involving namespaces every. single. time. Since SQLite has an awesome
-full-text search engine built right in, I found that I could do "soft"
-namespacing and just find everything I need through the search which returns
-matches on both titles and body text. These days, the pages that make up my
-section of Python notes look something like this (after slugifying the page
-names):
+syntax involving namespaces every. Single. Time. Again, thanks to FTS5, I
+found that I could do "soft" namespacing via page title prefixes (e.g.
+"python_operators" instead of "python/operators") and just find everything I
+need through the search which returns matches on both titles and body text.
+These days, the pages that make up my section of Python notes look something
+like this (after slugifying the page names):
 
 * python
 * python_operators
@@ -153,6 +154,7 @@ names):
 * python_virtual_environments
 * (et al)
 
-To put it another way, I want my notes to be a tool. They have very low value
-on their own, but very high value in conjunction with my work. Any time spent
-"curating" them is value subtracted from more important endeavours.
+To put it another way, I want my database of notes to be a tool. They have
+very low value on their own, but very high value in conjunction with my
+day-to-day work. Any time spent "curating" them is time subtracted from
+getting important things done.
