@@ -1,0 +1,20 @@
+:root {
+    --nav-background: rgb(221, 221, 221);
+    --nav-text: rgb(0, 0, 0);
+    --nav-title-background: rgb(52, 58, 64);
+    --nav-title-text: rgb(255, 255, 255);
+    --nav-page-links: rgb(51, 122, 183);
+    --nav-text: rgb(119, 119, 119);
+    --nav-button-background: rgb(51, 122, 183);
+    --nav-button-background-hover: rgba(51 ,122 ,183 ,0.75);
+    --nav-button-text: rgb(255, 255, 255);
+
+    --article-code-text: rgb(0, 0, 0);
+    --article-pre-background: rgb(236, 237, 239);
+    --article-pre-text: rgb(0, 0, 0);
+    --article-pre-border: rgb(214, 216, 219);
+    --article-header-underline: rgb(127, 127, 127);
+    --article-internal-link: rgb(45, 169, 74);
+    --article-external-link: rgb(0, 0, 238);
+    --article-external-link-visited: rgb(85, 26, 139);
+}

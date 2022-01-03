@@ -1,0 +1,25 @@
+.nav-side {
+    display: none;
+}
+
+.nav-top {
+    text-align: center;
+}
+
+.nav-top .menu-toggle {
+    display: none
+}
+
+.nav-top .page-title {
+    font-size: 26px;
+    font-family: serif;
+    color: black;
+}
+
+.nav-top .edit-link {
+    display: none;
+}
+
+.nav-bottom {
+    display: none;
+}

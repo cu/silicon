@@ -1,0 +1,257 @@
+.grid-for-nav {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-side {
+    padding-bottom: 3em;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    min-height: 100%;
+    color: var(--nav-text);
+    background: var(--nav-background);
+    z-index: 200;
+}
+
+.side-scroll {
+    /* width: 320px; */
+    position: relative;
+    overflow-x: hidden;
+    /* overflow-y: scroll; */
+    height: 100%;
+}
+
+.menu-vertical {
+    width: 300px;
+}
+
+.menu-vertical ul {
+    padding-left: 1em;
+    /* margin-bottom: 0.25em; */
+}
+
+.menu-vertical ul li {
+    list-style-type: none;
+}
+
+.nav-content-wrap {
+    margin-left: 300px;
+    min-height: 100%;
+}
+
+.nav-top {
+    display: none;
+    /* text-align: center; */
+}
+
+.menu-toggle {
+    float: left;
+    font-size: 1.1em;
+    /*font-weight: bold; */
+}
+
+.nav-top a {
+    float: right;
+    background: var(--nav-button-background);
+    color: var(--nav-button-text);
+    font-size: 14px;
+    padding: 0.5em;
+    margin-right: 0.5em;
+    text-decoration: none;
+    border-radius: 0.3em;
+}
+
+.nav-top a:hover {
+    background: var(--nav-button-background-hover);
+}
+
+.nav-content {
+    padding: 1.618em 3.326em;
+    height: 100%;
+    margin: 0;
+}
+
+.nav-page-title {
+    background: var(--nav-title-background);
+    padding-top: 0.25em;
+    padding-bottom: 0.25em;
+    border-bottom: 1px solid gray;
+    text-align: center;
+}
+
+.page-title {
+    color: var(--nav-title-text);
+    text-decoration: none;
+    font-size: 1.25em;
+}
+
+.nav-header {
+    /* background: var(--nav-header-background); */
+    color: var(--nav-text);
+    /* text-align: center; */
+    margin: 0.5em;
+    font-weight: bold;
+    font-size: 0.9em;
+    text-transform: uppercase;
+}
+
+.nav-page-timestamp {
+    color: var(--nav-text);
+    text-align: center;
+    margin: 0.5em 0 0.5em 0;
+}
+
+.nav-page-links {
+    color: var(--nav-text);
+    text-align: center;
+    /* font-size: 0.9em; */
+    margin: 0.5em 0 0.5em 0;
+}
+
+.nav-page-links a {
+    color: var(--nav-page-links);
+    text-decoration: none;
+}
+
+.nav-page-links a:hover {
+    text-decoration: underline;
+}
+
+#toc a {
+    color: var(--nav-page-links);
+    text-decoration: none;
+}
+
+#toc a:hover {
+    text-decoration: underline;
+}
+
+#toc ol {
+    list-style-type: decimal;
+    padding-left: 2em;
+}
+#toc ol ol { list-style-type: upper-alpha; }
+#toc ol ol ol { list-style-type: upper-roman; }
+#toc ol ol ol ol { list-style-type: lower-alpha; }
+#toc ol ol ol ol ol { list-style-type: lower-roman; }
+#toc ol ol ol ol ol ol { list-style-type: lower-greek; }
+
+.nav-bottom {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    background: var(--nav-background);
+    z-index: 400;
+}
+
+.nav-form {
+    margin: 0.5em;
+}
+
+.nav-controls {
+    display: flex;
+}
+
+.edit-link, .menu-toggle {
+    background: var(--nav-button-background);
+    color: var(--nav-button-text);
+    font-size: 14px;
+    padding: 0.5em;
+    margin-right: 0.5em;
+    text-decoration: none;
+    border-radius: 0.3em;
+    border: none;
+}
+
+.edit-link:hover, .menu-toggle:hover {
+    background: var(--nav-button-background-hover);
+}
+
+.nav-controls input {
+    font-size: 14px;
+    width: 100%;
+    padding: 0.5em;
+    border-radius: 0.3em;
+    border: none;
+}
+
+
+@media screen and (max-width: 768px) {
+    .nav-side {
+        left: -300px;
+    }
+
+    .nav-bottom {
+        width: 85%;
+    }
+
+    .nav-top::after {
+        clear: both;
+    }
+
+    .nav-top::after, .nav-top::before {
+        display: table;
+        content: "";
+    }
+
+    .nav-top {
+        background: var(--nav-title-background);
+        padding: 0.5em 0.5em;
+        position: fixed;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        text-align: center;
+    }
+
+    .nav-top .page-title {
+        width: 100%;
+    }
+
+    .nav-content-wrap {
+        margin-left: 0;
+    }
+
+    .nav-content {
+        padding: 1.618em;
+    }
+
+    .nav-side.shift {
+        width: 85%;
+        left: 0;
+    }
+
+    .menu-vertical {
+        width: auto;
+    }
+
+    .nav-page-title, .nav-bottom, #nav-edit-link {
+        display: none;
+    }
+
+    .nav-content-wrap.shift {
+        position: fixed;
+        min-width: 100%;
+        left: 85%;
+        top: 0;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .nav-bottom.shift {
+        display: block;
+    }
+
+    article {
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+}

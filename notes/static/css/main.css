@@ -1,0 +1,81 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 14px;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body, html {
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    min-height: 100%;
+    font-family: sans-serif;
+}
+
+article, nav, section {
+    display: block;
+}
+
+article a {
+    color: var(--article-external-link);
+}
+
+article a:visited {
+    color: var(--article-external-link-visited);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    font-weight: normal;
+    font-family: serif;
+}
+
+h1 {
+    font-size: 1.75rem;
+    border-bottom: 1px solid var(--article-header-underline);
+}
+
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.35rem; }
+h4 { font-size: 1.20rem; }
+h5 { font-size: 1.05rem; }
+
+h6 {
+    font-size: 1rem;
+    text-decoration: underline;
+}
+
+code {
+    color: var(--article-code-text);
+    background-color: var(--article-pre-background);
+}
+
+pre {
+    background-color: var(--article-pre-background);
+    border: 1px solid var(--article-pre-border);
+    border-radius: 0.5em;
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    overflow: auto;
+}
+
+pre code {
+    color: var(--article-pre-text);
+    background-color: var(--article-pre-background);
+}
+
+.internal-link {
+    color: var(--article-internal-link);
+    text-decoration: none;
+}
+
+.internal-link:hover {
+    text-decoration: underline;
+}
