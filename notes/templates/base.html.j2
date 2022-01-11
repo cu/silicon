@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" type="text/css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" type="text/css" media="screen">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/print.css') }}" type="text/css" media="print">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pygments.css') }}" type="text/css" media="screen">
   <script src="{{ url_for('static', filename='node_modules/jquery/dist/jquery.slim.min.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/notes.js') }}" defer></script>
 <body>
@@ -68,44 +69,6 @@
                   </ol>
                 </ol>
               </ol>
-              <!-- <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li>
-              <li><a href="#">Long list of items</a></li> -->
             </ul>
           </div>
         </div>
@@ -121,120 +84,8 @@
       </nav>
       <!-- main content area wrapper -->
       <div class="nav-content">
-        <article>
-
-Lol, some text.
-
-<h1>Heading One</h1>
-<h2>Heading Two</h2>
-<h3>Heading Three</h3>
-<h4>Heading Four</h4>
-<h5>Heading Five</h5>
-<h6>Heading Six</h6>
-
-<h1>See Also</h1>
-<p>This page covers topics applicable to both Desktop and Server, there are links below to pages which cover items specific to one of those:</p>
-<ul>
-<li><a class="internal-link" href="/view/ubuntu_desktop">Ubuntu Desktop</a></li>
-<li><a class="internal-link" href="/view/ubuntu_server">Ubuntu Server</a></li>
-</ul>
-<pre><code>May 15 00:17:01 figaro CRON[21842]: pam_unix(cron:session): session opened for user root by (uid=0)
-May 15 00:17:01 figaro CRON[21842]: pam_unix(cron:session): session closed for user root</code></pre>
-<p>Also related:</p>
-<ul>
-<li><a class="internal-link" href="/view/debian">Debian</a></li>
-<li><a class="internal-link" href="/view/debian_packaging">Debian Packaging</a></li>
-<li><a class="internal-link" href="/view/dns_on_linux">DNS on Linux</a></li>
-</ul>
-<h1>References</h1>
-<p><a href="https://ubuntu.com/server/docs">https://ubuntu.com/server/docs</a> is actually a pretty good guide to a lot of Ubuntu (and not) specific stuff like AppArmor, multipass, lxd, various services, etc. It appears to be a different thing from <a href="https://help.ubuntu.com/lts/serverguide/index.html">https://help.ubuntu.com/lts/serverguide/index.html</a></p>
-<h1>Releases</h1>
-<p><a href="https://en.wikipedia.org/wiki/Ubuntu_version_history#Table_of_versions">https://en.wikipedia.org/wiki/Ubuntu_version_history#Table_of_versions</a></p>
-<h1>Upgrades / Packaging / Releases</h1>
-<p>(as root)</p>
-<pre><code>apt update
-apt -y full-upgrade</code></pre>
-<p>See also: <a class="internal-link" href="/view/debian_packaging">debian packaging</a>.</p>
-<p>To upgrade to a new version, run:</p>
-<pre><code>do-release-upgrade</code></pre>
-<p>To upgrade from LTS to non-LTS</p>
-<p>Normally, one would run <code>do-release-upgrade</code> to upgrade from one Ubuntu release to the next. However, if you installed an LTS release, this will only upgrade you to the next LTS release, not the next normal release. Good, in theory, except when that's not what you want. In <code>/etc/update-manager/release-upgrades</code>, change the <code>Prompt</code> field from <code>lts</code> to <code>normal</code> and then try <code>do-release-upgrade</code> again.</p>
-<h2>Repositories</h2>
-<p>Accordion to the wiki:</p>
-<ul>
-<li>Main - Canonical-supported free and open-source software.</li>
-<li>Universe - Community-maintained free and open-source software.</li>
-<li>Restricted - Proprietary drivers for devices.</li>
-<li>Multiverse - Software restricted by copyright or legal issues. </li>
-<li>Partner - Proprietary and closed-source software (not enabled by default)</li>
-</ul>
-<p>Ubuntu Server 18.04 seems to not ship with the universe and multiverse repositories. Enabling them is easy, just edit <code>/etc/apt/sources.list</code> or run:</p>
-<pre><code>add-apt-repository universe
-add-apt-repository multiverse</code></pre>
-<h2>LTS Enablement stacks</h2>
-<p>So apparently if you install from a 14.04.2 ISO, you automatically get this "LTS Enablement Stack" which has newer X and kernel drivers. They say it's not recommended for cloud or VM images, but don't specify why.</p>
-<p>So, bottom line:</p>
-<ul>
-<li>Install 14.04.1 for virtualized images</li>
-<li>Install 14.04.2 for desktops and servers on real hardware</li>
-</ul>
-<h2>Install a kernel from proposed</h2>
-<p>Can't just install one kernel package, there are several. Let's say I'm running zesty and need the kernel in the proposed repository because that one fixes a particular bug that I'm seeing. (e.g. docker) First we enable the "proposed" repository <a href="https://wiki.ubuntu.com/Testing/EnableProposed">as detailed here</a>. Then we <code>apt update</code> and <code>apt install</code> the following packages:</p>
-<ul>
-<li>linux-generic/zesty-proposed</li>
-<li>linux-headers-generic/zesty-proposed</li>
-<li>linux-libc-dev/zesty-proposed</li>
-</ul>
-<p>For some reason, if we don't have all three of these (or some subset of their deps, a bunch of our hardware stops working.</p>
-<h1>Shell Environment</h1>
-<h2>Unfuck /bin/ls</h2>
-<p>From the factory, Ubuntu has an utterly retarded way of listing files and directories with /bin/ls. It ignores case and dot files when sorting. To fix, add the following to /etc/environment and /etc/default/locale:</p>
-<pre><code>LC_COLLATE="C"</code></pre>
-<p>To get dotfiles to show up by default, edit ~/.bashrc and edit the 'ls' alias.</p>
-<p>(Note: I don't do this any more because I just got used to the default en_US.UTF-8 sorting. Also it doesn't fix the fact that dirs should really be listed before files. Maybe some day.)</p>
-<h2>Add a touch of color</h2>
-<p>(Work in progress)</p>
-<pre><code>sudo apt-get install grc</code></pre>
-<p>Add this to ~/.bashrc:</p>
-<pre><code>alias ping='grc ping'
-alias grep='grep --color=auto'</code></pre>
-<p>I'll have to play around with this some more, a quick tour shows that it is pretty good at colorizing these things:</p>
-<ul>
-<li>mount</li>
-<li>ps</li>
-<li>ping</li>
-<li>netstat</li>
-</ul>
-<p>And is bad at these:</p>
-<ul>
-<li>ls</li>
-<li>df</li>
-</ul>
-<p>But it does some more and looks configurable, so look into that.</p>
-<h1>Security Checklist</h1>
-<h2>Fix $HOME permissions</h2>
-<p>"The contents of your home directory will normally be visible to all users on the system, to make it easier to share files among users." Wow, I almost never want to do that.</p>
-<pre><code>chmod 700 ~</code></pre>
-<p>Also, change DIR_MODE in /etc/adduser.conf from 0755 to 0700.</p>
-<h1>System Stuff</h1>
-<h2>Prevent crond + PAM auth.log spam</h2>
-<p>If you have cron jobs which fire off frequently, auth.log will fill up rapidly with lines that look like this:</p>
-<p>The sheer quantity of these make it difficult to keep an eye out for important log entries. One of my auth.log files stretched 7 days, contained almost half a meg of data, and 99.8% of the data in the log file were these cron notices.</p>
-<p>Fortunately, the solution is quite simple. Edit /etc/pam.d/cron and comment out this line:</p>
-<pre><code>@include common-session-noninteractive</code></pre>
-<h1>Loading kernel modules on boot</h1>
-<p>For the most part, deliberately loading kernel modules at boot isn't really necessary thanks to udev and whatever else. There are exceptions, however.</p>
-<p>Every place on the net says that you can have a module boot tells you to add the module (plus any arguments) to <code>/etc/modules</code>. This is true, but in Ubuntu 16.04, you're no longer able to specify parameters with this file. Instead, those have to be in a file in /etc/modprobe.d/foo.conf. To use a completely random example, say we need to load the <code>nbd</code> module and pass to it the arguments of <code>max-part=15</code>:</p>
-<p>Add this line to <code>/etc/modules</code>:</p>
-<pre><code>nbd</code></pre>
-<p>And create <code>/etc/modprobe.d/nbd.conf</code> with this line:</p>
-<pre><code>options nbd max_part=15</code></pre>
-<p>It seems like there should be a way to load the module from the file in /etc/modprobe.d but I haven't found a way to do that.</p>
-<h1>Snaps suck</h1>
-<p>I don't mind them being there, and they're fine for certain things. But Ubuntu is pushing them hard, to the point that a snap is the only way that I can install Chromium. And this makes starting it slow.</p>
-        </article>
+      {% block content %}{% endblock %}
       </div>
-
 
     </section>
   </div>
@@ -242,7 +93,7 @@ alias grep='grep --color=auto'</code></pre>
   <div class="nav-bottom" data-toggle="nav-bottom" role="note" aria-label="versions">
     <form class="nav-form" action="/search" method="get">
       <div class="nav-controls">
-        <a class="edit-link" id="nav-edit-link" href="#">Edit</a>
+        <a class="edit-link" id="nav-edit-link" href="{{ url_for('page.edit', title=title) }}">Edit</a>
         <input id="search" name="query" type="text" placeholder="🔍 Search">
       </div>
     </form>

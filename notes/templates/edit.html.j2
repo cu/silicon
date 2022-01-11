@@ -1,0 +1,32 @@
+
+{% extends "base.html.j2" %}
+
+{% block content %}
+<form class="wrap" action="{{ url_for('page.edit', title=title) }}" id="page-form" method="post">
+    <div class="border">
+      <textarea id="body" name="body" rows="24" cols="80">{{ body }}</textarea>
+    </div>
+
+    <div id="buttons">
+      <input type="submit" value="Submit">
+      <a href="{{ url_for('page.view', title=title) }}">Cancel</a>
+
+      <!-- this will _show_ multiple messages but due to space contraints
+           there won't much much room for more than one -->
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <span id="alert-container">
+        |
+        {% for message in messages %}
+        <span id="alert">{{ message }}</span>
+        {% endfor %}
+        <span id="alert-close">
+          <a href="#">[dismiss]</a>
+        </span>
+      </span>
+      {% endif %}
+      {% endwith %}
+
+    </div>
+  </form>
+{% endblock %}

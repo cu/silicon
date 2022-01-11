@@ -1,0 +1,12 @@
+{% extends "base.html.j2" %}
+
+{% block content %}
+  <article>
+    {% if revision is none() %}
+      {% include 'not_found.html.j2' %}
+    {% else %}
+      {{ html|safe }}
+
+    {% endif %}
+  </article>
+{% endblock %}
