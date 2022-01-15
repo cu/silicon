@@ -27,24 +27,12 @@ that means the following packages:
 
 ## Installation for development or local use
 
-Create a virtual env:
+Install [Poetry](https://python-poetry.org/) if necessary.
 
-```sh
-python3 -m venv .venv
-. .venv/bin/activate
-```
-
-Install the package in editable mode via pip:
+Use poetry to create a virtual environment and install the dependencies:
 
 ```
-pip install -e .
-```
-
-If you'll be hacking on the code, you can also install the (optional)
-development dependencies:
-
-```
-pip install -e '.[dev]'
+poetry install
 ```
 
 Install third-party Javascript/CSS static packages:
@@ -62,7 +50,6 @@ docker run -ti --rm -v $PWD/notes/static:/app -w /app node:alpine npm install
 Flask is configured via environment variables. There is a file called
 `.flaskenv` which sets the name of the app. If you want to run `flask` from
 somewhere else, you will need to set:
-
 
 ```
 FLASK_APP=notes
@@ -85,13 +72,13 @@ run the following command. It will create an `instance` directory in the root
 of the project and initialize the SQLite database from `schema.sql`.
 
 ```
-flask init-db
+poetry run flask init-db
 ```
 
 Run the project via the `flask` development server:
 
 ```
-flask run
+poetry run flask run
 ```
 
 Unless you changed the defaults, you should be able to access the UI on
@@ -100,8 +87,7 @@ http://localhost:5000/
 To run the tests, install the test dependencies and run `pytest`:
 
 ```
-pip install -e '.[test]'
-pytest
+poetry run pytest
 ```
 
 
