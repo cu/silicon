@@ -24,7 +24,7 @@ tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>
 name = "beautifulsoup4"
 version = "4.10.0"
 description = "Screen-scraping library"
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">3.0.0"
 
@@ -232,7 +232,7 @@ unidecode = ["Unidecode (>=1.1.1)"]
 name = "soupsieve"
 version = "2.3.1"
 description = "A modern CSS selector implementation for Beautiful Soup."
-category = "main"
+category = "dev"
 optional = false
 python-versions = ">=3.6"
 
@@ -277,7 +277,7 @@ watchdog = ["watchdog"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "7dafe42623dbd04721a269e9f99df7160d4ceb55a899c5b715775fb241e86619"
+content-hash = "854a4f80ee029f3b3da766f527856197014aa6e874afec8023a816251e628424"
 
 [metadata.files]
 atomicwrites = [
