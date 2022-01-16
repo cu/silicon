@@ -56,16 +56,26 @@ FLASK_APP=notes
 ```
 
 All other settings can either be set as environment variables or written to a
-file named `.env` in the project root. You can set any environment variables
-mentioned in the Flask or Werkzeug docs, but these are some you might care to
-know about:
+file named `.env` in the project root. For development, this will suffice:
+
+```
+FLASK_ENV=development
+WERKZEUG_DEBUG_PIN=off
+SECRET_KEY=for_dev_use_only
+```
+
+You can set any environment variables mentioned in the Flask or Werkzeug
+docs, but these are some you might care to know about:
 
 * `FLASK_ENV`: `production` (default), or `development`
 * `FLASK_RUN_HOST`: defaults to `127.0.0.1`
 * `FLASK_RUN_PORT`: defaults to `5000`
 * `INSTANCE_PATH`: where the notes data (in particular the database) is stored
 * `WERKZEUG_DEBUG_PIN`: the PIN to enable the Werkzeug debug console. Set to
-"off" to disable it if you are sure the app is only listening on localhost.
+  "off" to disable it if you are sure the app is only listening on localhost.
+* `SECRET_KEY`: A string used in session cookies. For development purposes, this
+  can be anything, but for production it should be a 16-byte (or larger) string
+  of random characters.
 
 To initialize the database after the configuration settings have been set,
 run the following command. It will create an `instance` directory in the root
