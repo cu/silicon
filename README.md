@@ -112,6 +112,19 @@ HTTP basic authentication enabled.
 
 {An example scenario or two go here.}
 
+## Running tests
+
+```
+poetry run pytest
+```
+
+If you have a tmpfs filesystem, you can set the `TMP` environment variable to
+have test databases created there:
+
+```
+TMP=/dev/shm poetry run pytest
+```
+
 
 # Terminology
 
