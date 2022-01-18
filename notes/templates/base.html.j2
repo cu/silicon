@@ -22,14 +22,14 @@
         <div class="menu-vertical" data-spy="affix" role="navigation" aria-label="main naviation">
 
           <div class="nav-page-title">
-            <a href="#" class="page-title">page_title</a>
+            <a href="{{ url_for('page.view', title=title) }}" class="page-title">{{ title }}</a>
           </div>
 
           <div class="nav-page-timestamp">Edited: Nov 12 2021, 09:44:27</div>
 
           <div class="nav-page-links">
             [
-            <a href="#">History </a> |
+            <a href="#">History</a> |
             <a href="#">Home</a> |
             <a href="#">Docs</a>
             ]

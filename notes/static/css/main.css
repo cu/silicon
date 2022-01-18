@@ -22,6 +22,23 @@ article, nav, section {
     display: block;
 }
 
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a.internal-link {
+    color: var(--article-internal-link);
+    text-decoration: none;
+}
+
+a.internal-link:visited {
+    color: var(--article-internal-link);
+}
+
 article a {
     color: var(--article-external-link);
 }
@@ -69,13 +86,4 @@ pre {
 pre code {
     color: var(--article-pre-text);
     background-color: var(--article-pre-background);
-}
-
-.internal-link {
-    color: var(--article-internal-link);
-    text-decoration: none;
-}
-
-.internal-link:hover {
-    text-decoration: underline;
 }

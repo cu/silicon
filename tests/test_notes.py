@@ -50,7 +50,7 @@ def test_markdown_link(client):
     r = client.post("/edit/test", data={"body": "[[link]]"}, follow_redirects=True)
     assert (
         str(_page(r.data).article.p.a)
-        == '<a class="internal_link" href="/view/link">link</a>'
+        == '<a class="internal-link" href="/view/link">link</a>'
     )
 
 
@@ -61,8 +61,8 @@ def test_markdown_link_alt_title(client):
         "/edit/test", data={"body": "[[link|alt title]]"}, follow_redirects=True
     )
     assert (
-        str(_page(r.data).article.find(class_="internal_link"))
-        == '<a class="internal_link" href="/view/link">alt title</a>'
+        str(_page(r.data).article.find(class_="internal-link"))
+        == '<a class="internal-link" href="/view/link">alt title</a>'
     )
 
 

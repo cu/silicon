@@ -63,7 +63,6 @@
     font-size: 14px;
     padding: 0.5em;
     margin-right: 0.5em;
-    text-decoration: none;
     border-radius: 0.3em;
 }
 
@@ -87,14 +86,11 @@
 
 .page-title {
     color: var(--nav-title-text);
-    text-decoration: none;
     font-size: 1.25em;
 }
 
 .nav-header {
-    /* background: var(--nav-header-background); */
     color: var(--nav-text);
-    /* text-align: center; */
     margin: 0.5em;
     font-weight: bold;
     font-size: 0.9em;
@@ -110,26 +106,15 @@
 .nav-page-links {
     color: var(--nav-text);
     text-align: center;
-    /* font-size: 0.9em; */
     margin: 0.5em 0 0.5em 0;
 }
 
 .nav-page-links a {
     color: var(--nav-page-links);
-    text-decoration: none;
-}
-
-.nav-page-links a:hover {
-    text-decoration: underline;
 }
 
 #toc a {
     color: var(--nav-page-links);
-    text-decoration: none;
-}
-
-#toc a:hover {
-    text-decoration: underline;
 }
 
 #toc ol {
@@ -173,6 +158,7 @@
 
 .edit-link:hover, .menu-toggle:hover {
     background: var(--nav-button-background-hover);
+    text-decoration: none;
 }
 
 .nav-controls input {

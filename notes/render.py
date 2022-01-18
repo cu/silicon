@@ -47,7 +47,7 @@ class WikiLinkMixin():
         Render link as HTML
         """
         link = url_for('page.view', title=page)
-        return f'<a class="internal_link" href="{link}">{alt}</a>'
+        return f'<a class="internal-link" href="{link}">{alt}</a>'
 
 class WikiLinkInlineLexer(InlineLexer):
     def __init__(self, renderer, rules=None, **kwargs):
