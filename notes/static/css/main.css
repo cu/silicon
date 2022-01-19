@@ -87,3 +87,29 @@ pre code {
     color: var(--article-pre-text);
     background-color: var(--article-pre-background);
 }
+
+article table {
+    border: 1px solid gray;
+    line-height: 1.5em;
+    border-collapse: collapse;
+}
+
+article table th {
+    font-weight: bold;
+    border: 1px solid var(--article-table-border);
+    padding: 0.25em;
+    background: var(--article-background);
+}
+
+article table td {
+    padding: 0.25em;
+    border: 1px solid var(--article-table-border);
+}
+
+article table tr:hover {
+    background: var(--article-table-hover);
+}
+
+tr:nth-child(odd) {
+    background: var(--article-table-stripe);
+}

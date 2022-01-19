@@ -1,19 +1,23 @@
 :root {
     --nav-background: rgb(221, 221, 221);
-    --nav-text: rgb(0, 0, 0);
+    --nav-text: black;
     --nav-title-background: rgb(52, 58, 64);
-    --nav-title-text: rgb(255, 255, 255);
+    --nav-title-text: white;
     --nav-page-links: rgb(51, 122, 183);
     --nav-text: rgb(119, 119, 119);
-    --nav-button-background: rgb(51, 122, 183);
+    --nav-button-background: var(--nav-page-links);
     --nav-button-background-hover: rgba(51 ,122 ,183 ,0.75);
-    --nav-button-text: rgb(255, 255, 255);
+    --nav-button-text: white;
 
-    --article-code-text: rgb(0, 0, 0);
+    --article-background: white;
+    --article-code-text: black;
     --article-pre-background: rgb(236, 237, 239);
-    --article-pre-text: rgb(0, 0, 0);
+    --article-pre-text: black;
     --article-pre-border: rgb(214, 216, 219);
-    --article-header-underline: rgb(127, 127, 127);
+    --article-table-border: var(--article-pre-border);
+    --article-table-stripe: var(--article-pre-background);
+    --article-table-hover: var(--nav-background);
+    --article-header-underline: gray;
     --article-internal-link: rgb(45, 169, 74);
     --article-external-link: rgb(0, 0, 238);
     --article-external-link-visited: rgb(85, 26, 139);
