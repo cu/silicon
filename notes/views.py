@@ -16,6 +16,7 @@ bp = Blueprint('page', __name__)
 
 @bp.route('/view/')
 @bp.route('/edit/')
+@bp.route('/history/')
 @bp.route('/')
 def home():
     return redirect(url_for('page.view', title='home'))
@@ -56,3 +57,12 @@ def edit(title):
                 return render_template('edit.html.j2',
                     title=title, body=request.form['body'])
         return redirect(url_for('page.view', title=title))
+
+@bp.route('/history/<path:title>')
+def history(title):
+    return "Not Yet Implemented"
+
+@bp.route('/docs/', defaults={'title': 'overview'})
+@bp.route('/docs/<path:title>')
+def docs(title):
+    return f"{title}: Not Yet Implemented"

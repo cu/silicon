@@ -27,9 +27,9 @@
 
           <div class="nav-page-links">
             [
-            <a href="#">History</a> |
-            <a href="#">Home</a> |
-            <a href="#">Docs</a>
+            <a href="{{ url_for('page.history', title=title) }}">History</a> |
+            <a href="{{ url_for('page.view', title='home') }}">Home</a> |
+            <a href="{{ url_for('page.docs') }}">Docs</a>
             ]
           </div>
 
