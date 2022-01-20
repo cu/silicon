@@ -137,31 +137,11 @@
     z-index: 400;
 }
 
-.nav-form {
+.nav-input-wrap {
     margin: 0.5em;
 }
 
-.nav-controls {
-    display: flex;
-}
-
-.edit-link, .menu-toggle {
-    background: var(--nav-button-background);
-    color: var(--nav-button-text);
-    font-size: 14px;
-    padding: 0.5em;
-    margin-right: 0.5em;
-    text-decoration: none;
-    border-radius: 0.3em;
-    border: none;
-}
-
-.edit-link:hover, .menu-toggle:hover {
-    background: var(--nav-button-background-hover);
-    text-decoration: none;
-}
-
-.nav-controls input {
+.nav-input-wrap input {
     font-size: 14px;
     width: 100%;
     padding: 0.5em;
@@ -169,6 +149,32 @@
     border: none;
 }
 
+.nav-button-wrap {
+    text-align: center;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin: 0.5em;
+}
+
+.edit-link, .menu-toggle {
+    background: var(--nav-button-background);
+    color: var(--nav-button-text);
+    font-size: 14px;
+    padding: 0.5em;
+    text-decoration: none;
+    border-radius: 0.3em;
+    border: none;
+}
+
+.edit-link {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.edit-link:hover, .menu-toggle:hover {
+    background: var(--nav-button-background-hover);
+    text-decoration: none;
+}
 
 @media screen and (max-width: 768px) {
     .nav-side {
@@ -219,7 +225,7 @@
         width: auto;
     }
 
-    .nav-page-title, .nav-bottom, #nav-edit-link {
+    .nav-page-title, .nav-bottom {
         display: none;
     }
 

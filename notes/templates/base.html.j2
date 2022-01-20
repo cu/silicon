@@ -25,8 +25,6 @@
             <a href="{{ url_for('page.view', title=title) }}" class="page-title">{{ title }}</a>
           </div>
 
-          <div class="nav-page-timestamp">Edited: Nov 12 2021, 09:44:27</div>
-
           <div class="nav-page-links">
             [
             <a href="#">History</a> |
@@ -34,6 +32,12 @@
             <a href="#">Docs</a>
             ]
           </div>
+
+          <div class="nav-button-wrap">
+            <a class="edit-link" id="nav-edit-link" href="{{ url_for('page.edit', title=title) }}">Edit</a>
+          </div>
+
+          <div class="nav-page-timestamp">Edited: Nov 12 2021, 09:44:27</div>
 
           <div>
             <div class="nav-header">Related</div>
@@ -80,7 +84,9 @@
       <nav class="nav-top" aria-label="top navigation">
         <button class="menu-toggle" data-toggle="nav-top">Menu</button>
         <span class="page-title" href="#">page_title</span>
-        <a class="edit-link" href="#">Edit</a>
+        <!-- this is dumb but I really want the page title to be centered
+             rather than slightly offset to the right -->
+        <button class="menu-toggle" style="visibility: hidden;">Menu</button>
       </nav>
       <!-- main content area wrapper -->
       <div class="nav-content">
@@ -90,10 +96,9 @@
     </section>
   </div>
 
-  <div class="nav-bottom" data-toggle="nav-bottom" role="note" aria-label="versions">
+  <div class="nav-bottom" data-toggle="nav-bottom" role="note">
     <form class="nav-form" action="/search" method="get">
-      <div class="nav-controls">
-        <a class="edit-link" id="nav-edit-link" href="{{ url_for('page.edit', title=title) }}">Edit</a>
+      <div class="nav-input-wrap">
         <input id="search" name="query" type="text" placeholder="🔍 Search">
       </div>
     </form>

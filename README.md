@@ -167,3 +167,11 @@ To put it another way, I want my database of notes to be a tool. They have
 very low value on their own, but very high value in conjunction with my
 day-to-day work. Any time spent "curating" them is time subtracted from
 getting important things done.
+
+# Suggested Contributions
+
+## Clean Up CSS
+
+The current style sheets were more or less arrived at by trial and error. Any
+help in organizing the rules in a more coherent yet extensible way would be
+much appreciated.
