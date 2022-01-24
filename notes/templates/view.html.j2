@@ -5,7 +5,7 @@
       {{ macros.nav_links(title, 'history', 'home', 'docs') }}
 
       <div class="nav-button-wrap">
-        <a class="edit-link" id="nav-edit-link" href="{{ url_for('page.edit', title=title) }}">Edit</a>
+        <a class="nav-button" href="{{ url_for('page.edit', title=title) }}">Edit</a>
       </div>
 
       <div class="nav-page-timestamp">Edited: Nov 12 2021, 09:44:27</div>
@@ -49,12 +49,15 @@
 {% endblock %}
 
 {% block content %}
-  <article>
-    {% if revision is none() %}
-      {% include 'not_found.html.j2' %}
-    {% else %}
-      {{ html|safe }}
+  <!-- main content area wrapper -->
+  <div class="nav-content">
+    <article>
+      {% if revision is none() %}
+        {% include 'not_found.html.j2' %}
+      {% else %}
+        {{ html|safe }}
 
-    {% endif %}
-  </article>
+      {% endif %}
+    </article>
+  </div>
 {% endblock %}
