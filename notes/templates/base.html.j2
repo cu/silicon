@@ -25,60 +25,12 @@
             <a href="{{ url_for('page.view', title=title) }}" class="page-title">{{ title }}</a>
           </div>
 
-          <div class="nav-page-links">
-            [
-            <a href="{{ url_for('page.history', title=title) }}">History</a> |
-            <a href="{{ url_for('page.view', title='home') }}">Home</a> |
-            <a href="{{ url_for('page.docs') }}">Docs</a>
-            ]
-          </div>
+          {% block sidebar_contents %}{% endblock %}
 
-          <div class="nav-button-wrap">
-            <a class="edit-link" id="nav-edit-link" href="{{ url_for('page.edit', title=title) }}">Edit</a>
-          </div>
-
-          <div class="nav-page-timestamp">Edited: Nov 12 2021, 09:44:27</div>
-
-          <div>
-            <div class="nav-header">Related</div>
-            <ul>
-              <li><a class="internal-link" href="#">raspberry_pi</a></li>
-              <li><a class="internal-link" href="#">debian</a></li>
-              <li><a class="internal-link" href="#">goat_farming</a></li>
-            </ul>
-          </div>
-
-          <div id="toc">
-            <div class="nav-header">Contents</div>
-            <ol>
-              <li><a href="#">References</a></li>
-              <ol>
-                <li><a href="#">The Dictionary</a></li>
-                <li><a href="#">Perhaps a Thesaurus or Three or Four or Five or Six or Seven</a></li>
-              </ol>
-              <li><a href="#">Releases</a></li>
-              <li><a href="#">Level One</a></li>
-              <ol>
-                <li><a href="#">Level Two</a></li>
-                <ol>
-                  <li><a href="#">Level Three</a></li>
-                  <ol>
-                    <li><a href="#">Level Four </a></li>
-                    <ol>
-                      <li><a href="#">Level Five</a></li>
-                      <ol>
-                        <li><a href="#">Level Six</a></li>
-                      </ol>
-                    </ol>
-                  </ol>
-                </ol>
-              </ol>
-            </ul>
-          </div>
         </div>
       </div>
     </nav>
-    <!-- this contains the "mobile" nav and contnet -->
+    <!-- this contains the "mobile" nav and content -->
     <section class="nav-content-wrap" data-toggle="nav-shift">
       <!-- this contains the hamburger menu and title for mobile -->
       <nav class="nav-top" aria-label="top navigation">

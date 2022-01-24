@@ -1,0 +1,23 @@
+{#
+ # Render the nav links bar
+ #
+ # Params:
+ # * title: title of the current page
+ # * _varargs_: `history`, `home`, and/or `docs`
+ #}
+{% macro nav_links(title) %}
+  <div class="nav-page-links">
+    [
+    {% for link in varargs %}
+      {% if link == 'history' %}
+        <a href="{{ url_for('page.history', title=title) }}">History</a>
+      {% elif link == 'home' %}
+        <a href="{{ url_for('page.view', title='home') }}">Home</a>
+      {% elif link == 'docs' %}
+        <a href="{{ url_for('page.docs') }}" target="_blank">Docs</a>
+      {% endif %}
+      {% if not loop.last %} | {% endif %}
+    {% endfor %}
+    ]
+  </div>
+{% endmacro %}
