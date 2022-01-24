@@ -60,9 +60,9 @@ def edit(title):
 
 @bp.route('/history/<path:title>')
 def history(title):
-    return "Not Yet Implemented"
+    return f"History for {title}: Not Yet Implemented"
 
 @bp.route('/docs/', defaults={'title': 'overview'})
 @bp.route('/docs/<path:title>')
 def docs(title):
-    return f"{title}: Not Yet Implemented"
+    return f"Docs for {title}: Not Yet Implemented"
