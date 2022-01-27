@@ -177,17 +177,6 @@
     text-decoration: none;
 }
 
-#page-form {
-    width: 100%;
-    overflow-y: hidden;
-}
-
-#body-text {
-    resize: none;
-    width: 100%;
-    height: 100%;
-}
-
 @media screen and (max-width: 768px) {
     .nav-side {
         left: -300px;
@@ -257,9 +246,5 @@
     article {
         margin-top: 2em;
         margin-bottom: 2em;
-    }
-
-    #page-form {
-        margin-top: 3.1em;
     }
 }

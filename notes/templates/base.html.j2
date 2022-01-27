@@ -4,13 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>page_title</title>
+  {% block links %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/colors-light.css') }}" type="text/css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" type="text/css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" type="text/css" media="screen">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/print.css') }}" type="text/css" media="print">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/pygments.css') }}" type="text/css" media="screen">
+  {% endblock %}
+  {% block scripts %}
   <script src="{{ url_for('static', filename='node_modules/jquery/dist/jquery.slim.min.js') }}" defer></script>
-  <script src="{{ url_for('static', filename='js/notes.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+  {% endblock %}
 <body>
 
   <div class="grid-for-nav">

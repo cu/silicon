@@ -1,6 +1,16 @@
 {% import "macros.html.j2" as macros %}
 {% extends "base.html.j2" %}
 
+{% block links %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/edit.css') }}" type="text/css" media="screen">
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/edit.js') }}" defer></script>
+{% endblock %}
+
 {% block sidebar_contents %}
       {{ macros.nav_links(title, 'docs') }}
 
