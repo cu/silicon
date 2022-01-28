@@ -8,6 +8,8 @@
     --nav-button-background: var(--nav-page-links);
     --nav-button-background-hover: rgba(51 ,122 ,183 ,0.75);
     --nav-button-text: white;
+    --nav-alert-background: rgb(183, 52, 52);
+    --nav-alert-text: white;
 
     --article-background: white;
     --article-code-text: black;

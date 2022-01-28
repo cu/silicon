@@ -41,7 +41,7 @@ def test_missing_page_body(client):
     """A missing page body field should flash an error."""
 
     r = client.post("/edit/test", follow_redirects=True)
-    assert _page(r.data).find(id="alert").string == '"body" field missing!'
+    assert _page(r.data).find(class_="alert").string == '"body" field missing!'
 
 
 def test_markdown_link(client):

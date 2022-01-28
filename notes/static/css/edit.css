@@ -9,6 +9,17 @@
     height: 100%;
 }
 
+#alerts {
+    background: var(--nav-alert-background);
+    color: var(--nav-alert-text);
+    margin: 1em;
+}
+
+#alerts li::before {
+    /* list-style: disc outside none; */
+    content: " ⚠ ";
+}
+
 @media screen and (max-width: 768px) {
     #page-form {
         margin-top: 3.1em;
