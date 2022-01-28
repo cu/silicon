@@ -77,3 +77,13 @@ def test_markdown_syntax_highlighting(client):
         str(_page(r.data).article.find(class_="highlight")).replace("\n", "")
         == code_block_html
     )
+
+
+def test_url_title_gets_slugified(client):
+    """The title in the URL should get slugified."""
+
+    raw_title = "a b-c|d:e=f+g"  # not exhaustive
+    for route in ("/view/", "/edit/"):
+        r = client.get(route + raw_title)
+        print(route)
+        assert str(_page(r.data).find(class_="page-title").string) == "a_b_c_d_e_f_g"

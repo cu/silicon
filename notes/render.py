@@ -57,7 +57,7 @@ class WikiLinkInlineLexer(InlineLexer):
         # add wiki_link rules
         self.rules.wiki_link = re.compile(
             r'\[{2}'                            # [[
-            r'([\w ~!@#$%^&*()\-=+|:\'",./?]+?)'    # link text
+            r'([\w `~!@#$%^&*()\-=+|:\'",./?\{\}]+?)'    # link text
             r'\]{2}'                            # ]]
         )
         self.default_rules.insert(3, 'wiki_link')
@@ -68,8 +68,7 @@ class WikiLinkInlineLexer(InlineLexer):
             page, alt = text.split('|', maxsplit=1)
         else:
             page = alt = text
-        slug_link = slugify(page, separator='_',
-            regex_pattern='[^-a-zA-Z0-9]+')
+        slug_link = slugify(page, separator='_')
         return self.renderer.wiki_link(alt, slug_link)
 
 class CustomRenderer(HighlightMixin, WikiLinkMixin, Renderer):
