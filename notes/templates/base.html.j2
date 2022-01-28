@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}" type="text/css" media="screen">
   {% endblock %}
   {% block scripts %}
-  <script src="{{ url_for('static', filename='node_modules/jquery/dist/jquery.slim.min.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
   {% endblock %}
 <body>
@@ -48,7 +47,7 @@
     </section>
   </div>
 
-  <div class="nav-bottom" data-toggle="nav-bottom" role="note">
+  <div class="nav-bottom" data-toggle="nav-shift" role="note">
     <form class="nav-form" action="/search" method="get">
       <div class="nav-input-wrap">
         <input id="search" name="query" type="text" placeholder="🔍 Search">

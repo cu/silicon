@@ -1,7 +1,10 @@
-$(document).ready(function() {
-    $("[data-toggle='nav-top']").click(function() {
-        console.log("click!");
-        $("[data-toggle='nav-shift']").toggleClass("shift");
-        $("[data-toggle='nav-bottom']").toggleClass("shift");
-    })
-});
+window.onload = function() {
+    document.querySelector("[data-toggle='nav-top']")
+        .addEventListener('click', (event) => {
+                const elements = document.querySelectorAll("[data-toggle='nav-shift']");
+
+                elements.forEach(function(element) {
+                    element.classList.toggle('shift');
+                })
+        })
+};
