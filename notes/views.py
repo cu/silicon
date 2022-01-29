@@ -56,8 +56,6 @@ def edit(title):
         # only save the page if the new text differs from previous revision
         if p['body'] != request.form['body']:
             error = page.write(title, request.form['body'])
-            #error = "This is an error"
-            #flash("we haz error")
             if error:
                 flash(error)
                 return render_template('edit.html.j2',
