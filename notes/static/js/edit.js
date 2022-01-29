@@ -6,6 +6,13 @@ wiki_edit.changed = false;
 wiki_edit.submit_clicked = false;
 
 window.onload = function() {
+    // mark the wiki page as changed if there is an alert shown
+    // (implies there was an error saving)
+    if (document.querySelector('#alerts') !== null) {
+        wiki_edit.changed = true;
+    };
+
+    // mark the wiki page as changed if the textarea has changed
     document.querySelector('#body-text')
         .addEventListener('input', (event) => wiki_edit.changed = true);
 
@@ -25,7 +32,7 @@ window.onload = function() {
         if ((wiki_edit.changed && ! wiki_edit.submit_clicked)) {
             e.preventDefault();
             e.returnValue = '';
-        }
+        };
     });
 
 };
