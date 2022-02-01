@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from bs4 import BeautifulSoup
 import pytest
 
@@ -87,3 +89,18 @@ def test_url_title_gets_slugified(client):
         r = client.get(route + raw_title)
         print(route)
         assert str(_page(r.data).find(class_="page-title").string) == "a_b_c_d_e_f_g"
+
+def test_page_timestamp(client):
+    """The page's timestamp should be accurate and rendered correctly."""
+
+    # post a page
+    # get the current time
+    # read the page
+    # assert there is a difference of less than 5 seconds between timestamp
+    #   and current time.
+
+    r = client.post("/edit/test", data={"body": "test"}, follow_redirects=True)
+    ts_str = str(_page(r.data).find(class_="nav-page-timestamp").string)
+    ts_obj = datetime.strptime(ts_str, 'Edited: %B %d %Y, %H:%M:%S')
+    ts_delta = datetime.now() - ts_obj
+    assert ts_delta.seconds <= 5

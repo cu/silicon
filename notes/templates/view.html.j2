@@ -14,7 +14,7 @@
         <a class="nav-button" href="{{ url_for('page.edit', title=title) }}">Edit</a>
       </div>
 
-      <div class="nav-page-timestamp">Edited: Nov 12 2021, 09:44:27</div>
+      <div class="nav-page-timestamp">Edited: {{ revision|human_timestamp }}</div>
 
       <div>
         <div class="nav-header">Related</div>

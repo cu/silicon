@@ -9,11 +9,13 @@ from flask import (
 
 from slugify import slugify
 
+from notes.j2_filters import human_timestamp
 from notes.render import get_md_renderer
 from notes import page
 
 
 bp = Blueprint('page', __name__)
+bp.add_app_template_filter(human_timestamp)
 
 
 @bp.route('/view/')
