@@ -58,12 +58,7 @@
   <!-- main content area wrapper -->
   <div class="nav-content">
     <article>
-      {% if revision is none() %}
-        {% include 'not_found.html.j2' %}
-      {% else %}
         {{ html|safe }}
-
-      {% endif %}
     </article>
   </div>
 {% endblock %}

@@ -33,7 +33,7 @@ def view(title):
         p = page.read(title)
 
     if p['revision'] is None:
-        return render_template('view.html.j2', **p), 404
+        return render_template('not_found.html.j2', **p), 404
     else:
         markdown = get_md_renderer()
         p['html'] = markdown(p['body'])
