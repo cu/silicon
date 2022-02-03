@@ -13,7 +13,7 @@ def _page(data):
 
 
 def test_redirects(client):
-    """These URLs should redirect to /view/home."""
+    """These URLs redirect to /view/home."""
 
     for url in "/view/", "/edit/", "/":
         r = client.get(url)
@@ -21,8 +21,8 @@ def test_redirects(client):
         assert b'<a href="/view/home">' in r.data
 
 
-def test_page_not_found(client):
-    """A non-existant page should return 404."""
+def test_view_page_not_found(client):
+    """Viewing a non-existant page returns 404."""
 
     r = client.get("/view/no_such_page")
     assert r.status_code == 404
@@ -40,7 +40,7 @@ def test_page_add(client):
 
 
 def test_missing_page_body(client):
-    """A missing page body field should flash an error."""
+    """A missing page body field flashes an error."""
 
     r = client.post("/edit/test", follow_redirects=True)
     assert _page(r.data).find(class_="alert").string == '"body" field missing!'
@@ -82,7 +82,7 @@ def test_markdown_syntax_highlighting(client):
 
 
 def test_url_title_gets_slugified(client):
-    """The title in the URL should get slugified."""
+    """The title in the URL gets slugified."""
 
     raw_title = "a b-c|d:e=f+g"  # not exhaustive
     for route in ("/view/", "/edit/"):
@@ -90,17 +90,41 @@ def test_url_title_gets_slugified(client):
         print(route)
         assert str(_page(r.data).find(class_="page-title").string) == "a_b_c_d_e_f_g"
 
-def test_page_timestamp(client):
-    """The page's timestamp should be accurate and rendered correctly."""
 
-    # post a page
-    # get the current time
-    # read the page
-    # assert there is a difference of less than 5 seconds between timestamp
-    #   and current time.
+def test_page_timestamp(client):
+    """The page's timestamp is accurate and rendered correctly."""
 
     r = client.post("/edit/test", data={"body": "test"}, follow_redirects=True)
     ts_str = str(_page(r.data).find(class_="nav-page-timestamp").string)
-    ts_obj = datetime.strptime(ts_str, 'Edited: %B %d %Y, %H:%M:%S')
+    ts_obj = datetime.strptime(ts_str, "Edited: %B %d %Y, %H:%M:%S")
     ts_delta = datetime.now() - ts_obj
     assert ts_delta.seconds <= 5
+
+
+def test_history_page_not_found(client):
+    """Viewing the history of a non-existant page returns 404."""
+
+    r = client.get("/history/no_such_page")
+    assert r.status_code == 404
+    assert _page(r.data).article.h1.string == "Not Found"
+
+
+def test_history_bad_revision_redirect(client):
+    """A revision that doesn't exist redirects to the history index."""
+
+    client.post("/edit/test", data={"body": "test"})
+    r = client.get("/history/test/bad-revision", follow_redirects=True)
+    assert r.request.url == 'http://localhost/history/test'
+
+
+def test_history_revisions(client):
+    """Multiple edits of a page create multiple revisions."""
+
+    client.post("/edit/test", data={"body": "revision 1"})
+    client.post("/edit/test", data={"body": "revision 2"})
+    r = client.get("/history/test")
+    assert "Revisions: 2" in str(r.data)
+    links = _page(r.data).find(id="revisions").find_all("a")
+    for index, anchor_tag in enumerate(reversed(links), start=1):
+        rev = client.get(anchor_tag["href"])
+        assert _page(rev.data).article.p.string == f"revision {index}"

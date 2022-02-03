@@ -1,0 +1,13 @@
+#revisions {
+    padding-left: 1em;
+}
+
+#revisions a {
+    color: var(--nav-page-links);
+}
+
+#current-revision a::after {
+    content: " <--";
+    font-weight: bold;
+    color: var(--nav-text);
+}

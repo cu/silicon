@@ -17,7 +17,7 @@ def read(title, revision=None):
     """
     Returns a dict with the following items:
     * title (str): the fully-qualified title of the page
-    * data (str): the contents of the page's file
+    * body (str): the contents of the page's file
     * revision (str): a timestamp of the page's last modification time (or None
         if the page does not exist)
 
@@ -75,3 +75,19 @@ def write(title, body):
     except Exception as err:
             current_app.logger.critical(f"Error saving page {title}: {err}'")
             return "Unable to save page"
+
+
+def history(title):
+    """
+    Return a list of all revisions of a title.
+    """
+    revisions = get_db().execute(
+        'SELECT revision'
+        ' FROM pages'
+        ' WHERE title=?'
+        ' ORDER BY revision'
+        ' DESC',
+        (title,)
+    ).fetchall()
+
+    return [r['revision'] for r in revisions]

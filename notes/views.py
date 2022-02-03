@@ -67,8 +67,32 @@ def edit(title):
 
 @bp.route('/history/<title>')
 def history(title):
+    p = {}
+    p['title'] = slugify(title, separator='_')
+    p['revisions'] = page.history(p['title'])
+    p['count'] = len(p['revisions'])
+    if p['count'] == 0:
+        return render_template('not_found.html.j2', **p), 404
+    return render_template('history.html.j2', **p)
+
+
+@bp.route('/history/<title>/<req_revision>')
+def history_revision(title, req_revision):
     title = slugify(title, separator='_')
-    return f"History for {title}: Not Yet Implemented"
+
+    p = page.read(title, req_revision)
+
+    # req_revision not found, redirect back to history index
+    if p['revision'] is None:
+        return redirect(url_for(f'{bp.name}.history', title=title))
+
+    p['req_revision'] = req_revision
+    p['revisions'] = page.history(title)
+    p['count'] = len(p['revisions'])
+    markdown = get_md_renderer()
+    p['html'] = markdown(p['body'])
+
+    return render_template('history.html.j2', **p)
 
 
 @bp.route('/docs/', defaults={'title': 'overview'})

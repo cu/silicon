@@ -1,0 +1,44 @@
+
+{% import "macros.html.j2" as macros %}
+{% extends "base.html.j2" %}
+
+{% block links %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/print.css') }}" type="text/css" media="print">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pygments.css') }}" type="text/css" media="screen">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}" type="text/css" media="screen">
+{% endblock %}
+
+{% block sidebar_contents %}
+  {{ macros.nav_links(title, 'home', 'docs') }}
+
+  <div class="nav-header">Revisions: {{ count }}</div>
+
+  <table id="revisions">
+    <tbody>
+    {% for r in revisions %}
+      <tr>
+      {% if r == req_revision %}
+        <td id="current-revision">
+      {% else %}
+        <td>
+      {% endif %}
+          <a href="{{ url_for('page.history_revision', title=title, req_revision=r) }}">{{ r|human_timestamp }}</a>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block content %}
+  <div class="nav-content">
+    <article>
+      {% if html %}
+        {{ html|safe }}
+      {% else %}
+        <p>Select a revision from the list.</p>
+      {% endif %}
+    </article>
+  </div>
+{% endblock %}

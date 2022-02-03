@@ -110,6 +110,6 @@ article table tr:hover {
     background: var(--article-table-hover);
 }
 
-tr:nth-child(odd) {
+article table tr:nth-child(odd) {
     background: var(--article-table-stripe);
 }
