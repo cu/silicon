@@ -128,3 +128,62 @@ def test_history_revisions(client):
     for index, anchor_tag in enumerate(reversed(links), start=1):
         rev = client.get(anchor_tag["href"])
         assert _page(rev.data).article.p.string == f"revision {index}"
+
+
+def test_empty_query(client):
+    """An empty query displays an error."""
+
+    r = client.get("/search")
+    err_msg = _page(r.data).find(class_="err-msg").text
+    assert r.status_code == 400
+    assert err_msg == "No query specified."
+
+
+def test_search_error(client):
+    """FTS5 syntax errors are caught and displayed."""
+
+    r = client.get("/search?query=*bar")
+    err_msg = _page(r.data).find(class_="err-msg").text
+    assert r.status_code == 400
+    assert err_msg == 'Search Error: fts5: syntax error near "*"'
+
+
+def test_search_title(client):
+    """Title is matched in search results."""
+
+    client.post("/edit/alpha_bravo_charlie", data={"body": ""})
+    r = client.get("/search?query=bravo")
+    title = _page(r.data).find(class_="title-matches").text.strip()
+    assert title == "alpha_bravo_charlie"
+
+
+def test_search_body(client):
+    """Body is matched in search results."""
+
+    client.post("/edit/test", data={"body": "alpha bravo charlie"})
+    r = client.get("/search?query=bravo")
+    body = _page(r.data).find(class_="body-matches").dd.get_text()
+    assert body == "alpha bravo charlie"
+
+
+def test_search_terms_marked(client):
+    """Matching search terms are marked in title and body."""
+
+    client.post("/edit/hotel_alpha_xray", data={"body": "bravo alpha romeo"})
+    r = client.get("/search?query=alpha")
+    title_seq = _page(r.data).find(class_="title-matches").li.a.contents
+    title = ''.join([str(x).strip() for x in list(title_seq)])
+    assert title == 'hotel_<mark>alpha</mark>_xray'
+
+    body_seq = _page(r.data).find(class_="body-matches").dd.contents
+    body = ''.join([str(x) for x in body_seq])
+    assert body == 'bravo <mark>alpha</mark> romeo'
+
+
+def test_search_body_plaintext(client):
+    """Body snippet does not contain HTML elements."""
+
+    client.post("/edit/test", data={"body": "alpha <b>bravo</b> charlie"})
+    r = client.get("/search?query=bravo")
+    body = _page(r.data).find(class_="body-matches").dd.get_text()
+    assert body == "alpha bravo charlie"

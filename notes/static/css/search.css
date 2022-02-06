@@ -1,0 +1,12 @@
+#search-tips {
+    margin-left: 1em;
+}
+
+#search-tips li {
+    list-style-type: disc;
+}
+
+#search-tips code {
+    color: var(--nav-text);
+    background: var(--nav-title-text);
+}

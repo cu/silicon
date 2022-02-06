@@ -1,0 +1,69 @@
+{% import "macros.html.j2" as macros %}
+{% extends "base.html.j2" %}
+
+{% block links %}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/print.css') }}" type="text/css" media="print">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pygments.css') }}" type="text/css" media="screen">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}" type="text/css" media="screen">
+{% endblock %}
+
+{% block sidebar_contents %}
+  {{ macros.nav_links(title, 'home', 'docs') }}
+
+  <div class="nav-header">Search Tips</div>
+
+  <ul id="search-tips">
+    <li>Search terms are case-insensitive</li>
+    <li><code>AND</code>, <code>OR</code>, and <code>NOT</code>: boolean operators</li>
+    <ul>
+      <li><code>AND</code> is the default</li>
+      <li>Must be uppercase</li>
+    </ul>
+    <li><code>"double quotes"</code>: phrase search</li>
+    <li><code>foo*</code>: prefix search</li>
+    <li><code>^foo</code>: title or page starts with <code>foo</code></li>
+  </ul>
+
+{% endblock %}
+
+{% block content %}
+  <div class="nav-content">
+    <article>
+    {% if err_msg %}
+      <p class="err-msg">{{ err_msg }}</p>
+    {% else %}
+      {% if title_results %}
+        <b>Title matches:</b>
+        <ul class="title-matches">
+        {% for t_result in title_results %}
+          <li>
+            <a class="internal-link" href="{{ url_for('page.view', title=t_result['title']) }}">
+              {{ t_result['snippet']|mark_query_results }}
+            </a>
+          </li>
+        {% endfor %}
+        </ul>
+        {% else %}
+        <p>No title matches.</p>
+      {% endif %}
+
+      {% if body_results %}
+      <b>Body matches:</b>
+        <dl class="body-matches">
+        {% for b_result in body_results %}
+          <dt class="result_title">
+            <a class="internal-link" href="{{ url_for('page.view', title=b_result['title']) }}">
+              {{ b_result['title'] }}
+            </a>
+          </dt>
+          <dd class="result_body">{{ b_result['snippet']|mark_query_results }}</dd>
+        {% endfor %}
+        </dl>
+        {% else %}
+        <p>No body matches.</p>
+      {% endif %}
+    {% endif %}
+    </article>
+  </div>
+{% endblock %}

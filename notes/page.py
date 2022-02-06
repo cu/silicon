@@ -2,8 +2,12 @@ from datetime import datetime
 import string
 
 from flask import current_app
+from sqlite3 import OperationalError
 
 from notes.db import get_db
+
+class SearchError(Exception):
+    pass
 
 
 def read_all():
@@ -91,3 +95,64 @@ def history(title):
     ).fetchall()
 
     return [r['revision'] for r in revisions]
+
+
+def search(query):
+    """
+    Execute a search given a query. Returns a two-element tuple containing
+    title results and body results.
+
+    To prevent SQL syntax errors and injection, we replace all non-alpha-
+    numeric characters with whitespace except:
+    * underscore (_)
+    * asterisk (*)
+    * plus (+)
+    * caret (^)
+    * double quotes (", but only an even number)
+
+    These are kept in order to make use of FTS5 query features, although
+    there may be some functionality that is lost as a result due to
+    characters that I didn't spot in the docs.
+
+    Matching text is surrounded by `__mark__` and `__/mark__` which are then
+    substituted for `<mark>` tags via a custom Jinja2 filter.
+    """
+    def filter_query(query):
+        permitted = string.ascii_letters + string.digits + ' _*+^'
+        # allow double quotes, but only if there is an even number of them
+        if (query.count('"') % 2) == 0:
+            permitted += '"'
+        filtered = ''
+        for char in query:
+            if char not in permitted:
+                filtered += ' '
+            else:
+                filtered += char
+        return filtered
+
+    filtered_query = filter_query(query)
+
+    try:
+        title_results = get_db().execute(
+            "SELECT title, snippet(pages_fts, 0, '__mark__', '__/mark__', '...', 10) AS snippet"
+            ' FROM pages_fts'
+            ' WHERE pages_fts'
+            ' MATCH ?'
+            ' ORDER BY rank'
+            ' LIMIT 50',
+            (f'title:{filtered_query}',)
+        ).fetchall()
+
+        body_results = get_db().execute(
+            "SELECT title, snippet(pages_fts, 1, '__mark__', '__/mark__', '...', 64) AS snippet"
+            ' FROM pages_fts'
+            ' WHERE pages_fts'
+            ' MATCH ?'
+            ' ORDER BY rank'
+            ' LIMIT 50',
+            (f'body:{filtered_query}',)
+        ).fetchall()
+    except OperationalError as err:
+        raise SearchError(f'Search Error: {err}')
+
+    return title_results, body_results

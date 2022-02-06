@@ -9,13 +9,14 @@ from flask import (
 
 from slugify import slugify
 
-from notes.j2_filters import human_timestamp
+from notes.j2_filters import human_timestamp, mark_query_results
 from notes.render import get_md_renderer
 from notes import page
 
 
 bp = Blueprint('page', __name__)
 bp.add_app_template_filter(human_timestamp)
+bp.add_app_template_filter(mark_query_results)
 
 
 @bp.route('/view/')
@@ -99,3 +100,25 @@ def history_revision(title, req_revision):
 @bp.route('/docs/<title>')
 def docs(title):
     return f"Docs for {title}: Not Yet Implemented"
+
+
+@bp.route('/search')
+def search():
+    def render_template_err(msg):
+        return render_template(
+            'search.html.j2',
+            err_msg=msg,
+            title="Invalid Query"
+        )
+
+    query = request.args.get('query', '').strip()
+    if not query:
+        return render_template_err('No query specified.'), 400
+    try:
+        title_results, body_results = page.search(request.args['query'])
+    except page.SearchError as err:
+        return render_template_err(err), 400
+    return render_template('search.html.j2',
+        title=f"Results for '{request.args['query']}'",
+        title_results=title_results,
+        body_results=body_results)
