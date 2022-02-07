@@ -10,7 +10,7 @@ from flask import (
 from slugify import slugify
 
 from notes.j2_filters import human_timestamp, mark_query_results
-from notes.render import get_md_renderer
+from notes.render_md import md_renderer
 from notes import page
 
 
@@ -38,8 +38,7 @@ def view(title):
     if p['revision'] is None:
         return render_template('not_found.html.j2', **p), 404
     else:
-        markdown = get_md_renderer()
-        p['html'] = markdown(p['body'])
+        p['html'] = md_renderer(p['body'])
         return render_template('view.html.j2', **p)
 
 
@@ -90,8 +89,7 @@ def history_revision(title, req_revision):
     p['req_revision'] = req_revision
     p['revisions'] = page.history(title)
     p['count'] = len(p['revisions'])
-    markdown = get_md_renderer()
-    p['html'] = markdown(p['body'])
+    p['html'] = md_renderer(p['body'])
 
     return render_template('history.html.j2', **p)
 
