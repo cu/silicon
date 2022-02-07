@@ -18,6 +18,8 @@ In this module, we add two "extra" features to mistune:
 
 
 class HighlightMixin(object):
+    """Renderer mixin for syntax highlighting of code blocks."""
+
     def block_code(self, text, lang):
         inlinestyles = self.options.get('inlinestyles', False)
         linenos = self.options.get('linenos', False)
@@ -42,6 +44,8 @@ class HighlightMixin(object):
 
 
 class WikiLinkMixin():
+    """Renderer mixin for rendering wiki links."""
+
     def wiki_link(self, alt, page):
         """
         Render link as HTML
@@ -51,6 +55,8 @@ class WikiLinkMixin():
 
 
 class WikiLinkInlineLexer(InlineLexer):
+    """Lexer mixin for parsing wiki links."""
+
     def __init__(self, renderer, rules=None, **kwargs):
         super().__init__(renderer, rules, **kwargs)
 
@@ -78,6 +84,8 @@ class MarkdownRenderer(HighlightMixin, WikiLinkMixin, Renderer):
 
 
 def md_renderer(text):
+    """Render Markdown into HTML."""
+
     md = MarkdownRenderer()
     inline_lexer = WikiLinkInlineLexer(md)
     inline_lexer.enable_wiki_link()
