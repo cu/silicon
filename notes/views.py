@@ -11,7 +11,7 @@ from slugify import slugify
 
 from notes.j2_filters import human_timestamp, mark_query_results
 from notes.render_md import md_renderer
-from notes.render_toc import toc_renderer
+#from notes.render_toc import toc_renderer
 from notes import page
 
 
@@ -122,10 +122,15 @@ def search():
         title_results=title_results,
         body_results=body_results)
 
+# @bp.route('/htmx/toc/<title>')
+# def toc(title):
+#     title = slugify(title, separator='_')
+#     p = page.read(title)
+#     if p['revision'] is None:
+#         return 'No such page', 404
+#     return toc_renderer(p['body'])
+
+
 @bp.route('/htmx/toc/<title>')
 def toc(title):
-    title = slugify(title, separator='_')
-    p = page.read(title)
-    if p['revision'] is None:
-        return 'No such page', 404
-    return toc_renderer(p['body'])
+    return "To be continued"

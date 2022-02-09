@@ -1,93 +1,74 @@
-import re
-
 from flask import url_for
-from mistune import escape, Markdown, Renderer, InlineGrammar, InlineLexer
+import mistune
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 
 from slugify import slugify
 
-
 """
-In this module, we add two "extra" features to mistune:
+In this module, we add two extra features to mistune:
 
 1. Syntax highlighting in code blocks.
-2. Wiki-style links, via a custom mixin inspired by the mistune README.
+2. Wiki-style links, via a custom plugin inspired by the mistune docs.
 """
 
 
-class HighlightMixin(object):
-    """Renderer mixin for syntax highlighting of code blocks."""
+class HighlightRenderer(mistune.HTMLRenderer):
+    """Renderer for syntax highlighting of code blocks."""
 
-    def block_code(self, text, lang):
-        inlinestyles = self.options.get('inlinestyles', False)
-        linenos = self.options.get('linenos', False)
-
-        if not lang:
-            text = text.strip()
-            return u'<pre><code>%s</code></pre>\n' % escape(text)
-
-        try:
+    def block_code(self, text, lang=None):
+        if lang:
             lexer = get_lexer_by_name(lang, stripall=True)
-            formatter = HtmlFormatter(
-                noclasses=inlinestyles, linenos=linenos
-            )
-            code = highlight(text, lexer, formatter)
-            if linenos:
-                return '<div class="highlight-wrapper">%s</div>\n' % code
-            return code
-        except:
-            return '<pre class="%s"><code>%s</code></pre>\n' % (
-                lang, escape(text)
-            )
+            formatter = HtmlFormatter()
+            return highlight(text, lexer, formatter)
+
+        return '<pre><code>%s</code></pre>\n' % mistune.escape(text)
 
 
-class WikiLinkMixin():
-    """Renderer mixin for rendering wiki links."""
+def wiki_links(md):
+    WIKI_PATTERN = (
+        r'\[{2}'                                   # [[
+        r'([\w `~!@#$%^&*()\-=+|:\'",./?\{\}]+?)'  # link text
+        r'\]{2}'                                   # ]]
+    )
 
-    def wiki_link(self, alt, page):
-        """
-        Render link as HTML
-        """
-        link = url_for('page.view', title=page)
-        return f'<a class="internal-link" href="{link}">{alt}</a>'
-
-
-class WikiLinkInlineLexer(InlineLexer):
-    """Lexer mixin for parsing wiki links."""
-
-    def __init__(self, renderer, rules=None, **kwargs):
-        super().__init__(renderer, rules, **kwargs)
-
-    def enable_wiki_link(self):
-        # add wiki_link rules
-        self.rules.wiki_link = re.compile(
-            r'\[{2}'                            # [[
-            r'([\w `~!@#$%^&*()\-=+|:\'",./?\{\}]+?)'    # link text
-            r'\]{2}'                            # ]]
-        )
-        self.default_rules.insert(3, 'wiki_link')
-
-    def output_wiki_link(self, m):
+    def parse_wiki(inline, m, state):
+        # `inline` is `md.inline`, see below
+        # `m` is matched regex item
         text = m.group(1)
         if '|' in text:
-            page, alt = text.split('|', maxsplit=1)
+            page, title = text.split('|', maxsplit=1)
         else:
-            page = alt = text
-        slug_link = slugify(page, separator='_')
-        return self.renderer.wiki_link(alt, slug_link)
+            page = title = text
+        return 'wiki', slugify(page, separator='_'), title
 
+    def render_html_wiki(page, link_text):
+        url = url_for('page.view', title=page)
+        return f'<a class="internal-link" href="{url}">{link_text}</a>'
 
-class MarkdownRenderer(HighlightMixin, WikiLinkMixin, Renderer):
-    pass
+    md.inline.register_rule('wiki', WIKI_PATTERN, parse_wiki)
+
+    # add wiki rule into active rules
+    md.inline.rules.append('wiki')
+
+    # add HTML renderer
+    if md.renderer.NAME == 'html':
+        md.renderer.register('wiki', render_html_wiki)
 
 
 def md_renderer(text):
-    """Render Markdown into HTML."""
-
-    md = MarkdownRenderer()
-    inline_lexer = WikiLinkInlineLexer(md)
-    inline_lexer.enable_wiki_link()
-    render = Markdown(renderer=md, inline=inline_lexer)
-    return render(text)
+    markdown = mistune.create_markdown(
+        renderer=HighlightRenderer(escape=False),
+        plugins=[
+            'strikethrough',
+            'footnotes',
+            'table',
+            'url',
+            'task_lists',
+            'def_list',
+            'abbr',
+            wiki_links
+        ]
+    )
+    return markdown(text)

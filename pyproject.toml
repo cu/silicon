@@ -7,7 +7,7 @@ authors = ["Charles Ulrich <charles@bityard.net>"]
 [tool.poetry.dependencies]
 python = "^3.9"
 Flask = "^2.0.2"
-mistune = "0.8.4"
+mistune = "^2.0.2"
 Pygments = "2.6.1"
 python-slugify = "^4.0.0"
 python-dotenv = "^0.13.0"
