@@ -6,6 +6,9 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/print.css') }}" type="text/css" media="print">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/pygments.css') }}" type="text/css" media="screen">
 {% endblock %}
+{% block scripts %}
+  <script src="{{ url_for('static', filename='node_modules/htmx.org/dist/htmx.min.js.gz') }}" defer></script>
+{% endblock %}
 
 {% block sidebar_contents %}
       {{ macros.nav_links(title, 'history', 'home', 'docs') }}
@@ -26,31 +29,11 @@
       </div>
 
       <div id="toc">
-        <div class="nav-header">Contents</div>
-        <ol>
-          <li><a href="#">References</a></li>
-          <ol>
-            <li><a href="#">The Dictionary</a></li>
-            <li><a href="#">Perhaps a Thesaurus or Three or Four or Five or Six or Seven</a></li>
-          </ol>
-          <li><a href="#">Releases</a></li>
-          <li><a href="#">Level One</a></li>
-          <ol>
-            <li><a href="#">Level Two</a></li>
-            <ol>
-              <li><a href="#">Level Three</a></li>
-              <ol>
-                <li><a href="#">Level Four </a></li>
-                <ol>
-                  <li><a href="#">Level Five</a></li>
-                  <ol>
-                    <li><a href="#">Level Six</a></li>
-                  </ol>
-                </ol>
-              </ol>
-            </ol>
-          </ol>
-        </ul>
+        <div class="nav-header"
+          hx-get="{{ url_for('page.toc', title=title) }}"
+          hx-trigger="load">
+          Contents
+        </div>
       </div>
 {% endblock %}
 
