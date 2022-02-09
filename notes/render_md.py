@@ -14,16 +14,38 @@ In this module, we add two extra features to mistune:
 """
 
 
-class HighlightRenderer(mistune.HTMLRenderer):
-    """Renderer for syntax highlighting of code blocks."""
+class CustomRenderer(mistune.HTMLRenderer):
+    """
+    Customized Mistune renderer to add the following features:
+
+    * Highlighted code blocks
+    * `rel` attribute in external links
+    """
+
 
     def block_code(self, text, lang=None):
+        """Renderer for syntax highlighting of code blocks."""
         if lang:
             lexer = get_lexer_by_name(lang, stripall=True)
             formatter = HtmlFormatter()
             return highlight(text, lexer, formatter)
 
-        return '<pre><code>%s</code></pre>\n' % mistune.escape(text)
+        return '<pre><code>' + mistune.escape(text) + '</code></pre>\n'
+
+    def link(self, link, text=None, title=None):
+        """Renderer for external links.
+
+        This is customized from the mistune renderer to add the `rel` attribute.
+        """
+
+        if text is None:
+            text = link
+
+        s = '<a rel="external noreferrer" href="' + self._safe_url(link) + '"'
+        if title:
+            s += ' title="' + escape_html(title) + '"'
+        return s + '>' + (text or link) + '</a>'
+
 
 
 def wiki_links(md):
@@ -68,7 +90,7 @@ def wiki_links(md):
 
 def md_renderer(text):
     markdown = mistune.create_markdown(
-        renderer=HighlightRenderer(escape=False),
+        renderer=CustomRenderer(escape=False),
         plugins=[
             'strikethrough',
             'footnotes',

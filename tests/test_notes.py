@@ -46,7 +46,7 @@ def test_missing_page_body(client):
     assert _page(r.data).find(class_="alert").string == '"body" field missing!'
 
 
-def test_markdown_link(client):
+def test_markdown_internal_link(client):
     """Rendering of wiki-style links in Markdown."""
 
     r = client.post("/edit/test", data={"body": "[[link]]"}, follow_redirects=True)
@@ -55,17 +55,8 @@ def test_markdown_link(client):
         == '<a class="internal-link" href="/view/link">link</a>'
     )
 
-def test_markdown_link_alt_text(client):
-    """Rendering of wiki-style links with alternate text."""
 
-    r = client.post("/edit/test", data={"body": "[[alpha|bravo]]"}, follow_redirects=True)
-    assert (
-        str(_page(r.data).article.p.a)
-        == '<a class="internal-link" href="/view/alpha">bravo</a>'
-    )
-
-
-def test_markdown_link_alt_title(client):
+def test_markdown_internal_link_alt_title(client):
     """Rendering of wiki links with an alternate title."""
 
     r = client.post(
@@ -75,6 +66,17 @@ def test_markdown_link_alt_title(client):
         str(_page(r.data).article.find(class_="internal-link"))
         == '<a class="internal-link" href="/view/link">alt title</a>'
     )
+
+
+def test_markdown_external_link(client):
+    """External links have a `rel` attribute with 'external' and 'referrer'."""
+
+    r = client.post(
+        "/edit/test", data={"body": "http://example.com"}, follow_redirects=True
+    )
+    a_rel = _page(r.data).article.p.a['rel']
+    assert 'external' in a_rel
+    assert 'noreferrer' in a_rel
 
 
 def test_markdown_syntax_highlighting(client):
