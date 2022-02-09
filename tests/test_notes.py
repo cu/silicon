@@ -55,6 +55,15 @@ def test_markdown_link(client):
         == '<a class="internal-link" href="/view/link">link</a>'
     )
 
+def test_markdown_link_alt_text(client):
+    """Rendering of wiki-style links with alternate text."""
+
+    r = client.post("/edit/test", data={"body": "[[alpha|bravo]]"}, follow_redirects=True)
+    assert (
+        str(_page(r.data).article.p.a)
+        == '<a class="internal-link" href="/view/alpha">bravo</a>'
+    )
+
 
 def test_markdown_link_alt_title(client):
     """Rendering of wiki links with an alternate title."""

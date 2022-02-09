@@ -27,15 +27,16 @@ class HighlightRenderer(mistune.HTMLRenderer):
 
 
 def wiki_links(md):
-    WIKI_PATTERN = (
-        r'\[{2}'                                   # [[
-        r'([\w `~!@#$%^&*()\-=+|:\'",./?\{\}]+?)'  # link text
-        r'\]{2}'                                   # ]]
-    )
+    """Wiki-style links plugin for mistune."""
 
     def parse_wiki(inline, m, state):
-        # `inline` is `md.inline`, see below
-        # `m` is matched regex item
+        """
+        Parse wiki links.
+
+        `inline` is `md.inline`, see below
+        `m` is matched regex item
+        """
+
         text = m.group(1)
         if '|' in text:
             page, title = text.split('|', maxsplit=1)
@@ -44,8 +45,16 @@ def wiki_links(md):
         return 'wiki', slugify(page, separator='_'), title
 
     def render_html_wiki(page, link_text):
+        """Render wiki links as internal links."""
+
         url = url_for('page.view', title=page)
         return f'<a class="internal-link" href="{url}">{link_text}</a>'
+
+    WIKI_PATTERN = (
+        r'\[{2}'                                   # [[
+        r'([\w `~!@#$%^&*()\-=+|:\'",./?\{\}]+?)'  # link text
+        r'\]{2}'                                   # ]]
+    )
 
     md.inline.register_rule('wiki', WIKI_PATTERN, parse_wiki)
 
