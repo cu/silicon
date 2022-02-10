@@ -3,6 +3,7 @@ import mistune
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
+from pygments.util import ClassNotFound
 
 from slugify import slugify
 
@@ -22,15 +23,21 @@ class CustomRenderer(mistune.HTMLRenderer):
     * `rel` attribute in external links
     """
 
+    def _render_plain(self, text):
+        return '<pre><code>' + mistune.escape(text) + '</code></pre>\n'
 
     def block_code(self, text, lang=None):
         """Renderer for syntax highlighting of code blocks."""
         if lang:
-            lexer = get_lexer_by_name(lang, stripall=True)
-            formatter = HtmlFormatter()
-            return highlight(text, lexer, formatter)
+            try:
+                lexer = get_lexer_by_name(lang, stripall=True)
+            except ClassNotFound:
+                return self._render_plain(text)
+            else:
+                formatter = HtmlFormatter()
+                return highlight(text, lexer, formatter)
 
-        return '<pre><code>' + mistune.escape(text) + '</code></pre>\n'
+        return self._render_plain(text)
 
     def link(self, link, text=None, title=None):
         """Renderer for external links.
@@ -43,7 +50,7 @@ class CustomRenderer(mistune.HTMLRenderer):
 
         s = '<a rel="external noreferrer" href="' + self._safe_url(link) + '"'
         if title:
-            s += ' title="' + escape_html(title) + '"'
+            s += ' title="' + mistune.escape_html(title) + '"'
         return s + '>' + (text or link) + '</a>'
 
 
