@@ -113,3 +113,11 @@ article table tr:hover {
 article table tr:nth-child(odd) {
     background: var(--article-table-stripe);
 }
+
+.task-list-item {
+    list-style-type: none;
+}
+
+article dl dt {
+    font-weight: bold;
+}
