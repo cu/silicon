@@ -3,6 +3,9 @@
 Bityard Notes is designed to be a low-friction personal knowledge base, with a
 wiki-like interface.
 
+For the rationale on why this was created and paper-thin justifications on
+certain design decisions, see [DESIGN.md](./DESIGN.md).
+
 
 # Quickstart
 
@@ -12,22 +15,29 @@ For details, see the [Flask configuration handling Docs].
 [Flask configuration handling docs]: https://flask.palletsprojects.com/en/1.1.x/config/
 
 
-## Requirements
+## Pre-requisites
 
-This project requires Python 3.7 or greater and `npm` to install the
-third-party Javascript and CSS static resources. On a Debian/Ubuntu system,
-that means the following packages:
+This project requires Python 3.7 or greater and either `npm` or docker to
+install the third-party Javascript and CSS static resources. On a
+Debian/Ubuntu system, that means the following packages:
 
 * `python3`
 * `python3-pip` (unless installed via other means)
 * `python3-dev`
 * `python3-venv`
-* `npm` (optional, if you already have docker installed)
+* `npm` (or `docker`)
 
 
 ## Installation for development or local use
 
-Install [Poetry](https://python-poetry.org/) if necessary.
+Install [Poetry](https://python-poetry.org/) if necessary. Everyone has their
+own way of setting up their Python tooling but I'm a fan of
+[pipx](https://github.com/pypa/pipx):
+
+```
+pip3 install --user pipx
+pipx install poetry
+```
 
 Use poetry to create a virtual environment and install the dependencies:
 
@@ -110,7 +120,7 @@ If deploying on a public server, you are responsible for ensuring all access to
 it is secure. One example may be deploying it behind an HTTPS proxy with
 HTTP basic authentication enabled.
 
-{An example scenario or two go here.}
+{TODO: An example scenario or two go here.}
 
 ## Running tests
 
@@ -126,48 +136,6 @@ TMP=/dev/shm poetry run pytest
 ```
 
 
-# Terminology
-
-
-# FAQ
-
-
-## Why can't I add tags to a page? Or put pages into a heirarchy or namespaces?
-
-Previous iterations of this project supported these features. But I found
-that no matter how hard I tried, I ended up using tags and page heirarchies
-inconsistently across varous subjects. Some subjects lent themselves to a
-nice obvious heirarchical system, others worked better with tags. Still
-others didn't fit either well.
-
-First I dropped support for tags because managing an accurate list of
-relevant tags for each and every page, and reviewing them on every edit,
-became a chore that I grew to loathe. Plus on the development side of things,
-saving tags with each revision meant an extra layer of metadata. Since the FTS5
-search engine in SQLite is excellent, tags became a labor-intensive redundant
-feature.
-
-Until I got rid of heirarchies too. I found that I only ever used them in one
-section (my notes on Python) and found myself having to look up the linking
-syntax involving namespaces every. Single. Time. Again, thanks to FTS5, I
-found that I could do "soft" namespacing via page title prefixes (e.g.
-"python_operators" instead of "python/operators") and just find everything I
-need through the search which returns matches on both titles and body text.
-These days, the pages that make up my section of Python notes look something
-like this (after slugifying the page names):
-
-* python
-* python_operators
-* python_functions
-* python_classes
-* python_virtual_environments
-* (et al)
-
-To put it another way, I want my database of notes to be a tool. They have
-very low value on their own, but very high value in conjunction with my
-day-to-day work. Any time spent "curating" them is time subtracted from
-getting important things done.
-
 # Suggested Contributions
 
 ## Clean Up CSS
@@ -175,6 +143,23 @@ getting important things done.
 The current style sheets were more or less arrived at by trial and error. Any
 help in organizing the rules in a more coherent yet extensible way would be
 much appreciated.
+
+## Local CLI
+
+For those who prefer to work on the command line, it should be very doable to
+turn this into a local command-line application with full view, edit, search,
+etc functionality.
+
+## Remote CLI
+
+The client part of this would be relatively easy, but obviously the server
+side would require a proper API.
+
+## Diffs Between Revisions
+
+This is pretty standard on wiki-like apps, but it's not a critical feature
+for me so I haven't yet mustered up the fortitude to implement it. (It would
+also likely involve adding a diff library as a dependency.)
 
 ## Redirect to Slugified URL
 
@@ -192,3 +177,35 @@ but it would be nice if the application could immediately redirect to a
 slugified page title instead, if necessary.
 
 I found lots of ugly ways to do this but nothing I was comfortable shipping.
+
+## Draft Feature / Autosave / Leap-frog Detection
+
+To prevent the loss of unsaved changes while editing, we use the browser's
+"are you sure?" nag if there has been a change to the editing area since the
+page was loaded. However, there are still (at least) two opportunies to lose
+work:
+
+1. The browser crashes.
+2. Two simulatenous edits of a page in separate tabs or windows.
+
+The first is rare and the second is not as serious since both revisions are
+saved. But it is currently up to the user to recognize what happened and
+remedy the situation by hand.
+
+These are technically three separate features but I believe they would be
+quite closely coupled if implemented together.
+
+## Refine tests
+
+The `tests` directory contains functional test that were deemed the most
+important. But they could be better organized and optimized/flexible. Code
+coverage is not likely very high. Some tests are lacking or missing because I
+was not able to work out the right way to test certain things.
+
+## Add Anchors to Headings
+
+Anchors on headers are a very common feature on various CMSes. They let you
+link directly to headings, e.g.:
+
+http://example.com/view/page_title#some-section
+
