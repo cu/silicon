@@ -105,7 +105,6 @@ def md_renderer(text):
             'footnotes',
             'table',
             'url',
-            'task_lists',
             'def_list',
             'abbr',
             wiki_links

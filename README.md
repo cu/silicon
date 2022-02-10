@@ -209,3 +209,17 @@ link directly to headings, e.g.:
 
 http://example.com/view/page_title#some-section
 
+## Implement a (Better) Task List Plugin
+
+Mistune (the Markdown->HTML renderer) ships with a [task_lists plugin]. It is
+functional, but it renders task list items inside an ordinary `<ol>` as just
+another kind of list item. This means the task list items get prefixed with
+_both_ a bullet point and a checkbox. IMO, this is fairly ugly and the "right"
+way to display a task list item is the have the checkbox replace the bullet
+point.
+
+[task_lists plugin]: https://mistune.readthedocs.io/en/latest/plugins.html#task-lists
+
+To do this right, I think task lists should be their own separate kind of list
+rather than just another item type in regular lists. It should be possible to
+accomplish this with a Mistune plugin.
