@@ -7,6 +7,24 @@ For the rationale on why this was created and paper-thin justifications on
 certain design decisions, see [DESIGN.md](./DESIGN.md).
 
 
+# Tech Stack
+
+Projects we rely on and appreciate!
+
+* [Python](https://www.python.org/), of course.
+* [Poetry](https://python-poetry.org/) for project management.
+* [Flask](https://flask.palletsprojects.com/), the micro-framework.
+* [Mistune](https://github.com/lepture/mistune) to render Markdown into HTML.
+* [Pygments](https://pygments.org/) for syntax highlighting of code blocks.
+* [python-slugify](https://github.com/un33k/python-slugify) creates URL-friendly
+  "slugs" from strings.
+* [python-dotenv](https://github.com/theskumar/python-dotenv) for configuration
+  management.
+* [Gunicorn](https://gunicorn.org/) for deployment.
+* [Pytest](https://pytest.org/) and
+  [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/) for functional testing.
+
+
 # Quickstart
 
 This project is configured and deployed much like any other Flask project.
@@ -17,7 +35,7 @@ For details, see the [Flask configuration handling Docs].
 
 ## Pre-requisites
 
-This project requires Python 3.7 or greater and either `npm` or docker to
+This project requires Python 3.9 or greater and either `npm` or docker to
 install the third-party Javascript and CSS static resources. On a
 Debian/Ubuntu system, that means the following packages:
 
@@ -195,7 +213,7 @@ remedy the situation by hand.
 These are technically three separate features but I believe they would be
 quite closely coupled if implemented together.
 
-## Refine tests
+## Refine Tests
 
 The `tests` directory contains functional test that were deemed the most
 important. But they could be better organized and optimized/flexible. Code
