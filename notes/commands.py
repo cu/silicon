@@ -6,9 +6,11 @@ from notes.db import close_db, init_db
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
-    '''Create new tables.'''
+    """Create new tables."""
+
     init_db()
-    click.echo('Initialized the database.')
+    click.echo("Initialized the database.")
+
 
 def init_app(app):
     app.teardown_appcontext(close_db)

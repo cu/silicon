@@ -26,8 +26,10 @@ class CustomRenderer(mistune.HTMLRenderer):
     def _render_plain(self, text):
         return '<pre><code>' + mistune.escape(text) + '</code></pre>\n'
 
+
     def block_code(self, text, lang=None):
         """Renderer for syntax highlighting of code blocks."""
+
         if lang:
             try:
                 lexer = get_lexer_by_name(lang, stripall=True)

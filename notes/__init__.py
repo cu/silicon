@@ -41,7 +41,7 @@ def create_app(test_config=None):
         app.config['DATABASE'] = os.path.join(app.instance_path, 'notes.sqlite')
 
     if app.config['SECRET_KEY'] is None:
-        raise AppConfigurationError('SECRET_KEY must be defined, see README.md')
+        raise AppConfigurationError("SECRET_KEY must be defined, see README.md")
 
     from . import commands
     commands.init_app(app)
