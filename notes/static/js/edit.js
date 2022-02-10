@@ -5,7 +5,7 @@ var wiki_edit = {};
 wiki_edit.changed = false;
 wiki_edit.submit_clicked = false;
 
-window.onload = function() {
+window.addEventListener("load", function() {
     // mark the wiki page as changed if there is an alert shown
     // (implies there was an error saving)
     if (document.querySelector('#alerts') !== null) {
@@ -35,4 +35,4 @@ window.onload = function() {
         };
     });
 
-};
+});

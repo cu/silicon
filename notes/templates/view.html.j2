@@ -6,7 +6,9 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/print.css') }}" type="text/css" media="print">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/pygments.css') }}" type="text/css" media="screen">
 {% endblock %}
+
 {% block scripts %}
+  {{ super() }}
   <script src="{{ url_for('static', filename='node_modules/htmx.org/dist/htmx.min.js.gz') }}" defer></script>
 {% endblock %}
 

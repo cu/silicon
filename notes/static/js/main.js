@@ -1,4 +1,5 @@
-window.onload = function() {
+window.addEventListener("load", function() {
+    console.log("I'm in yer function");
     document.querySelector("[data-toggle='nav-top']")
         .addEventListener('click', (event) => {
                 const elements = document.querySelectorAll("[data-toggle='nav-shift']");
@@ -7,4 +8,4 @@ window.onload = function() {
                     element.classList.toggle('shift');
                 })
         })
-};
+});
