@@ -21,3 +21,13 @@
     ]
   </div>
 {% endmacro %}
+
+{% macro toc(title) %}
+  <div id="toc">
+    <div class="nav-header">Contents</div>
+    <div
+      hx-get="{{ url_for('page.toc', title=title) }}"
+      hx-trigger="load">
+    </div>
+  </div>
+{% endmacro %}

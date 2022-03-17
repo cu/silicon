@@ -7,11 +7,6 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/pygments.css') }}" type="text/css" media="screen">
 {% endblock %}
 
-{% block scripts %}
-  {{ super() }}
-  <script src="{{ url_for('static', filename='node_modules/htmx.org/dist/htmx.min.js.gz') }}" defer></script>
-{% endblock %}
-
 {% block sidebar_contents %}
       {{ macros.nav_links(title, 'history', 'home', 'docs') }}
 
@@ -30,13 +25,7 @@
         </ul>
       </div>
 
-      <div id="toc">
-        <div class="nav-header"
-          hx-get="{{ url_for('page.toc', title=title) }}"
-          hx-trigger="load">
-          Contents
-        </div>
-      </div>
+      {{ macros.toc(title) }}
 {% endblock %}
 
 {% block content %}

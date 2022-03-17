@@ -41,33 +41,7 @@
         </ul>
       </div>
 
-      <div id="toc">
-        <div class="nav-header">Contents</div>
-        <ol>
-          <li><a href="#">References</a></li>
-          <ol>
-            <li><a href="#">The Dictionary</a></li>
-            <li><a href="#">Perhaps a Thesaurus or Three or Four or Five or Six or Seven</a></li>
-          </ol>
-          <li><a href="#">Releases</a></li>
-          <li><a href="#">Level One</a></li>
-          <ol>
-            <li><a href="#">Level Two</a></li>
-            <ol>
-              <li><a href="#">Level Three</a></li>
-              <ol>
-                <li><a href="#">Level Four </a></li>
-                <ol>
-                  <li><a href="#">Level Five</a></li>
-                  <ol>
-                    <li><a href="#">Level Six</a></li>
-                  </ol>
-                </ol>
-              </ol>
-            </ol>
-          </ol>
-        </ul>
-      </div>
+      {{ macros.toc(title) }}
 {% endblock %}
 
 {% block content %}

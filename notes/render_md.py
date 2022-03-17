@@ -1,17 +1,19 @@
 from flask import url_for
 import mistune
+from mistune.directives import render_toc_ul
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
 from pygments.util import ClassNotFound
-
 from slugify import slugify
 
 """
-In this module, we add two extra features to mistune:
+In this module, we add these extra features to mistune:
 
-1. Syntax highlighting in code blocks.
-2. Wiki-style links, via a custom plugin inspired by the mistune docs.
+* Syntax highlighting in code blocks.
+* Wiki-style links, via a custom plugin inspired by the mistune docs.
+* Heading `id` with slugified text.
+* A table of contents renderer.
 """
 
 
@@ -23,23 +25,21 @@ class CustomRenderer(mistune.HTMLRenderer):
     * `rel` attribute in external links
     """
 
-    def _render_plain(self, text):
-        return '<pre><code>' + mistune.escape(text) + '</code></pre>\n'
-
-
     def block_code(self, text, lang=None):
         """Renderer for syntax highlighting of code blocks."""
+
+        html = '<pre><code>' + mistune.escape(text) + '</code></pre>\n'
 
         if lang:
             try:
                 lexer = get_lexer_by_name(lang, stripall=True)
             except ClassNotFound:
-                return self._render_plain(text)
+                return html
             else:
                 formatter = HtmlFormatter()
                 return highlight(text, lexer, formatter)
 
-        return self._render_plain(text)
+        return html
 
     def link(self, link, text=None, title=None):
         """Renderer for external links.
@@ -55,6 +55,14 @@ class CustomRenderer(mistune.HTMLRenderer):
             s += ' title="' + mistune.escape_html(title) + '"'
         return s + '>' + (text or link) + '</a>'
 
+    def heading(self, text, level):
+        """Return heading HTML with slugified text in the `id` attribute.
+
+        todo: paragraph link thing
+        """
+
+        level = str(level)
+        return f'<h{level} id="{slugify(text)}">{text}</h{level}>\n'
 
 
 def wiki_links(md):
@@ -98,6 +106,8 @@ def wiki_links(md):
 
 
 def md_renderer(text):
+    """Render a Markdown document into HTML."""
+
     markdown = mistune.create_markdown(
         renderer=CustomRenderer(escape=False),
         plugins=[
@@ -107,7 +117,46 @@ def md_renderer(text):
             'url',
             'def_list',
             'abbr',
-            wiki_links
+            wiki_links,
         ]
     )
     return markdown(text)
+
+
+def ast_renderer(text):
+    """Render a Makrdown document into an Abstract Syntax Tree."""
+
+    ast = mistune.create_markdown(renderer=mistune.AstRenderer())
+    return ast(text)
+
+
+def walk_heading_children(ast):
+    """
+    Headings are block-level elements but can have inline markup as child
+    nodes.
+    """
+
+    text = ''
+    for node in ast:
+        if 'children' in node:
+            text += walk_heading_children(node['children'])
+        if 'text' in node:
+            text += node['text']
+    return text
+
+
+def toc_renderer(text):
+    """Render a Markdown document into an HTML table of contents."""
+
+    ast = ast_renderer(text)
+    headings = []
+
+    # walk the AST to find headings, calling walk_heading_children() if any
+    # headings have child nodes
+    for node in ast:
+        text = ''
+        if node['type'] == 'heading':
+            text += mistune.escape_html(walk_heading_children(node['children']))
+            headings.append((slugify(text), text, node['level']))
+
+    return render_toc_ul(headings)
