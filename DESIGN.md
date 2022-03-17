@@ -6,7 +6,12 @@ almost every day. I know people who are able memorize the fine details of
 complex systems, and regurgitate them at will, sometimes years after the
 fact. I'm not one of them.
 
-To put it another way, I'm an idiot without my notes. This is my notebook.
+To put it another way, I'm an idiot without my notes. This is my notebook.[^1]
+
+[^1]: A few months after my first draft of this document, I learned that there
+is a community of people who call this kind of software a [digital garden].
+
+[digital garden]: https://github.com/MaggieAppleton/digital-gardeners/
 
 I wrote this app to suit the way my particular brain wants to work. I have
 tried many others and a few came close but didn't quite hit the spot. It took
@@ -67,10 +72,11 @@ front costs (e.g. Flask) and shunning those that offer mainly convenience
 (like an ORM, CSS toolkit, or flashy Javascript UI framework). I believe people
 call this "boring technology" these days.
 
-I chose dependencies that are relatively small, easy to understand, and are
-mature and therefore unlikely to change dramatically in the future. I also
-hope that I have structured things in a way that will make it relatively easy
-to swap out parts for better or more available versions in the future.
+I chose dependencies that are relatively small, easy to understand, and if
+not mature are at least apparently stable and therefore unlikely to change
+dramatically in the future. I also hope that I have structured things in a
+way that will make it relatively easy to swap out parts for better or more
+available versions in the future.
 
 ## Markdown Syntax
 
@@ -91,18 +97,19 @@ seem to hit a lot.
 cues inline, as text, than I am with keyboard shortcuts and clicking toolbar
 icons.
 
-## Minimal Distractions
+## Least Cognitive Load
 
 I use lots of software on a daily basis that tries to be everything to
-everyone and as a result, much of it gets in your way a lot. Probably more
-than you realize until you've stood back to look at it. Even small annoyances
-encountered frequently enough add up to significant cognitive load that has
-no return on investment.
+everyone and as a result, cannot be customized for individual use cases. This
+slows you down more than you realize until you've stood back to look at it.
+Even small annoyances encountered frequently enough add up to significant
+cognitive load that has no return on investment.
 
-Prior to my iterations of this tool, all of my notes were kept in a self-hosted
-instance of Dokuwiki. As open source wiki systems go, it's easily at the top of
-the heap for being easy to set up and easy to use. The main things that took me
-away from it were the lack of native support for Markdown and the editor UI.
+Prior to my iterations of this tool, all of my notes were kept in a
+self-hosted instance of Dokuwiki. As open source wiki systems go, it's easily
+at the top of the heap for being easy to set up and use. The main things that
+took me away from it were the lack of native support for Markdown and the
+editor UI.
 
 _The editor UI, you say?_ Yes. Eventually, day by day, it managed to drive me
 mad. You might think there's not much that can go wrong with a page that just
