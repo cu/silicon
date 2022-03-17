@@ -126,11 +126,58 @@ Another intentional design decision was omitting the ever-present changelog
 line present in most wiki software. These are just my own notes, I don't have
 to justify updating the content to myself. :)
 
-## Data Permenance
+## Data Permanance
 
 SQLite
 
 Reasons why plain text files didn't work out.
+
+One of the reasons I liked Dokuwiki was that it was one of the few full-featured
+wikis that did not need a database. You can just go to the data directory,
+and there are your pages.
+
+I was hoping to do something similar myself, but it turns out that you make
+some trade-offs when you try to turn a file store into a document store:
+
+* Want to keep every version of a page? Now you have to invent (or steal) a
+file-based revision system. This alone almost nullifies the "simplicity"
+argument for storing pages as files.
+
+* Want to search all pages? Implementing a basic search feature on a tree of
+files is not terribly difficult. But if you want search operators, you're left
+with writing your own query parser, or bringing in a library to do it. When the
+size if your notes collection grows, it also becomes important to index pages
+so that you're not grepping over every byte in the tree for every search query.
+Dokuwiki solved this by writing their own moderately complicated page index
+system. You could pull in a full-text search application that does all of this
+for you (e.g. ElasticSearch) but those tend to be quite heavy.
+
+* If you later decide to add any metadata to pages beyond a title and timestamp,
+you have to invent a way to store it.
+
+After looking at all the options, I decided that storing pages in SQLite was
+the best way to go for my purposes:
+
+* Although the pages are "locked up" inside a database, SQLite is so mature
+and ubuquitous that it seems like there is zero risk that the notes in the
+database will ever be unreachable, no matter how far technology progresses in
+the rest of my lifetime. It is fairly trivial to export the contents, should we
+desire. (And we desire.)
+
+* We can trivially implement page history by simply storing every edit to a page
+as a new row in a table. The "current" version of a page is simply the one with
+the newest timestamp. Listing, retrieving, and comparing old versions becomes
+easy as well, as far as the data layer is concerned.
+
+* SQLite has [rather amazing full-text-search](https://www.sqlite.org/fts5.html)
+and indexing built right in! All you need are minor additions to your schema
+and it Just Works.
+
+* Extra page metadata is easy to add by just changing the schema and perhaps
+some of your existing model code.
+
+* Marginal benefit: One database file is easier to "handle" than a tree of
+files, e.g. for backup or data migration purposes.
 
 ## Data Portability
 
