@@ -1,6 +1,7 @@
 import os
 import tempfile
 
+from bs4 import BeautifulSoup
 import pytest
 
 from notes import create_app
@@ -38,3 +39,13 @@ def client(app):
 def runner(app):
     """A test runner for the app's Click commands."""
     return app.test_cli_runner()
+
+@pytest.fixture
+def page():
+    """
+    Take the raw HTML for the full page and return a BeautifulSoup object so
+    that the tests can check against specific parts of the page.
+    """
+    def _page(data):
+        return BeautifulSoup(data, "html.parser", from_encoding="utf-8")
+    return _page

@@ -122,12 +122,6 @@ poetry run flask run
 Unless you changed the defaults, you should be able to access the UI on
 http://localhost:5000/
 
-To run the tests, install the test dependencies and run `pytest`:
-
-```
-poetry run pytest
-```
-
 
 ## Installation for a production deployment
 
@@ -141,6 +135,8 @@ HTTP basic authentication enabled.
 {TODO: An example scenario or two go here.}
 
 ## Running tests
+
+To run the tests, install the test dependencies and run `pytest`:
 
 ```
 poetry run pytest
