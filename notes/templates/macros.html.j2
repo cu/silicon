@@ -30,10 +30,10 @@
  # relatives: list of pages relatives as an array
  #}
 {% macro related(title, relatives) %}
-  <div class="nav-header" id="related-pages">
+  <div class="nav-header">
     Related
-    <span class="add-relation">
-      [<span id="add-relation-btn">add</span>]
+    <span class="widget-title-span">
+      [<span class="widget-title-btn" id="add-relation-btn">add</span>]
     </span>
   </div>
   <div id="related-links" data-widget-url="{{ url_for('page.get_relatives', title=title) }}">
@@ -47,8 +47,11 @@
  # toc: pre-rendered table of contents
  #}
 {% macro table_of_contents(title, toc) %}
-  {% if toc %}
-  <div class="nav-header">Contents</div>
-  <div id="toc">{{ toc }}</div>
-  {% endif %}
+  <div class="nav-header">
+    Contents
+    <span class="widget-title-span" id="update-toc" style="visibility: hidden">
+      [<span class="widget-title-btn" id="update-toc-btn">update</span>]
+    </span>
+  </div>
+  <div id="toc" data-widget-url="{{ url_for('page.toc') }}">{{ toc }}</div>
 {% endmacro %}

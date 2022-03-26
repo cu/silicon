@@ -127,14 +127,11 @@ def search():
         body_results=body_results)
 
 
-@bp.route('/toc/<title>')
-def toc(title):
-    title = slugify(title, separator='_')
-    p = page.read(title)
-    if p['revision'] is None:
-        return 'No such page', 404
-
-    return toc_renderer(p['body'])
+@bp.route('/toc', methods=['POST'])
+def toc():
+    if 'body' not in request.form:
+        return 'Invalid request', 400
+    return toc_renderer(request.form['body'])
 
 
 @bp.route('/related/<title>')

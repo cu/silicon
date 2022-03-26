@@ -181,13 +181,13 @@
     margin-right: 1em;
 }
 
-.add-relation {
+.widget-title-span {
     text-transform: none;
     font-weight: normal;
 }
 
-#add-relation-btn {
-    color: var(--article-internal-link);
+.widget-title-btn {
+    color: var(--nav-page-links);
 }
 
 .related-page:hover .del-relation {
@@ -205,7 +205,7 @@
     color: var(--nav-alert-background);
 }
 
-#add-relation-btn:hover, .del-relation-btn:hover {
+.widget-title-btn:hover, .del-relation-btn:hover {
     text-decoration: underline;
     cursor: pointer;
 }
