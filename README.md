@@ -1,6 +1,19 @@
-# What's all this, then?
+# What's all this, then?!
 
-A lightweight, low-friction personal knowledge base with a wiki-like interface.
+This is a lightweight, low-friction personal knowledge base.
+
+Features:
+
+* Plaintext editing in Markdown, rendering in HTML
+* Language syntax highlighting in rendered HTML
+* Bi-directional page relationships
+* Full text and page title search
+* Page history
+* A table of contents in the left sidebar, where it belongs
+* A quite-usuable mobile layout
+* Built-in documentation
+* No-frills UI
+* No big frameworks, just a few small dependencies
 
 For the rationale on why this was created and paper-thin justifications on
 certain design decisions, see [DESIGN.md](./DESIGN.md).
