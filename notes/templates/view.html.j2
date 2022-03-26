@@ -9,7 +9,7 @@
 
 {% block scripts %}
   {{ super() }}
-  <script src="{{ url_for('static', filename='js/related.js') }}" defer></script>
+  <script src="{{ url_for('static', filename='js/widgets.js') }}" defer></script>
 {% endblock %}
 
 {% block sidebar_contents %}
@@ -22,7 +22,7 @@
       <div class="nav-page-timestamp">Edited: {{ revision|human_timestamp }}</div>
 
       {{ macros.related(title, relatives) }}
-      {{ macros.toc(title) }}
+      {{ macros.table_of_contents(title, toc) }}
 {% endblock %}
 
 {% block content %}

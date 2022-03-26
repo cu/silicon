@@ -34,6 +34,8 @@ def view(title):
     else:
         p = page.read(title)
         p['relatives'] = related.get(title)
+        if 'body' in p:
+            p['toc']  = toc_renderer(p['body'])
 
     if p['revision'] is None:
         return render_template('not_found.html.j2', **p), 404
@@ -46,6 +48,9 @@ def view(title):
 def edit(title):
     title = slugify(title, separator='_')
     p = page.read(title)
+    p['relatives'] = related.get(title)
+    if 'body' in p:
+        p['toc']  = toc_renderer(p['body'])
     if request.method == 'GET':
         return render_template('edit.html.j2', **p)
     elif request.method == 'POST':
@@ -122,7 +127,7 @@ def search():
         body_results=body_results)
 
 
-@bp.route('/htmx/toc/<title>')
+@bp.route('/toc/<title>')
 def toc(title):
     title = slugify(title, separator='_')
     p = page.read(title)

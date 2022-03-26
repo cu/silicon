@@ -8,6 +8,7 @@
 
 {% block scripts %}
   {{ super() }}
+  <script src="{{ url_for('static', filename='js/widgets.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/edit.js') }}" defer></script>
 {% endblock %}
 
@@ -32,13 +33,12 @@
         {% endwith %}
       </div>
 
-      {{ macros.related(title) }}
-      {{ macros.toc(title) }}
+      {{ macros.related(title, relatives) }}
+      {{ macros.table_of_contents(title, toc) }}
 {% endblock %}
 
 {% block content %}
   <form action="{{ url_for('page.edit', title=title) }}" id="page-form" method="post">
-    {# <textarea id="body-text" name="body" rows="24" cols="80">{{ body }}</textarea> #}
     <textarea id="body-text" name="body">{{ body }}</textarea>
   </form>
 {% endblock %}
