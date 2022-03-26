@@ -24,6 +24,45 @@ become known as "technical debt."
 The following are a few of the _intentional_ design descisions and their
 rationale.
 
+## Function over Form
+
+It's only natural that as technology progresses, innovation and novelty slow
+down. As a result, many programs (even free and open source ones) attempt to
+introduce novelty or stand out through visual design. This is the current
+trend in software development, especially for personal productivity and
+programming tools.
+
+It's not hard to understand why. When you want users (or perhaps more often,
+employers) to see your work, you need to grab their attention. The best way
+to grab a person's attention is to show them something interesting.
+Applications that _look_ interesting are desirable for that. It certainly
+helps with "spreading the word" through our visual web and social media.
+
+It's fine to develop a program as an art project, but the problem is that
+when applications are developed as art projects, functionality almost always
+suffers to some degree or another. When writing any kind of program, you
+often have to choose between adding complexity to the UI, adding complexity
+to the underlying code, or compromising on functionality. A person writing a
+program to look pretty has already made those decisions up-front, usually in
+favor of comprosmising on functionality because that involves shipping the
+thing with the least amount of work.
+
+Personally, I'd rather use an ugly tool that works well than a beautiful one
+that slows me down or won't let me do my work the way I want to because it's
+too busy checking itself in the mirror.
+
+Things this app doesn't have and likely never will because they don't add
+value to (or worse, subtract value from) my daily workflow:
+
+* Emoji
+* Things that fade in and out of existence
+* Things that zoom around the screen for no reason at all
+* Animated backgrounds
+* Fancy-pants typography
+* Scroll bar hijacking
+* A front-end UI framework of any kind
+* "Subscribe to my newsletter!"
+
 ## Web-Based
 
 The app is web-based for the following reasons:
