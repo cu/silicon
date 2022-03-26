@@ -1,7 +1,6 @@
 # What's all this, then?
 
-Bityard Notes is designed to be a low-friction personal knowledge base, with a
-wiki-like interface.
+A lightweight, low-friction personal knowledge base with a wiki-like interface.
 
 For the rationale on why this was created and paper-thin justifications on
 certain design decisions, see [DESIGN.md](./DESIGN.md).
@@ -158,16 +157,18 @@ The current style sheets were more or less arrived at by trial and error. Any
 help in organizing the rules in a more coherent yet extensible way would be
 much appreciated.
 
-## Local CLI
+## Dark Theme
 
-For those who prefer to work on the command line, it should be very doable to
-turn this into a local command-line application with full view, edit, search,
-etc functionality.
+It would be nice if the CSS adjusted itself to a dark theme based on the
+preference set by the user in the browser. This should be pretty easy since
+almost all of the colors are in one file.
 
-## Remote CLI
+## Clean up Javascript
 
-The client part of this would be relatively easy, but obviously the server
-side would require a proper API.
+To put it mildly, my JS skills are not the best. I would very much appreciate
+any suggestions on improvements to the small amount of code there is, or
+whether there is a better way to organize it. I won't bring in any kind of
+Javascript "build" tool as a project dependency, though.
 
 ## Diffs Between Revisions
 
@@ -177,7 +178,7 @@ also likely involve adding a diff library as a dependency.)
 
 ## Redirect to Slugified URL
 
-We currently "slugify" the page title in two places:
+We currently "slugify" the page title in at least two places:
 
 1. When building the URL for an internal page link generated from wiki link
 syntax `[[like this]]` in `render.py`.
@@ -211,7 +212,7 @@ quite closely coupled if implemented together.
 
 ## Refine Tests
 
-The `tests` directory contains functional test that were deemed the most
+The `tests` directory contains functional tests that were deemed the most
 important. But they could be better organized and optimized/flexible. Code
 coverage is not likely very high. Some tests are lacking or missing because I
 was not able to work out the right way to test certain things.
