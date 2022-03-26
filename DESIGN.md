@@ -14,51 +14,61 @@ is a community of people who call this kind of software a [digital garden].
 [digital garden]: https://github.com/MaggieAppleton/digital-gardeners/
 
 I wrote this app to suit the way my particular brain wants to work. I have
-tried many others and a few came close but didn't quite hit the spot. It took
+tried many others and a few came close but none quite hit the spot. It took
 a great deal to convince myself that it was worth my time to reinvent one of
-the most commonly reinvented wheels. As a result, although I am definitely
-intrested in improvements, what you see here is likely to stick. I'm not
-inclined to add many bells and whistles because those things eventually
-become known as "technical debt."
+the most commonly reinvented wheels. I am definitely intrested in
+improvements, but what you see here is likely to stick. I'm not inclined to
+add many bells and whistles because those things eventually become known as
+"technical debt."
 
 The following are a few of the _intentional_ design descisions and their
 rationale.
 
 ## Function over Form
 
-It's only natural that as technology progresses, innovation and novelty slow
-down. As a result, many programs (even free and open source ones) attempt to
-introduce novelty or stand out through visual design. This is the current
-trend in software development, especially for personal productivity and
-programming tools.
+It's only natural that as a field of technology progresses, innovation and
+novelty slow down. The fruit on the lower branches has mostly been picked and
+pretty much all of the basic and important software is free or cheap enough
+to not matter. As a result, it's hard to come up with something truly new and
+interesting and so many programs attempt to introduce novelty or stand out
+through visual design. This is the current trend in software development,
+especially for personal productivity and programming tools.
 
 It's not hard to understand why. When you want users (or perhaps more often,
-employers) to see your work, you need to grab their attention. The best way
-to grab a person's attention is to show them something interesting.
-Applications that _look_ interesting are desirable for that. It certainly
-helps with "spreading the word" through our visual web and social media.
+employers and clients) to see your work, you need to grab their attention.
+The best way to grab someone's attention is to show them something
+interesting. Applications that _look_ interesting are desirable for that. Or
+at least it certainly helps with "spreading the word" through our present-day
+visual web and social media.
 
 It's fine to develop a program as an art project, but the problem is that
-when applications are developed as art projects, functionality almost always
-suffers to some degree or another. When writing any kind of program, you
-often have to choose between adding complexity to the UI, adding complexity
-to the underlying code, or compromising on functionality. A person writing a
-program to look pretty has already made those decisions up-front, usually in
-favor of comprosmising on functionality because that involves shipping the
-thing with the least amount of work.
+these are often presented as tools. When applications are developed as art
+projects, functionality almost always suffers to some degree or another.
 
-Personally, I'd rather use an ugly tool that works well than a beautiful one
-that slows me down or won't let me do my work the way I want to because it's
-too busy checking itself in the mirror.
+Case in point: I know of a mechanic who likes to take old bicycles and old
+engines and combines the two into motorcycles. The results are striking, he
+ends up with beautiful, one-of-a-kind hand- built machines that are glorious
+to look at and sound awesome. However, nearly all of them offer a terrible
+riding experience. Now, generally the throttle works as it should. But the
+ability to stop once you get going is a bit hit or miss. The handling is
+awful, the ride is bumpy, the seat is painful, and you'll get your flesh
+burned off if you touch the wrong thing. This guy enjoys the process of
+building these machines and his creations are wonderful, but he also doesn't
+try to pass them off as daily riders.
 
-Things this app doesn't have and likely never will because they don't add
-value to (or worse, subtract value from) my daily workflow:
+Personally, when it comes to Getting Stuff Done, I'd rather use an ugly tool
+that works well than a beautiful one that has lost sight of its true purpose.
+And of course, bonus points for unburnt flesh.
+
+The following is an incomplete list of things this app doesn't have and
+likely never will because they don't add value to (or worse, subtract value
+from) my daily workflow:
 
 * Emoji
-* Things that fade in and out of existence
-* Things that zoom around the screen for no reason at all
+* Parts that fade in and out of existence
+* Things that move around for no pratical reason at all
 * Animated backgrounds
-* Fancy-pants typography
+* Fancy-pants fonts
 * Scroll bar hijacking
 * A front-end UI framework of any kind
 * "Subscribe to my newsletter!"
