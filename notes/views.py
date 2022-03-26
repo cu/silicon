@@ -6,12 +6,11 @@ from flask import (
     request,
     url_for,
 )
-
 from slugify import slugify
 
 from notes.j2_filters import human_timestamp, mark_query_results
 from notes.render_md import md_renderer, toc_renderer
-from notes import page
+from notes import page, related
 
 
 bp = Blueprint('page', __name__)
@@ -34,6 +33,7 @@ def view(title):
         p = page.read(title, request.args.get('revision'))
     else:
         p = page.read(title)
+        p['relatives'] = related.get(title)
 
     if p['revision'] is None:
         return render_template('not_found.html.j2', **p), 404
@@ -130,3 +130,24 @@ def toc(title):
         return 'No such page', 404
 
     return toc_renderer(p['body'])
+
+
+@bp.route('/related/<title>')
+def get_relatives(title):
+    return render_template('related.html.j2',title=title,
+        relatives=related.get(title))
+
+
+@bp.route('/related/<title>', methods=['POST'])
+def add_relative(title):
+    if 'relative' in request.form:
+        related.add(title, request.form['relative'])
+    return render_template('related.html.j2',title=title,
+        relatives=related.get(title))
+
+
+@bp.route('/related/<title>/<relative>', methods=['DELETE'])
+def delete_relative(title, relative):
+    related.delete(title, relative)
+    return render_template('related.html.j2',title=title,
+        relatives=related.get(title))

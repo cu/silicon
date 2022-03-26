@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/pygments.css') }}" type="text/css" media="screen">
 {% endblock %}
 
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ url_for('static', filename='js/related.js') }}" defer></script>
+{% endblock %}
+
 {% block sidebar_contents %}
       {{ macros.nav_links(title, 'history', 'home', 'docs') }}
 
@@ -16,15 +21,7 @@
 
       <div class="nav-page-timestamp">Edited: {{ revision|human_timestamp }}</div>
 
-      <div>
-        <div class="nav-header">Related</div>
-        <ul>
-          <li><a class="internal-link" href="#">raspberry_pi</a></li>
-          <li><a class="internal-link" href="#">debian</a></li>
-          <li><a class="internal-link" href="#">goat_farming</a></li>
-        </ul>
-      </div>
-
+      {{ macros.related(title, relatives) }}
       {{ macros.toc(title) }}
 {% endblock %}
 

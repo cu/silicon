@@ -12,6 +12,12 @@ CREATE INDEX IF NOT EXISTS pages_idx ON pages (
   title
 );
 
+-- Page relationships
+CREATE TABLE relationships (
+    title_a TEXT NOT NULL,
+    title_b TEXT NOT NULL
+);
+
 -- The full-text search table
 CREATE virtual TABLE pages_fts USING FTS5(
     title,

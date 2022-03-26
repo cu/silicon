@@ -39,6 +39,10 @@ a.internal-link:visited {
     color: var(--article-internal-link);
 }
 
+a.internal-link:hover {
+    text-decoration: underline;
+}
+
 article a {
     color: var(--article-external-link);
 }

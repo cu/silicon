@@ -31,3 +31,17 @@
     </div>
   </div>
 {% endmacro %}
+
+{% macro related(title, relatives) %}
+  <div>
+    <div class="nav-header" id="related-pages">
+      Related
+      <span class="add-relation">
+        [<span id="add-relation-btn">add</span>]
+      </span>
+    </div>
+    <div id="related-links" data-widget-url="{{ url_for('page.get_relatives', title=title) }}">
+      {% include "related.html.j2" %}
+    </div>
+  </div>
+{% endmacro %}

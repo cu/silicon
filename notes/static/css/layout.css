@@ -177,6 +177,39 @@
     text-decoration: none;
 }
 
+#related-links ul {
+    margin-right: 1em;
+}
+
+.add-relation {
+    text-transform: none;
+    font-weight: normal;
+}
+
+#add-relation-btn {
+    color: var(--article-internal-link);
+}
+
+.related-page:hover .del-relation {
+    visibility: visible;
+}
+
+.del-relation {
+    visibility: hidden;
+    padding-left: 0.5em;
+    /* this messes things up a little when page names are very long */
+    float: right;
+}
+
+.del-relation-btn {
+    color: var(--nav-alert-background);
+}
+
+#add-relation-btn:hover, .del-relation-btn:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
     .nav-side {
         left: -300px;

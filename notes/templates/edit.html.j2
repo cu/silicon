@@ -32,15 +32,7 @@
         {% endwith %}
       </div>
 
-      <div>
-        <div class="nav-header">Related</div>
-        <ul>
-          <li><a class="internal-link" href="#">raspberry_pi</a></li>
-          <li><a class="internal-link" href="#">debian</a></li>
-          <li><a class="internal-link" href="#">goat_farming</a></li>
-        </ul>
-      </div>
-
+      {{ macros.related(title) }}
       {{ macros.toc(title) }}
 {% endblock %}
 

@@ -1,0 +1,12 @@
+<ul>
+{% for rel in relatives -%}
+  <li class="related-page">
+    <a class="internal-link" href="{{ url_for('page.view', title=rel) }}">
+      {{ rel }}
+    </a>
+    <span class="del-relation">
+      [<span class="del-relation-btn" data-del-relative="{{ rel }}">remove</span>]
+    </span>
+  </li>
+{% endfor -%}
+</ul>
