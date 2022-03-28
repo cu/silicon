@@ -11,7 +11,9 @@
 
 {% block scripts %}
   {{ super() }}
-  <script src="{{ url_for('static', filename='node_modules/requirejs/require.js') }}" defer></script>
+  {% if config.NOTES_EDITOR == 'codemirror' %}
+    <script src="{{ url_for('static', filename='node_modules/requirejs/require.js') }}" defer></script>
+  {% endif %}
   <script type="text/javascript">
     const js_modules_root = "{{ url_for('static', filename='node_modules') }}";
     const notes_editor = "{{ config.NOTES_EDITOR }}";
