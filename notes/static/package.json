@@ -8,6 +8,7 @@
     },
     "author": "",
     "dependencies": {
-        "htmx.org": "^1.6.1"
+        "codemirror": "^5.65.2",
+        "requirejs": "^2.3.6"
     }
 }

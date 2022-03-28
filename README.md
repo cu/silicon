@@ -1,6 +1,6 @@
 # What's all this, then?!
 
-This is a lightweight, low-friction personal knowledge base.
+Bityard Notes: A somewhat lightweight, low-friction personal knowledge base.
 
 Features:
 
@@ -47,15 +47,14 @@ For details, see the [Flask configuration handling Docs].
 
 ## Pre-requisites
 
-This project requires Python 3.9 or greater and either `npm` or docker to
-install the third-party Javascript and CSS static resources. On a
-Debian/Ubuntu system, that means the following packages:
+This project requires Python 3.9 or greater. On a Debian/Ubuntu system, that
+means the following packages:
 
 * `python3`
 * `python3-pip` (unless installed via other means)
 * `python3-dev`
 * `python3-venv`
-* `npm` (or `docker`)
+* `npm` (or `docker`) (optional to enable CodeMirror editor)
 
 
 ## Installation for development or local use
@@ -73,18 +72,6 @@ Use poetry to create a virtual environment and install the dependencies:
 
 ```
 poetry install
-```
-
-Install third-party Javascript/CSS static packages:
-
-```
-(cd notes/static && npm install)
-```
-
-Or, if you'd rather just use npm from inside a docker container:
-
-```
-docker run -ti --rm -v $PWD/notes/static:/app -w /app node:alpine npm install
 ```
 
 Flask is configured via environment variables. There is a file called
@@ -145,6 +132,34 @@ it is secure. One example may be deploying it behind an HTTPS proxy with
 HTTP basic authentication enabled.
 
 {TODO: An example scenario or two go here.}
+
+## Configuring the CodeMirror Editor
+
+Optional support for [CodeMirror](https://codemirror.net) as a text editor is
+included. It's not enabled by default because it adds a lot of "heft" to the
+UI, mostly around having to make a separate network request for each language
+and addon specified. To enable CodeMirror, add the following to your `.env`:
+
+```
+NOTES_EDITOR=codemirror
+```
+
+You also have to install third-party Javascript/CSS static packages:
+
+```
+(cd notes/static && npm install)
+```
+
+Or, if you'd rather just use npm from inside a docker container:
+
+```
+docker run -ti --rm -v $PWD/notes/static:/app -w /app node:alpine npm install
+```
+
+Currently only a handful of languages are enabled for syntax highlighting, if
+you want to edit the list to suit your needs, you can edit
+`notes/static/js/edit.js`. You can find a list of supported lanauges
+[here](https://codemirror.net/mode/).
 
 ## Running tests
 

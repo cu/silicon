@@ -43,6 +43,8 @@ def create_app(test_config=None):
     if app.config['SECRET_KEY'] is None:
         raise AppConfigurationError("SECRET_KEY must be defined, see README.md")
 
+    app.config['NOTES_EDITOR'] = os.getenv('NOTES_EDITOR', 'textarea')
+
     from . import commands
     commands.init_app(app)
 

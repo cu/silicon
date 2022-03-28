@@ -9,6 +9,10 @@
     height: 100%;
 }
 
+.CodeMirror {
+    height: 100%;
+}
+
 #alerts {
     background: var(--nav-alert-background);
     color: var(--nav-alert-text);
