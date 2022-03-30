@@ -73,6 +73,13 @@ h6 {
     text-decoration: underline;
 }
 
+blockquote {
+    margin: 0;
+    padding: 0.001em;
+    padding-left: 0.5em;
+    border-left: 0.2em solid var(--article-header-underline);
+}
+
 code {
     color: var(--article-code-text);
     background-color: var(--article-pre-background);
