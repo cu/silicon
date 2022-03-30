@@ -35,6 +35,8 @@ Projects we rely on and appreciate!
 * [Gunicorn](https://gunicorn.org/) for deployment.
 * [Pytest](https://pytest.org/) and
   [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/) for functional testing.
+* [CodeMirror](https://codemirror.net/) (optional) for editor syntax
+  highlighting
 
 
 # Quickstart
