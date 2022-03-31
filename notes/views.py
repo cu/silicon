@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from flask import (
     Blueprint,
     flash,
@@ -99,10 +101,24 @@ def history_revision(title, req_revision):
     return render_template('history.html.j2', **p)
 
 
-@bp.route('/docs/', defaults={'title': 'overview'})
+@bp.route('/docs', defaults={'title': 'main'})
 @bp.route('/docs/<title>')
 def docs(title):
-    return f"Docs for {title}: Not Yet Implemented"
+    p = {}
+
+    p['title'] = slugify(title)
+
+    doc = Path(__file__).parent.parent / 'docs' / f'{title}.md'
+    try:
+        with doc.open() as f:
+            body = f.read()
+            p['html'] = md_renderer(body)
+    except FileNotFoundError:
+        p['html'] = f'No documentation for "{title}" found.'
+        return render_template('docs.html.j2', **p), 404
+
+    p['toc']  = toc_renderer(body)
+    return render_template('docs.html.j2', **p)
 
 
 @bp.route('/search')
