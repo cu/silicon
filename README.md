@@ -7,7 +7,7 @@ Features:
 * Plaintext editing in Markdown, rendering in HTML
 * Language syntax highlighting in rendered HTML
 * Bi-directional page relationships
-* Full text and page title search
+* Powerful full-text and page title search
 * Page history
 * A table of contents in the left sidebar, where it belongs
 * A quite-usuable mobile layout
@@ -18,6 +18,17 @@ Features:
 For the rationale on why this was created and paper-thin justifications on
 certain design decisions, see [DESIGN.md](./DESIGN.md).
 
+<a href="https://gist.githubusercontent.com/cu/addb3a5f6ba1de11b8fb5eedd212d82a/raw/58e80468acbdd832d012fd776afac6d58357cbb3/view_full.png">
+  <img src="https://gist.githubusercontent.com/cu/addb3a5f6ba1de11b8fb5eedd212d82a/raw/58e80468acbdd832d012fd776afac6d58357cbb3/view_full.png" width="400" height="275">
+</a>
+
+<a href="https://gist.githubusercontent.com/cu/addb3a5f6ba1de11b8fb5eedd212d82a/raw/bd5c9022462fe6aa6fd239b07a56777275bccf85/view_full_codemirror.png">
+  <img src="https://gist.githubusercontent.com/cu/addb3a5f6ba1de11b8fb5eedd212d82a/raw/bd5c9022462fe6aa6fd239b07a56777275bccf85/view_full_codemirror.png" width="400" height="275">
+</a>
+
+<a href="https://gist.githubusercontent.com/cu/addb3a5f6ba1de11b8fb5eedd212d82a/raw/58e80468acbdd832d012fd776afac6d58357cbb3/view_mobile.png">
+  <img src="https://gist.githubusercontent.com/cu/addb3a5f6ba1de11b8fb5eedd212d82a/raw/58e80468acbdd832d012fd776afac6d58357cbb3/view_mobile.png" width="248" height="275">
+</a>
 
 # Tech Stack
 
