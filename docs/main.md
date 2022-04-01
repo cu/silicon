@@ -1,4 +1,4 @@
-Welcome to the documentation for Bityard Notes, a low-friction personal
+Welcome to the documentation for Silicon Notes, a low-friction personal
 knowledge base.
 
 This page is a brief introduction to the program. For a detailed reference on

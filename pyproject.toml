@@ -2,7 +2,7 @@
 name = "notes"
 version = "0.1.0"
 description = "A personal knowledge base with a wiki-like interface."
-authors = ["Charles Ulrich <charles@bityard.net>"]
+authors = ["Charles Ulrich <charles.silicon@bityard.net>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"

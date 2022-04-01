@@ -1,6 +1,6 @@
 # What's all this, then?!
 
-Bityard Notes: A somewhat lightweight, low-friction personal knowledge base.
+Silicon Notes: A somewhat lightweight, low-friction personal knowledge base.
 
 Features:
 
