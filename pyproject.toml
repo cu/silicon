@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "notes"
+name = "silicon"
 version = "0.1.0"
 description = "A personal knowledge base with a wiki-like interface."
 authors = ["Charles Ulrich <charles.silicon@bityard.net>"]
