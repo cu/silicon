@@ -92,7 +92,7 @@ Flask is configured via environment variables. There is a file called
 somewhere else, you will need to set:
 
 ```
-FLASK_APP=notes
+FLASK_APP=silicon
 ```
 
 All other settings can either be set as environment variables or written to a
@@ -110,7 +110,7 @@ docs, but these are some you might care to know about:
 * `FLASK_ENV`: `production` (default), or `development`
 * `FLASK_RUN_HOST`: defaults to `127.0.0.1`
 * `FLASK_RUN_PORT`: defaults to `5000`
-* `INSTANCE_PATH`: where the notes data (in particular the database) is stored
+* `INSTANCE_PATH`: where the silicon data (in particular the database) is stored
 * `WERKZEUG_DEBUG_PIN`: the PIN to enable the Werkzeug debug console. Set to
   "off" to disable it if you are sure the app is only listening on localhost.
 * `SECRET_KEY`: A string used in session cookies. For development purposes, this
@@ -154,24 +154,24 @@ UI, mostly around having to make a separate network request for each language
 and addon specified. To enable CodeMirror, add the following to your `.env`:
 
 ```
-NOTES_EDITOR=codemirror
+SILICON_EDITOR=codemirror
 ```
 
 You also have to install third-party Javascript/CSS static packages:
 
 ```
-(cd notes/static && npm install)
+(cd silicon/static && npm install)
 ```
 
 Or, if you'd rather just use npm from inside a docker container:
 
 ```
-docker run -ti --rm -v $PWD/notes/static:/app -w /app node:alpine npm install
+docker run -ti --rm -v $PWD/silicon/static:/app -w /app node:alpine npm install
 ```
 
 Currently only a handful of languages are enabled for syntax highlighting, if
 you want to edit the list to suit your needs, you can edit
-`notes/static/js/edit.js`. You can find a list of supported lanauges
+`silicon/static/js/edit.js`. You can find a list of supported lanauges
 [here](https://codemirror.net/mode/).
 
 ## Running tests

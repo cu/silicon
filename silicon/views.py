@@ -10,9 +10,9 @@ from flask import (
 )
 from slugify import slugify
 
-from notes.j2_filters import human_timestamp, mark_query_results
-from notes.render_md import md_renderer, toc_renderer
-from notes import page, related
+from silicon.j2_filters import human_timestamp, mark_query_results
+from silicon.render_md import md_renderer, toc_renderer
+from silicon import page, related
 
 
 bp = Blueprint('page', __name__)

@@ -1,7 +1,7 @@
 import click
 from flask.cli import with_appcontext
 
-from notes.db import close_db, init_db
+from silicon.db import close_db, init_db
 
 @click.command('init-db')
 @with_appcontext

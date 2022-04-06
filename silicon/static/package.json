@@ -1,8 +1,7 @@
 {
     "name": "static",
     "version": "1.0.0",
-    "description": "Static files for notes",
-    "main": "notes.js",
+    "description": "Static files for silicon",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },

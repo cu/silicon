@@ -4,7 +4,7 @@ import string
 from flask import current_app
 from sqlite3 import OperationalError
 
-from notes.db import get_db
+from silicon.db import get_db
 
 
 class SearchError(Exception):

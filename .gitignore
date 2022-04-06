@@ -1,7 +1,7 @@
 .env
 .venv
 instance/
-notes/static/node_modules
+silicon/static/node_modules
 __pycache__
 *.egg-info/
 .pytest_cache/

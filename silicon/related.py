@@ -5,7 +5,7 @@ Model functions for managing page relationships.
 from flask import current_app
 from slugify import slugify
 
-from notes.db import get_db
+from silicon.db import get_db
 
 
 def get(title):

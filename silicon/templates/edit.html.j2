@@ -3,7 +3,7 @@
 
 {% block links %}
   {{ super() }}
-  {% if config.NOTES_EDITOR == 'codemirror' %}
+  {% if config.SILICON_EDITOR == 'codemirror' %}
     <link rel=stylesheet href="{{ url_for('static', filename='node_modules/codemirror/lib/codemirror.css') }}">
   {% endif %}
   <link rel="stylesheet" href="{{ url_for('static', filename='css/edit.css') }}" type="text/css" media="screen">
@@ -11,12 +11,12 @@
 
 {% block scripts %}
   {{ super() }}
-  {% if config.NOTES_EDITOR == 'codemirror' %}
+  {% if config.SILICON_EDITOR == 'codemirror' %}
     <script src="{{ url_for('static', filename='node_modules/requirejs/require.js') }}" defer></script>
   {% endif %}
   <script type="text/javascript">
     const js_modules_root = "{{ url_for('static', filename='node_modules') }}";
-    const notes_editor = "{{ config.NOTES_EDITOR }}";
+    const silicon_editor = "{{ config.SILICON_EDITOR }}";
   </script>
   <script src="{{ url_for('static', filename='js/widgets.js') }}" defer></script>
   <script src="{{ url_for('static', filename='js/edit.js') }}" defer></script>

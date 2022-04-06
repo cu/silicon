@@ -1,1 +1,1 @@
-FLASK_APP=notes
+FLASK_APP=silicon

@@ -38,12 +38,12 @@ def create_app(test_config=None):
             print(sys.version)
             print(f"Instance path: {app.instance_path}")
 
-        app.config['DATABASE'] = os.path.join(app.instance_path, 'notes.sqlite')
+        app.config['DATABASE'] = os.path.join(app.instance_path, 'silicon.sqlite')
 
     if app.config['SECRET_KEY'] is None:
         raise AppConfigurationError("SECRET_KEY must be defined, see README.md")
 
-    app.config['NOTES_EDITOR'] = os.getenv('NOTES_EDITOR', 'textarea')
+    app.config['SILICON_EDITOR'] = os.getenv('SILICON_EDITOR', 'textarea')
 
     from . import commands
     commands.init_app(app)

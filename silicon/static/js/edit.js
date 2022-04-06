@@ -4,7 +4,7 @@ var editor = {
     submit_clicked: false,
 };
 
-if (notes_editor === 'codemirror') {
+if (silicon_editor === 'codemirror') {
     var cm_instance;
 }
 
@@ -15,7 +15,7 @@ function usurp_unload(e) {
 
 window.addEventListener("load", function() {
     // load CodeMirror instance
-    if (notes_editor === 'codemirror') {
+    if (silicon_editor === 'codemirror') {
         require.config({
             baseUrl: js_modules_root
         });
@@ -76,7 +76,7 @@ window.addEventListener("load", function() {
     };
 
     window.addEventListener('beforeunload', function (e) {
-        if (notes_editor === 'codemirror') {
+        if (silicon_editor === 'codemirror') {
             // alert on changed codemirror
             if ((! cm_instance.isClean() && ! editor.submit_clicked)) {
                 usurp_unload(e);

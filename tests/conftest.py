@@ -4,8 +4,8 @@ import tempfile
 from bs4 import BeautifulSoup
 import pytest
 
-from notes import create_app
-from notes.db import init_db
+from silicon import create_app
+from silicon.db import init_db
 
 
 @pytest.fixture
