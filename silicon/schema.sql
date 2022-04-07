@@ -1,13 +1,13 @@
 -- Because we (generally) keep all revisions, most mutable operations on this
 -- will be INSERTs with a few deletes from time to time. No UPDATEs.
-CREATE TABLE IF NOT EXISTS pages (
+CREATE TABLE pages (
     revision TEXT NOT NULL,
     title TEXT NOT NULL,
     body TEXT
 );
 
 -- creating the index should be done after the inserts on bulk import of data
-CREATE INDEX IF NOT EXISTS pages_idx ON pages (
+CREATE INDEX pages_idx ON pages (
   revision,
   title
 );
