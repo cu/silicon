@@ -1,6 +1,9 @@
 [tool.poetry]
-name = "silicon"
+name = "silicon-notes"
 version = "0.1.0"
+packages = [
+    { include = "silicon" },
+]
 description = "A personal knowledge base with a wiki-like interface."
 authors = ["Charles Ulrich <charles.silicon@bityard.net>"]
 
