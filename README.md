@@ -13,7 +13,7 @@ Features:
 * A quite-usuable mobile layout
 * Built-in documentation
 * No-frills UI
-* No big frameworks, just a few small dependencies
+* No big frameworks, just a few smallish dependencies
 
 For the rationale on why this was created and paper-thin justifications on
 certain design decisions, see [DESIGN.md](./DESIGN.md).
@@ -101,7 +101,6 @@ file named `.env` in the project root. For development, this will suffice:
 ```
 FLASK_ENV=development
 WERKZEUG_DEBUG_PIN=off
-SECRET_KEY=for_dev_use_only
 ```
 
 You can set any environment variables mentioned in the Flask or Werkzeug
@@ -115,7 +114,8 @@ docs, but these are some you might care to know about:
   "off" to disable it if you are sure the app is only listening on localhost.
 * `SECRET_KEY`: A string used in session cookies. For development purposes, this
   can be anything, but for production it should be a 16-byte (or larger) string
-  of random characters.
+  of random characters. Setting this is optional as the app will create one
+  (and write it to a file in `INSTANCE_PATH`) if one doesn't exist.
 
 To initialize the database after the configuration settings have been set,
 run the following command. It will create an `instance` directory in the root

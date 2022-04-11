@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+import secrets
 import sys
 
 from flask import Flask
@@ -15,7 +17,13 @@ def create_app(test_config=None):
     path but we are opting to use environment variables instead, to avoid
     having to manage configuration in different places.
 
-    `instance_path` is where the database is stored.
+    `app.instance_path` is the directory where the database and secret key are
+    stored.
+
+    Flask requires a secret key for session handling. If one was provided in
+    the environment, we use that. Otherwise, we try to read one from a file
+    in the instance path. If that fails, we generate a new key and write it out
+    to disk.
     """
     instance_path = os.getenv('INSTANCE_PATH', None)
 
@@ -25,8 +33,6 @@ def create_app(test_config=None):
         # Flask defaults to setting `instance_path` to a directory named
         # `instance` next to the package.
         app = Flask(__name__)
-
-    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', None)
 
     if test_config:
         app.config.update(test_config)
@@ -40,8 +46,18 @@ def create_app(test_config=None):
 
         app.config['DATABASE'] = os.path.join(app.instance_path, 'silicon.sqlite')
 
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', None)
     if app.config['SECRET_KEY'] is None:
-        raise AppConfigurationError("SECRET_KEY must be defined, see README.md")
+        # try to read the secret key
+        try:
+            with open(Path(app.instance_path) / 'secret.key', 'rb') as f:
+                app.config['SECRET_KEY'] = f.read()
+        except:
+            # generate and save a new one
+            app.config['SECRET_KEY'] = secrets.token_bytes(16)
+            os.umask(0)
+            with open(os.open(Path(app.instance_path) / 'secret.key', os.O_CREAT | os.O_WRONLY, 0o600), 'wb') as f:
+                f.write(app.config['SECRET_KEY'])
 
     app.config['SILICON_EDITOR'] = os.getenv('SILICON_EDITOR', 'textarea')
 
