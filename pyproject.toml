@@ -1,11 +1,16 @@
 [tool.poetry]
 name = "silicon-notes"
 version = "0.1.0"
+description = "A personal knowledge base with a wiki-like interface."
+authors = ["Charles Ulrich <charles.silicon@bityard.net>"]
+repository = "https://github.com/cu/silicon"
+readme = "README.md"
 packages = [
     { include = "silicon" },
 ]
-description = "A personal knowledge base with a wiki-like interface."
-authors = ["Charles Ulrich <charles.silicon@bityard.net>"]
+include = [
+    "docs",
+]
 
 [tool.poetry.dependencies]
 python = "^3.9"
