@@ -57,8 +57,29 @@ For details, see the [Flask configuration handling Docs].
 
 [Flask configuration handling docs]: https://flask.palletsprojects.com/en/1.1.x/config/
 
+## Docker
 
-## Pre-requisites
+If you want to take this for a quick spin and have Docker installed, a
+`Dockerfile` and a `docker-compose.yaml` file are provided, so you can build
+the container with:
+
+```sh
+docker built -t silicon .
+```
+
+Silicon will listen on port 5000 (plaintext HTTP) and stores all application
+data in `/home/silicon/instance`.
+
+If you use `docker-compose`, you can simply run this command to build and
+start the application:
+
+```sh
+docker-compose up
+```
+
+## Development
+
+### Pre-requisites
 
 This project requires Python 3.9 or greater. On a Debian/Ubuntu system, that
 means the following packages:
@@ -68,9 +89,6 @@ means the following packages:
 * `python3-dev`
 * `python3-venv`
 * `npm` (or `docker`) (optional to enable CodeMirror editor)
-
-
-## Installation for development or local use
 
 Install [Poetry](https://python-poetry.org/) if necessary. Everyone has their
 own way of setting up their Python tooling but I'm a fan of
@@ -135,7 +153,7 @@ Unless you changed the defaults, you should be able to access the UI on
 http://localhost:5000/
 
 
-## Production Deployment
+# Production Deployment
 
 Be aware that this is a web application which contains no authentication or
 security mechanisms whatsoever. Those are up to you to provide. Otherwise,
@@ -144,23 +162,6 @@ segregated from the public Internet by a firewall or VPN. **If deploying on a
 public server, you are responsible for ensuring all access to it is secure.**
 One simple option may be deploying it behind an HTTPS proxy with HTTP Basic
 Authentication enabled.
-
-A `Dockerfile` and a `docker-compose.yaml` file are included, so if you have
-Docker installed, you can build the container with:
-
-```sh
-docker built -t silicon .
-```
-
-Silicon will listen on port 5000 (plaintext HTTP) and stores all application
-data in `/home/silicon/instance`.
-
-If you use `docker-compose`, you can simply run this command to build and
-start the application:
-
-```sh
-docker-compose up
-```
 
 
 ## Configuring the CodeMirror Editor
