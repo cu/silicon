@@ -8,9 +8,6 @@ readme = "README.md"
 packages = [
     { include = "silicon" },
 ]
-include = [
-    "docs",
-]
 
 [tool.poetry.dependencies]
 python = "^3.9"

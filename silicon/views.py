@@ -108,7 +108,7 @@ def docs(title):
 
     p['title'] = slugify(title)
 
-    doc = Path(__file__).parent.parent / 'docs' / f'{title}.md'
+    doc = Path(__file__).parent / 'docs' / f'{title}.md'
     try:
         with doc.open() as f:
             body = f.read()
