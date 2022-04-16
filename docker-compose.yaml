@@ -1,0 +1,11 @@
+services:
+  silicon:
+    image: silicon
+    build: .
+    init: true
+    ports: ["5000:5000"]
+    volumes:
+      - instance:/home/silicon/instance
+
+volumes:
+  instance:

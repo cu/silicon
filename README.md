@@ -135,26 +135,44 @@ Unless you changed the defaults, you should be able to access the UI on
 http://localhost:5000/
 
 
-## Installation for a production deployment
+## Production Deployment
 
 Be aware that this is a web application which contains no authentication or
-security mechanisms whatsoever. Only deploy this to a trusted private network
-such as a local LAN segregated from the public Internet by a firewall or VPN.
-If deploying on a public server, you are responsible for ensuring all access to
-it is secure. One example may be deploying it behind an HTTPS proxy with
-HTTP basic authentication enabled.
+security mechanisms whatsoever. Those are up to you to provide. Otherwise,
+you should only deploy this to a trusted private network such as a local LAN
+segregated from the public Internet by a firewall or VPN. **If deploying on a
+public server, you are responsible for ensuring all access to it is secure.**
+One simple option may be deploying it behind an HTTPS proxy with HTTP Basic
+Authentication enabled.
 
-{TODO: An example scenario or two go here.}
+A `Dockerfile` and a `docker-compose.yaml` file are included, so if you have
+Docker installed, you can build the container with:
+
+```sh
+docker built -t silicon .
+```
+
+Silicon will listen on port 5000 (plaintext HTTP) and stores all application
+data in `/home/silicon/instance`.
+
+If you use `docker-compose`, you can simply run this command to build and
+start the application:
+
+```sh
+docker-compose up
+```
+
 
 ## Configuring the CodeMirror Editor
 
-Optional support for [CodeMirror](https://codemirror.net) as a text editor is
-included. It's not enabled by default because it adds a lot of "heft" to the
+Support for [CodeMirror](https://codemirror.net) as a text editor is
+included by default. It does add a lot of "heft" to the
 UI, mostly around having to make a separate network request for each language
-and addon specified. To enable CodeMirror, add the following to your `.env`:
+and addon specified. To disable CodeMirror and use a regular textarea instead,
+add the following to your `.env` or environment:
 
 ```
-SILICON_EDITOR=codemirror
+SILICON_EDITOR=textarea
 ```
 
 You also have to install third-party Javascript/CSS static packages:
@@ -183,7 +201,8 @@ poetry run pytest
 ```
 
 If you have a tmpfs filesystem, you can set the `TMP` environment variable to
-have test databases created there:
+have test databases created there (which is faster and results in less
+wear-and-tear on your disk):
 
 ```
 TMP=/dev/shm poetry run pytest

@@ -59,7 +59,7 @@ def create_app(test_config=None):
             with open(os.open(Path(app.instance_path) / 'secret.key', os.O_CREAT | os.O_WRONLY, 0o600), 'wb') as f:
                 f.write(app.config['SECRET_KEY'])
 
-    app.config['SILICON_EDITOR'] = os.getenv('SILICON_EDITOR', 'textarea')
+    app.config['SILICON_EDITOR'] = os.getenv('SILICON_EDITOR', 'codemirror')
 
     from . import commands
     commands.init_app(app)
