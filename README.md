@@ -64,7 +64,7 @@ If you want to take this for a quick spin and have Docker installed, a
 the container with:
 
 ```sh
-docker built -t silicon .
+docker build -t silicon .
 ```
 
 Silicon will listen on port 5000 (plaintext HTTP) and stores all application
