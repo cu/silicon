@@ -1,6 +1,7 @@
 ARG APP_NAME=silicon
 ARG PYTHON_IMAGE=python:3.10-slim
-ARG NODE_IMAGE=node:17-alpine
+ARG NODE_IMAGE=node:18-alpine
+
 
 # Staging:
 # * copy the project dir into /staging
