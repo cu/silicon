@@ -24,6 +24,7 @@ ENV PYTHONUNBUFFERED=1
 
 COPY --from=staging /staging /staging
 WORKDIR /staging
+RUN mkdir instance
 
 RUN pip install --no-cache-dir poetry
 RUN poetry install
