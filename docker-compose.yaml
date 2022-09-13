@@ -5,7 +5,7 @@ services:
     init: true
     ports: ["5000:5000"]
     volumes:
-      - instance:/home/silicon/instance
+      - silicon_instance:/home/silicon/instance
 
 volumes:
-  instance:
+  silicon_instance:
