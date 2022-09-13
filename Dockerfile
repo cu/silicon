@@ -48,6 +48,7 @@ ENV APP_NAME=$APP_NAME
 ENV FLASK_APP=$APP_NAME:create_app()
 ENV INSTANCE_PATH=/home/$APP_NAME/instance
 ENV GUNICORN_CMD_ARGS="--bind :5000 --workers 2 --threads 4"
+EXPOSE 5000
 
 COPY --from=build /$APP_NAME /$APP_NAME
 COPY ./entrypoint.sh /
