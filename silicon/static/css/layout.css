@@ -72,9 +72,10 @@
 }
 
 .nav-content {
-    padding: 1.618em 3.326em;
+    padding: 1.618em;
     height: 100%;
     margin: 0;
+    overflow-x: auto;
 }
 
 .nav-page-title {
