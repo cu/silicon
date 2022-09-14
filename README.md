@@ -59,23 +59,36 @@ For details, see the [Flask configuration handling Docs].
 
 ## Docker
 
-If you want to take this for a quick spin and have Docker installed, a
-`Dockerfile` and a `docker-compose.yaml` file are provided, so you can build
-the container with:
+If you want to take this for a quick spin and have Docker installed, you can
+simply run:
 
 ```sh
-docker build -t silicon .
+docker run \
+  -ti \
+  --rm \
+  --init \
+  -p 127.0.0.1:5000:5000 \
+  -v silicon_instance:/home/silicon/instance \
+  bityard/silicon
 ```
 
-Silicon will listen on port 5000 (plaintext HTTP) and stores all application
-data in `/home/silicon/instance`.
+And then open http://localhost:5000/ with your local web browser.
 
-If you use `docker-compose`, you can simply run this command to build and
-start the application:
+You could also start it with `docker-compose` (or `docker compose`):
 
 ```sh
 docker-compose up
 ```
+
+If you want to build the image, a `Dockerfile` and a `docker-compose.yaml` file
+are provided, so you can build the container with:
+
+```sh
+docker build -t bityard/silicon .
+```
+
+Silicon will listen on port 5000 (plaintext HTTP) and stores all application
+data in `/home/silicon/instance`.
 
 ## Development
 
