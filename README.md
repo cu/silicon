@@ -134,6 +134,8 @@ docs, but these are some you might care to know about:
   can be anything, but for production it should be a 16-byte (or larger) string
   of random characters. Setting this is optional as the app will create one
   (and write it to a file in `INSTANCE_PATH`) if one doesn't exist.
+* `SILICON_EDITOR`: When set to `textarea`, this disables the CodeMirror text
+editor when editing pages and uses a standard textarea element instead.
 
 To initialize the database after the configuration settings have been set,
 run the following command. It will create an `instance` directory in the root
@@ -166,25 +168,21 @@ Authentication enabled.
 
 ## Configuring the CodeMirror Editor
 
-Support for [CodeMirror](https://codemirror.net) as a text editor is
-included by default. It does add a lot of "heft" to the
-UI, mostly around having to make a separate network request for each language
-and addon specified. To disable CodeMirror and use a regular textarea instead,
-add the following to your `.env` or environment:
+Support for [CodeMirror](https://codemirror.net) as a text editor is included by
+default. It does add a lot of "heft" to the UI, mostly around having to make a
+separate network request for each language and addon specified. To use it, you
+also have to install third-party Javascript/CSS static packages by running ONE
+of the following commands:
 
 ```
-SILICON_EDITOR=textarea
-```
-
-You also have to install third-party Javascript/CSS static packages:
-
-```
+# If you have `npm` installed locally
 (cd silicon/static && npm install)
 ```
 
-Or, if you'd rather just use npm from inside a docker container:
+Or:
 
 ```
+# if you have `docker` installed
 docker run -ti --rm -v $PWD/silicon/static:/app -w /app node:alpine npm install
 ```
 
@@ -192,6 +190,13 @@ Currently only a handful of languages are enabled for syntax highlighting, if
 you want to edit the list to suit your needs, you can edit
 `silicon/static/js/edit.js`. You can find a list of supported lanauges
 [here](https://codemirror.net/mode/).
+
+To disable CodeMirror and use a regular textarea instead, add the following to
+your `.env` file or environment:
+
+```
+SILICON_EDITOR=textarea
+```
 
 ## Running tests
 
