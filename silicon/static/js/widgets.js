@@ -94,11 +94,18 @@ function toc_update_button() {
     document.querySelector("#update-toc-btn")
         .addEventListener("click", (event => {
             const widget = get_widget("#toc");
+            // get the contents of CodeMirror, or the textarea
+            let body_text;
+            if (document.querySelector(".CodeMirror")) {
+                body_text = document.querySelector(".CodeMirror").CodeMirror.getValue();
+            } else {
+                body_text = document.querySelector("#body-text").value;
+            }
 
             fetch(widget.url, {
                 method: "POST",
                 body: new URLSearchParams(
-                    {body: document.querySelector("#body-text").value}
+                    {body: body_text}
                 ),
                 headers: new Headers({
                     "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"

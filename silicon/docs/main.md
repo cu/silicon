@@ -118,10 +118,10 @@ the current page. If there are no headings, this section will be empty.
 If you click on a heading, you will be taken to that heading in the page, and
 your browser window will scroll to it if necessary.
 
-Note that when editing a page, the table of contents is only loaded once
-when the editor is first loaded and is not updated automatically as the page
-is being edited. Additionally, clicking on the links while the page is being
-edited does not navigate you to that section.
+When editing a page, the table of contents is not updated automatically as you
+enter text. However, you can update the table of contents by clicking on
+"update" at the top of the CONTENTS section. Clicking on the links in the
+CONTENTS section does not navigate you to that section while editing a page.
 
 # Search
 
