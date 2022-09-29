@@ -49,14 +49,14 @@ def create_app(test_config=None):
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', None)
     if app.config['SECRET_KEY'] is None:
         # try to read the secret key
+        secret_key_path = Path(app.instance_path) / 'secret.key'
         try:
-            with open(Path(app.instance_path) / 'secret.key', 'rb') as f:
-                app.config['SECRET_KEY'] = f.read()
+            app.config['SECRET_KEY'] = secret_key_path.read_bytes()
         except:
             # generate and save a new one
             app.config['SECRET_KEY'] = secrets.token_bytes(16)
             os.umask(0)
-            with open(os.open(Path(app.instance_path) / 'secret.key', os.O_CREAT | os.O_WRONLY, 0o600), 'wb') as f:
+            with open(os.open(secret_key_path, os.O_CREAT | os.O_WRONLY, 0o600), 'wb') as f:
                 f.write(app.config['SECRET_KEY'])
 
     app.config['SILICON_EDITOR'] = os.getenv('SILICON_EDITOR', 'codemirror')
