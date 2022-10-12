@@ -79,7 +79,7 @@ def delete(title, related):
             "DELETE FROM relationships WHERE"
             " (title_a = ? and title_b = ?)"
             " OR"
-            " (title_a = ? and title_b = ?)",
+            " (title_b = ? and title_a = ?)",
             (title, related, title, related)
         )
         db.commit()

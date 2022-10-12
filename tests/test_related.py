@@ -23,6 +23,19 @@ def test_delete_relationship(client, page):
     assert relatives == ['bar']
 
 
+def test_delete_relationship_from_other_page(client, page):
+    """Remove a relationship from the other side."""
+
+    client.post("/related/foo", data={"relative": "bar"})
+    r = client.post("/related/foo", data={"relative": "baz"})
+    relatives = [li.a.string.strip() for li in page(r.data).ul.find_all("li")]
+    assert relatives == ['bar', 'baz']
+
+    r = client.delete("/related/baz/foo")
+    relatives = [li.a.string.strip() for li in page(r.data).ul.find_all("li")]
+    assert relatives == []
+
+
 def test_self_relationship_fails(client, page):
     """Page cannot be related to itself."""
 
