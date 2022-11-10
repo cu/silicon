@@ -11,9 +11,6 @@ def human_timestamp(timestamp):
 
 def mark_query_results(snippet):
     """
-    A page body might have HTML in it, which we don't want rendered in search
-    results. This Jinja filter strips HTML, and then marks matched search terms.
-
     A page body might have HTML in it. We don't want it rendered in the search
     results because it's effectively noise and we certainly don't want to
     render it here.
