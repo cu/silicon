@@ -1,6 +1,4 @@
-This page describes the supported Markdown syntax and functionality in full
-detail. If you would like a shorter guide to reference for some of the more
-basic syntax, see https://commonmark.org/help/.
+This page describes the supported Markdown syntax and functionality in full detail. If you would like a shorter guide to reference for some of the more basic syntax, see https://commonmark.org/help/.
 
 # Inline Markup
 
@@ -315,8 +313,7 @@ The HTML specification is maintained by the W3C.
 
 # Preformatted Text
 
-To specify a block of pre-formatted text to be rendered in a monospace
-font, put it between two triple-backticks, each on their own line.
+To specify a block of pre-formatted text to be rendered in a monospace font, put it between two triple-backticks, each on their own line.
 
 You can also prefix each line by four spaces to achieve the same effect.
 
@@ -326,8 +323,8 @@ You can also prefix each line by four spaces to achieve the same effect.
 a b c e f
 g h i j k
 
-  l m n o p
-  q r s t u
+    l m n o p
+    q r s t u
 ```
 </pre>
 
@@ -342,9 +339,7 @@ g h i j k
 
 ## Code Blocks
 
-Blocks of code and other markup will be syntax-highlighted if you tag the
-code block with a well-known language name by placing it after the first
-set of triple backticks.
+Blocks of code and other markup will be syntax-highlighted if you tag the code block with a well-known language name by placing it after the first set of triple backticks.
 
 An example with bash:
 
@@ -440,7 +435,7 @@ Table with centered and right-aligned text:
 | Kelly     | QA       | $13    |
 | Mackenzie | PM       | $88    |
 
-Minimal table:
+Minimal viable table:
 
 ```
 1|2
@@ -457,7 +452,13 @@ foobar|baz
 Raw HTML, CSS, and Javascript can be used where convenient or necessary.
 
 ```
-<b>bold</b> and <i>italic</i>
+<b>bold</b> and <i>italic</i> in HTML
+
+<style type="text/css">
+  #some-red-text { color: red; }
+</style>
+
+<span id="some-red-text">This should be red.</span>
 
 A link to <a href="https://example.com">example.com</a>.
 
@@ -486,7 +487,13 @@ function myFunction() {
 </script>
 ```
 
-<b>bold</b> and <i>italic</i>
+<b>bold</b> and <i>italic</i> in HTML
+
+<style type="text/css">
+  #some-red-text { color: red; }
+</style>
+
+<span id="some-red-text">This should be red.</span>
 
 A link to <a href="https://example.com">example.com</a>.
 
