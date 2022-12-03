@@ -20,10 +20,8 @@
 }
 
 .side-scroll {
-    /* width: 320px; */
     position: relative;
     overflow-x: hidden;
-    /* overflow-y: scroll; */
     height: 100%;
 }
 
@@ -33,7 +31,6 @@
 
 .menu-vertical ul {
     padding-left: 1em;
-    /* margin-bottom: 0.25em; */
 }
 
 .menu-vertical ul li {
@@ -48,13 +45,11 @@
 
 .nav-top {
     display: none;
-    /* text-align: center; */
 }
 
 .menu-toggle {
     float: left;
     font-size: 1.1em;
-    /*font-weight: bold; */
 }
 
 .nav-top a {
