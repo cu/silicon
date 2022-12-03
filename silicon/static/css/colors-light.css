@@ -23,4 +23,5 @@
     --article-internal-link: rgb(45, 169, 74);
     --article-external-link: rgb(0, 0, 238);
     --article-external-link-visited: rgb(85, 26, 139);
+    --article-warning-text: rgb(183, 52, 52);
 }

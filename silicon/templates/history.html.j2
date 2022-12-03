@@ -28,12 +28,18 @@
     {% endfor %}
     </tbody>
   </table>
+
+  {% if req_revision %}
+    {{ macros.table_of_contents(title, toc) }}
+  {% endif %}
+
 {% endblock %}
 
 {% block content %}
   <div class="nav-content">
     <article>
       {% if html %}
+        <p id="revision-notice">Revision from {{ req_revision|human_timestamp }}</p>
         {{ html|safe }}
       {% else %}
         <p>Select a revision from the list.</p>

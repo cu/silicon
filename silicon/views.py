@@ -97,6 +97,7 @@ def history_revision(title, req_revision):
     p['revisions'] = page.history(title)
     p['count'] = len(p['revisions'])
     p['html'] = md_renderer(p['body'])
+    p['toc']  = toc_renderer(p['body'])
 
     return render_template('history.html.j2', **p)
 
