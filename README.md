@@ -16,7 +16,7 @@ Features:
 * No big frameworks, just a few smallish dependencies
 
 For the rationale on why this was created and paper-thin justifications on
-certain design decisions, see [DESIGN.md](./DESIGN.md).
+certain design decisions, see [this blog article](https://blog.bityard.net/articles/2022/December/the-design-of-silicon-notes-with-cartoons).
 
 <a href="https://gist.githubusercontent.com/cu/addb3a5f6ba1de11b8fb5eedd212d82a/raw/58e80468acbdd832d012fd776afac6d58357cbb3/view_full.png">
   <img src="https://gist.githubusercontent.com/cu/addb3a5f6ba1de11b8fb5eedd212d82a/raw/58e80468acbdd832d012fd776afac6d58357cbb3/view_full.png" width="400" height="275">
