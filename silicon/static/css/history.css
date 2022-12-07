@@ -21,6 +21,7 @@
     background-color: var(--article-pre-background);
     border: 1px solid var(--article-pre-border);
     border-radius: 0.5em;
+    margin-top: 1em;
     margin-bottom: 0.5em;
     padding: 0.5em;
     overflow: auto;

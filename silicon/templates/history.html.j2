@@ -37,9 +37,11 @@
 
 {% block content %}
   <div class="nav-content">
+    {% if req_revision %}
+      <div id="revision-notice">Revision from {{ req_revision|human_timestamp }}</div>
+    {% endif %}
     <article>
       {% if html %}
-        <p id="revision-notice">Revision from {{ req_revision|human_timestamp }}</p>
         {{ html|safe }}
       {% else %}
         <p>Select a revision from the list.</p>
