@@ -98,9 +98,9 @@ buildah build --format docker -t docker.io/bityard/silicon .
 Silicon will listen on port 5000 (plaintext HTTP) and stores all application
 data in `/home/silicon/instance`.
 
-## Development
+# Development
 
-### Pre-requisites
+## Prerequisites
 
 This project requires Python 3.9 or greater. On a Debian/Ubuntu system, that
 means the following packages:
@@ -115,14 +115,16 @@ Install [Poetry](https://python-poetry.org/) if necessary. Everyone has their
 own way of setting up their Python tooling but I'm a fan of
 [pipx](https://github.com/pypa/pipx):
 
-```
+```sh
 pip3 install --user pipx
 pipx install poetry
 ```
 
+## Setup
+
 Use poetry to create a virtual environment and install the dependencies:
 
-```
+```sh
 poetry install
 ```
 
@@ -130,14 +132,14 @@ Flask is configured via environment variables. There is a file called
 `.flaskenv` which sets the name of the app. If you want to run `flask` from
 somewhere else, you will need to set:
 
-```
+```sh
 FLASK_APP=silicon
 ```
 
 All other settings can either be set as environment variables or written to a
 file named `.env` in the project root. For development, this will suffice:
 
-```
+```sh
 FLASK_ENV=development
 WERKZEUG_DEBUG_PIN=off
 ```
@@ -162,18 +164,36 @@ To initialize the database after the configuration settings have been set,
 run the following command. It will create an `instance` directory in the root
 of the project and initialize the SQLite database from `schema.sql`.
 
-```
+```sh
 poetry run flask init-db
 ```
 
+## Running Silicon
+
 Run the project via the `flask` development server:
 
-```
+```sh
 poetry run flask run
 ```
 
 Unless you changed the defaults, you should be able to access the UI on
 http://localhost:5000/
+
+## Running tests
+
+To run the tests, install the test dependencies and run `pytest`:
+
+```sh
+poetry run pytest
+```
+
+If you have a tmpfs filesystem, you can set the `TMP` environment variable to
+have test databases created there (which is faster and results in less
+wear-and-tear on your disk):
+
+```
+TMP=/dev/shm poetry run pytest
+```
 
 
 # Production Deployment
@@ -187,7 +207,7 @@ One simple option may be deploying it behind an HTTPS proxy with HTTP Basic
 Authentication enabled.
 
 
-## Configuring the CodeMirror Editor
+# Configuring the CodeMirror Editor
 
 Support for [CodeMirror](https://codemirror.net) as a text editor is included by
 default. It does add a lot of "heft" to the UI, mostly around having to make a
@@ -195,14 +215,14 @@ separate network request for each language and addon specified. To use it, you
 also have to install third-party Javascript/CSS static packages by running ONE
 of the following commands:
 
-```
+```sh
 # If you have `npm` installed locally
 (cd silicon/static && npm install)
 ```
 
 Or:
 
-```
+```sh
 # if you have `docker` installed
 docker run -ti --rm -v $PWD/silicon/static:/app -w /app node:alpine npm install
 ```
@@ -215,24 +235,8 @@ you want to edit the list to suit your needs, you can edit
 To disable CodeMirror and use a regular textarea instead, add the following to
 your `.env` file or environment:
 
-```
+```sh
 SILICON_EDITOR=textarea
-```
-
-## Running tests
-
-To run the tests, install the test dependencies and run `pytest`:
-
-```
-poetry run pytest
-```
-
-If you have a tmpfs filesystem, you can set the `TMP` environment variable to
-have test databases created there (which is faster and results in less
-wear-and-tear on your disk):
-
-```
-TMP=/dev/shm poetry run pytest
 ```
 
 
