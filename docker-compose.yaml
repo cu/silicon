@@ -1,6 +1,6 @@
 services:
   silicon:
-    image: bityard/silicon
+    image: docker.io/bityard/silicon
     build: .
     init: true
     ports: ["5000:5000"]

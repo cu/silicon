@@ -57,10 +57,12 @@ For details, see the [Flask configuration handling Docs].
 
 [Flask configuration handling docs]: https://flask.palletsprojects.com/en/1.1.x/config/
 
-## Docker
+## Docker or Podman
 
-If you want to take this for a quick spin and have Docker installed, you can
-simply run:
+If you want to take this for a quick spin, the following commands should get
+you going. You obviously need to have [Docker](https://www.docker.com)
+installed. (If you have [Podman](https://podman.io), simply substitute `docker`
+for `podman`.)
 
 ```sh
 docker run \
@@ -69,7 +71,7 @@ docker run \
   --init \
   -p 127.0.0.1:5000:5000 \
   -v silicon_instance:/home/silicon/instance \
-  bityard/silicon
+  docker.io/bityard/silicon
 ```
 
 And then open http://localhost:5000/ with your local web browser.
@@ -84,7 +86,13 @@ If you want to build the image, a `Dockerfile` and a `docker-compose.yaml` file
 are provided, so you can build the container with:
 
 ```sh
-docker build -t bityard/silicon .
+docker build -t docker.io/bityard/silicon .
+```
+
+Or with buildah:
+
+```sh
+buildah build --format docker -t docker.io/bityard/silicon .
 ```
 
 Silicon will listen on port 5000 (plaintext HTTP) and stores all application

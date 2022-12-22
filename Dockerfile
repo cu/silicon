@@ -1,6 +1,6 @@
 ARG APP_NAME=silicon
-ARG PYTHON_IMAGE=python:3.11-slim
-ARG NODE_IMAGE=node:lts-alpine
+ARG PYTHON_IMAGE=docker.io/library/python:3.11-slim
+ARG NODE_IMAGE=docker.io/library/node:lts-alpine
 
 
 # Staging:
