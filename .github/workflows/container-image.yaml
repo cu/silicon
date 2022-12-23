@@ -32,7 +32,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ env.REGISTRY }}/${{ env.DH_NAMESPACE}}/silicon:latest
             ${{ env.REGISTRY }}/${{ env.DH_NAMESPACE}}/silicon:${{ github.sha }}
