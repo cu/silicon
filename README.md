@@ -2,9 +2,6 @@
 
 Silicon Notes: A somewhat lightweight, low-friction personal knowledge base.
 
-Give it a spin without leaving your browser:
-[![Try in PWD](https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/cu/silicon/master/docker-compose.yaml)
-
 Features:
 
 * Plaintext editing in Markdown, rendering in HTML
