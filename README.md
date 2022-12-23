@@ -179,7 +179,7 @@ poetry run flask run
 Unless you changed the defaults, you should be able to access the UI on
 http://localhost:5000/
 
-## Running tests
+## Running tests and flake8
 
 To run the tests, install the dev dependencies and run `pytest`:
 
@@ -192,8 +192,14 @@ If you have a tmpfs filesystem, you can set the `TMP` environment variable to
 have test databases created there (which is faster and results in less
 wear-and-tear on your disk):
 
-```
+```sh
 TMP=/dev/shm poetry run pytest
+```
+
+To make sure all code is formatted to flake8 standards, run `flake8`:
+
+```sh
+poetry run flake8
 ```
 
 
