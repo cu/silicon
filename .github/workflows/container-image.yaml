@@ -19,8 +19,8 @@ jobs:
       - name: log into registry
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DH_NAMESPACE }}
-          password: ${{ secrets.DH_TOKEN }}
+          username: ${{ env.DH_NAMESPACE }}
+          password: ${{ env.DH_TOKEN }}
 
       - name: build and push
         uses: docker/build-push-action@v3
