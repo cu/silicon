@@ -181,9 +181,10 @@ http://localhost:5000/
 
 ## Running tests
 
-To run the tests, install the test dependencies and run `pytest`:
+To run the tests, install the dev dependencies and run `pytest`:
 
 ```sh
+poetry install --with dev
 poetry run pytest
 ```
 
