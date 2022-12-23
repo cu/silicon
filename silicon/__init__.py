@@ -5,8 +5,10 @@ import sys
 
 from flask import Flask
 
+
 class AppConfigurationError(Exception):
     pass
+
 
 def create_app(test_config=None):
     """
@@ -44,7 +46,8 @@ def create_app(test_config=None):
             print(sys.version)
             print(f"Instance path: {app.instance_path}")
 
-        app.config['DATABASE'] = os.path.join(app.instance_path, 'silicon.sqlite')
+        app.config['DATABASE'] = os.path.join(
+            app.instance_path, 'silicon.sqlite')
 
     app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', None)
     if app.config['SECRET_KEY'] is None:
@@ -52,11 +55,13 @@ def create_app(test_config=None):
         secret_key_path = Path(app.instance_path) / 'secret.key'
         try:
             app.config['SECRET_KEY'] = secret_key_path.read_bytes()
-        except:
+        except FileNotFoundError:
             # generate and save a new one
             app.config['SECRET_KEY'] = secrets.token_bytes(16)
             os.umask(0)
-            with open(os.open(secret_key_path, os.O_CREAT | os.O_WRONLY, 0o600), 'wb') as f:
+            secret_key_fd = os.open(
+                secret_key_path, os.O_CREAT | os.O_WRONLY, 0o600)
+            with open(secret_key_fd, 'wb') as f:
                 f.write(app.config['SECRET_KEY'])
 
     app.config['SILICON_EDITOR'] = os.getenv('SILICON_EDITOR', 'codemirror')

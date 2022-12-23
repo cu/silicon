@@ -14,7 +14,8 @@ def app():
     # create a temporary file to isolate the database for each test
     db_fd, db_path = tempfile.mkstemp()
     # create the app with common test config
-    app = create_app({"TESTING": True, "DATABASE": db_path, "SECRET_KEY": "test"})
+    app = create_app(
+        {"TESTING": True, "DATABASE": db_path, "SECRET_KEY": "test"})
 
     print(f"Database: {db_path}")
 
@@ -39,6 +40,7 @@ def client(app):
 def runner(app):
     """A test runner for the app's Click commands."""
     return app.test_cli_runner()
+
 
 @pytest.fixture
 def page():

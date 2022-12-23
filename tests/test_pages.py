@@ -1,7 +1,4 @@
 from datetime import datetime
-from textwrap import dedent
-
-import pytest
 
 
 def test_redirects(client):
@@ -25,8 +22,7 @@ def test_page_add(client, page):
     """Add a simple page."""
 
     r = client.post(
-        "/edit/test", data={"body": "This is a test"}, follow_redirects=True
-    )
+        "/edit/test", data={"body": "This is a test"}, follow_redirects=True)
     assert r.status_code == 200
     assert page(r.data).article.p.string == "This is a test"
 
@@ -41,31 +37,30 @@ def test_missing_page_body(client, page):
 def test_markdown_internal_link(client, page):
     """Rendering of wiki-style links in Markdown."""
 
-    r = client.post("/edit/test", data={"body": "[[link]]"}, follow_redirects=True)
+    r = client.post(
+        "/edit/test", data={"body": "[[link]]"}, follow_redirects=True)
     assert (
         str(page(r.data).article.p.a)
-        == '<a class="internal-link" href="/view/link">link</a>'
-    )
+        == '<a class="internal-link" href="/view/link">link</a>')
 
 
 def test_markdown_internal_link_alt_title(client, page):
     """Rendering of wiki links with an alternate title."""
 
     r = client.post(
-        "/edit/test", data={"body": "[[link|alt title]]"}, follow_redirects=True
-    )
+        "/edit/test", data={"body": "[[link|alt title]]"},
+        follow_redirects=True)
     assert (
         str(page(r.data).article.find(class_="internal-link"))
-        == '<a class="internal-link" href="/view/link">alt title</a>'
-    )
+        == '<a class="internal-link" href="/view/link">alt title</a>')
 
 
 def test_markdown_external_link(client, page):
     """External links have a `rel` attribute with 'external' and 'referrer'."""
 
     r = client.post(
-        "/edit/test", data={"body": "http://example.com"}, follow_redirects=True
-    )
+        "/edit/test", data={"body": "http://example.com"},
+        follow_redirects=True)
     a_rel = page(r.data).article.p.a['rel']
     assert 'external' in a_rel
     assert 'noreferrer' in a_rel
@@ -75,13 +70,22 @@ def test_markdown_syntax_highlighting(client, page):
     """Rendering of code block syntax highlighting."""
 
     code_block_md = '```python\nprint("test")\n```'
-    code_block_html = '<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"test"</span><span class="p">)</span></pre></div>'
+    code_block_html = (
+        '<div class="highlight">'
+        '<pre>'
+        '<span></span>'
+        '<span class="nb">print</span>'
+        '<span class="p">(</span>'
+        '<span class="s2">"test"</span>'
+        '<span class="p">)</span>'
+        '</pre>'
+        '</div>')
 
-    r = client.post("/edit/test", data={"body": code_block_md}, follow_redirects=True)
+    r = client.post(
+        "/edit/test", data={"body": code_block_md}, follow_redirects=True)
     assert (
         str(page(r.data).article.find(class_="highlight")).replace("\n", "")
-        == code_block_html
-    )
+        == code_block_html)
 
 
 def test_url_title_gets_slugified(client, page):
@@ -91,7 +95,9 @@ def test_url_title_gets_slugified(client, page):
     for route in ("/view/", "/edit/"):
         r = client.get(route + raw_title)
         print(route)
-        assert str(page(r.data).find(class_="page-title").string) == "a_b_c_d_e_f_g"
+        assert (
+            str(page(r.data).find(class_="page-title").string)
+            == "a_b_c_d_e_f_g")
 
 
 def test_page_timestamp(client, page):

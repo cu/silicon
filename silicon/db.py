@@ -29,10 +29,7 @@ def db_exists():
     the `pages` table as a proxy.
     """
     result = get_db().execute(
-        "SELECT name"
-        " FROM sqlite_master"
-        " WHERE type='table'"
-        "  AND name='pages'"
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='pages'"
     ).fetchone()
     if result is not None and result[0] == 'pages':
         return True

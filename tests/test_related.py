@@ -1,6 +1,3 @@
-import pytest
-
-
 def test_add_relationship(client, page):
     """Add relationship between pages."""
 

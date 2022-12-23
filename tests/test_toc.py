@@ -1,7 +1,5 @@
 from pathlib import Path
 
-import pytest
-
 
 def test_table_of_contents(client):
     """Generation of a table of contents for a page."""

@@ -26,29 +26,29 @@ def read(title, revision=None):
     * revision (str): a timestamp of the page's last modification time (or None
         if the page does not exist)
 
-    This returns a dict because that's ultimately the easiest way to get context
-    into the Jinja2 templates.
+    This returns a dict because that's ultimately the easiest way to get
+    context into the Jinja2 templates.
     """
     page = {}
 
     if revision is None:
         db_row = get_db().execute(
-            "SELECT revision, body"
-            " FROM pages"
-            " WHERE title=?"
-            " ORDER BY revision"
-            " DESC"
-            " LIMIT 1",
+            "SELECT revision, body "
+            "FROM pages "
+            "WHERE title=? "
+            "ORDER BY revision "
+            "DESC "
+            "LIMIT 1",
             (title,)
         ).fetchone()
     else:
         db_row = get_db().execute(
-            "SELECT revision, body"
-            " FROM pages"
-            " WHERE title=? AND revision=?"
-            " ORDER BY revision"
-            " DESC"
-            " LIMIT 1",
+            "SELECT revision, body "
+            "FROM pages "
+            "WHERE title=? AND revision=? "
+            "ORDER BY revision "
+            "DESC "
+            "LIMIT 1",
             (title, revision)
         ).fetchone()
 
@@ -71,15 +71,13 @@ def write(title, body):
     try:
         db = get_db()
         db.execute(
-            "INSERT INTO pages"
-            " (revision, title, body) VALUES"
-            " (?, ?, ?)",
+            "INSERT INTO pages (revision, title, body) VALUES (?, ?, ?)",
             (datetime.now().isoformat(), title, body)
         )
         db.commit()
     except Exception as err:
-            current_app.logger.critical(f"Error saving page {title}: {err}")
-            return "Unable to save page"
+        current_app.logger.critical(f"Error saving page {title}: {err}")
+        return "Unable to save page"
 
 
 def history(title):
@@ -88,11 +86,7 @@ def history(title):
     """
 
     revisions = get_db().execute(
-        "SELECT revision"
-        " FROM pages"
-        " WHERE title=?"
-        " ORDER BY revision"
-        " DESC",
+        "SELECT revision FROM pages WHERE title=? ORDER BY revision DESC",
         (title,)
     ).fetchall()
 
@@ -136,22 +130,28 @@ def search(query):
 
     try:
         title_results = get_db().execute(
-            "SELECT title, snippet(pages_fts, 0, '__mark__', '__/mark__', '...', 10) AS snippet"
-            " FROM pages_fts"
-            " WHERE pages_fts"
-            " MATCH ?"
-            " ORDER BY rank"
-            " LIMIT 50",
+            "SELECT "
+            "  title, "
+            "  snippet(pages_fts, 0, '__mark__', '__/mark__', '...', 10) "
+            "AS snippet "
+            "FROM pages_fts "
+            "WHERE pages_fts "
+            "MATCH ? "
+            "ORDER BY rank "
+            "LIMIT 50",
             (f'title:{filtered_query}',)
         ).fetchall()
 
         body_results = get_db().execute(
-            "SELECT title, snippet(pages_fts, 1, '__mark__', '__/mark__', '...', 64) AS snippet"
-            " FROM pages_fts"
-            " WHERE pages_fts"
-            " MATCH ?"
-            " ORDER BY rank"
-            " LIMIT 50",
+            "SELECT "
+            "  title, "
+            "  snippet(pages_fts, 1, '__mark__', '__/mark__', '...', 64) "
+            "AS snippet "
+            "FROM pages_fts "
+            "WHERE pages_fts "
+            "MATCH ? "
+            "ORDER BY rank "
+            "LIMIT 50",
             (f"body:{filtered_query}",)
         ).fetchall()
     except OperationalError as err:

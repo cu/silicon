@@ -44,7 +44,8 @@ class CustomRenderer(mistune.HTMLRenderer):
     def link(self, link, text=None, title=None):
         """Renderer for external links.
 
-        This is customized from the mistune renderer to add the `rel` attribute.
+        This is customized from the mistune renderer to add the `rel`
+        attribute.
         """
 
         if text is None:
@@ -156,7 +157,8 @@ def toc_renderer(text):
     for node in ast:
         text = ''
         if node['type'] == 'heading':
-            text += mistune.escape_html(walk_heading_children(node['children']))
+            text += mistune.escape_html(
+                walk_heading_children(node['children']))
             headings.append((slugify(text), text, node['level']))
 
     return render_toc_ul(headings)
