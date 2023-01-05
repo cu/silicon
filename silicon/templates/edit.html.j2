@@ -49,6 +49,6 @@
 
 {% block content %}
   <form action="{{ url_for('page.edit', title=title) }}" id="page-form" method="post">
-    <textarea id="body-text" name="body">{{ body }}</textarea>
+    <textarea id="body-text" name="body">{{ body|e }}</textarea>
   </form>
 {% endblock %}
