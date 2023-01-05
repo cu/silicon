@@ -2,6 +2,8 @@
 
 Silicon Notes: A somewhat lightweight, low-friction personal knowledge base.
 
+![silicon logo](https://gist.githubusercontent.com/cu/addb3a5f6ba1de11b8fb5eedd212d82a/raw/b56dfbf4cd3ac77487e61cfbdeba7519d8b4f487/favicon-view-192.png)
+
 Features:
 
 * Plaintext editing in Markdown, rendering in HTML
