@@ -23,28 +23,28 @@
 {% endblock %}
 
 {% block sidebar_contents %}
-      {{ macros.nav_links(title, 'docs') }}
+  {{ macros.nav_links(title, 'docs') }}
 
-      <div class="nav-button-wrap">
-        <input class="nav-button" type="Submit" form="page-form" value="Save">
-        <a class="nav-button" href="{{ url_for('page.view', title=title) }}">Cancel</a>
-      </div>
+  <div class="nav-button-wrap">
+    <input class="nav-button" type="Submit" form="page-form" value="Save">
+    <a class="nav-button" href="{{ url_for('page.view', title=title) }}">Cancel</a>
+  </div>
 
-      <div id="alert-box">
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            <ul id="alerts">
-              {% for message in messages %}
-              <li class="alert">{{ message }}</li>
-              {% endfor %}
-            </ul>
-          </span>
-          {% endif %}
-        {% endwith %}
-      </div>
+  <div id="alert-box">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul id="alerts">
+          {% for message in messages %}
+          <li class="alert">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </span>
+      {% endif %}
+    {% endwith %}
+  </div>
 
-      {{ macros.related(title, relatives) }}
-      {{ macros.table_of_contents(title, toc) }}
+  {{ macros.related(title, relatives) }}
+  {{ macros.table_of_contents(title, toc) }}
 {% endblock %}
 
 {% block content %}

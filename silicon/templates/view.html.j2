@@ -13,16 +13,16 @@
 {% endblock %}
 
 {% block sidebar_contents %}
-      {{ macros.nav_links(title, 'history', 'home', 'docs') }}
+  {{ macros.nav_links(title, 'history', 'home', 'docs') }}
 
-      <div class="nav-button-wrap">
-        <a class="nav-button" href="{{ url_for('page.edit', title=title) }}">Edit</a>
-      </div>
+  <div class="nav-button-wrap">
+    <a class="nav-button" href="{{ url_for('page.edit', title=title) }}">Edit</a>
+  </div>
 
-      <div class="nav-page-timestamp">Edited: {{ revision|human_timestamp }}</div>
+  <div class="nav-page-timestamp">Edited: {{ revision|human_timestamp }}</div>
 
-      {{ macros.related(title, relatives) }}
-      {{ macros.table_of_contents(title, toc) }}
+  {{ macros.related(title, relatives) }}
+  {{ macros.table_of_contents(title, toc) }}
 {% endblock %}
 
 {% block content %}
