@@ -1,6 +1,11 @@
 {% import "macros.html.j2" as macros %}
 {% extends "base.html.j2" %}
 
+{% block links %}
+  {{ super() }}
+  {{ macros.favicons() }}
+{% endblock %}
+
 {% block sidebar_contents %}
   {{ macros.nav_links(title, 'home', 'docs') }}
 

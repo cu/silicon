@@ -1,4 +1,17 @@
 {#
+ # Render favicon links
+ #
+ # Params:
+ # * mode: `view` (default) or `edit`
+#}
+{% macro favicons(mode='view') %}
+  <link rel="icon" sizes="16x16 32x32 48x48" href="{{ url_for('static', filename='img') }}/favicon-{{ mode }}.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="{{ url_for('static', filename='img') }}/favicon-{{ mode }}-192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='img') }}/favicon-{{ mode }}-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='img') }}/favicon-{{ mode }}-16.png">
+{% endmacro %}
+
+{#
  # Render the nav links bar
  #
  # Params:
