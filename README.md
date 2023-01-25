@@ -215,6 +215,14 @@ public server, you are responsible for ensuring all access to it is secure.**
 One simple option may be deploying it behind an HTTPS proxy with HTTP Basic
 Authentication enabled.
 
+There is a `docker-compose.yaml` file provided to get you started but you will
+need to provide your own reverse proxy with TLS and authentication.
+
+Normally, it is easiest to host applications like this under their own
+domain or subdomain, such as https://silicon.example.com/. If you would
+rather host it under a prefix instead (as in https://example.com/silicon),
+see [this issue](https://github.com/cu/silicon/issues/3) for hints on how to do
+that.
 
 # Configuring the CodeMirror Editor
 
