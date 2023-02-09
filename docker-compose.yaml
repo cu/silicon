@@ -1,11 +1,8 @@
-version: "3.7"
-
 services:
   silicon:
     image: docker.io/bityard/silicon
     build: .
-    init: true
-    ports: ["5000:5000"]
+    ports: ["127.0.0.1:5000:5000"]
     volumes:
       - silicon_instance:/home/silicon/instance
 

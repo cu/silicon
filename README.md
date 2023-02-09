@@ -70,7 +70,6 @@ for `podman`.)
 docker run \
   -ti \
   --rm \
-  --init \
   -p 127.0.0.1:5000:5000 \
   -v silicon_instance:/home/silicon/instance \
   docker.io/bityard/silicon

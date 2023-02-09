@@ -56,7 +56,7 @@ RUN chmod +x /entrypoint.sh
 
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && \
-    apt-get install -yq --no-install-recommends curl && \
+    apt-get install -yq --no-install-recommends curl tini && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 HEALTHCHECK --start-period=10s --timeout=5s \
     CMD curl http://localhost:5000/view/home || exit 1
@@ -69,5 +69,5 @@ WORKDIR /home/$APP_NAME
 
 RUN mkdir instance
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]
 CMD ["gunicorn", "--worker-tmp-dir /dev/shm", "$FLASK_APP"]
