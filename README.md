@@ -80,6 +80,7 @@ And then open http://localhost:5000/ with your local web browser.
 You could also start it with `docker-compose` (or `docker compose`):
 
 ```sh
+cd deploy/docker-local
 docker-compose up
 ```
 
@@ -206,22 +207,20 @@ poetry run flake8
 
 # Production Deployment
 
-Be aware that this is a web application which contains no authentication or
-security mechanisms whatsoever. Those are up to you to provide. Otherwise,
-you should only deploy this to a trusted private network such as a local LAN
-segregated from the public Internet by a firewall or VPN. **If deploying on a
-public server, you are responsible for ensuring all access to it is secure.**
-One simple option may be deploying it behind an HTTPS proxy with HTTP Basic
-Authentication enabled.
+Silicon Notes is a fairly simple web application which contains no built-in
+authentication or authorization mechanisms whatsoever. If deploying the
+application on its own, you should only deploy this to a trusted private network
+such as a local LAN segregated from the public Internet by a firewall or VPN.
+**If deploying on a public server, you are responsible for ensuring all access
+to it is secure.**
 
-There is a `docker-compose.yaml` file provided to get you started but you will
-need to provide your own reverse proxy with TLS and authentication.
+The `deploy` direcctory contains various sample deployments that may be helpful
+as starting points for a production deployment.
 
-Normally, it is easiest to host applications like this under their own
-domain or subdomain, such as https://silicon.example.com/. If you would
-rather host it under a prefix instead (as in https://example.com/silicon),
-see [this issue](https://github.com/cu/silicon/issues/3) for hints on how to do
-that.
+Normally, it is easiest to host applications like this on their own domain or
+subdomain, such as https://silicon.example.com/. If you would rather host it
+under a prefix instead (as in https://example.com/silicon), see [this
+issue](https://github.com/cu/silicon/issues/3) for hints on how to do that.
 
 # Configuring the CodeMirror Editor
 
