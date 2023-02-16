@@ -1,0 +1,6 @@
+{$SILICON_FQDN} {
+    reverse_proxy silicon:5000
+    basicauth /* {
+        {$BASICAUTH_USER} {$BASICAUTH_PW}
+    }
+}

@@ -1,0 +1,33 @@
+volumes:
+  silicon_instance:
+  caddy_data:
+  caddy_config:
+
+configs:
+  caddyfile:
+    file: ./Caddyfile
+
+services:
+  silicon:
+    image: docker.io/bityard/silicon
+    build: .
+    volumes:
+      - silicon_instance:/home/silicon/instance
+
+  caddy:
+    image: docker.io/caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    configs:
+      - source: caddyfile
+        target: /etc/caddy/Caddyfile
+    depends_on:
+      - silicon
+    environment:
+      SILICON_FQDN: ${SILICON_FQDN}
+      BASICAUTH_USER: ${BASICAUTH_USER}
+      BASICAUTH_PW: ${BASICAUTH_PW}

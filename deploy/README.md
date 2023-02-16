@@ -12,4 +12,5 @@ questions about integrating Silicon Notes into your stack.
 What we have here, so far:
 
 * `docker-local`: The simplest possible `docker-compose.yaml` file for bringing
-* up Silicon Notes on a localhost IP on port 5000.
+up Silicon Notes on a localhost IP on port 5000.
+* `caddy-basic-auth`: Spin up an instance with single-user HTTP Basic Authentication with Caddy.
