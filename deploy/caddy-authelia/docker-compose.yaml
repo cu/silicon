@@ -1,0 +1,80 @@
+configs:
+  caddyfile:
+    file: ./Caddyfile
+  authelia:
+    file: ./configuration.yml
+
+networks:
+  ldap:
+  authelia:
+  silicon:
+
+volumes:
+  lldap_data:
+  authelia_config:
+  silicon_instance:
+  caddy_data:
+  caddy_config:
+
+services:
+  lldap:
+    # Identifies as 0.4.2-alpha
+    # Check with: docker run --rm -ti nitnelave/lldap --version
+    image: docker.io/nitnelave/lldap@sha256:926c7576b12e90546c10a01349ed5ee8e9921863719e8db5ea15b15957f4639e
+    environment:
+      #- UID=####
+      #- GID=####
+      #- TZ=####/####
+      - LLDAP_JWT_SECRET=${LLDAP_JWT_SECRET}
+      - LLDAP_LDAP_USER_PASS=${LLDAP_LDAP_USER_PASS}
+      - LLDAP_LDAP_BASE_DN=${LLDAP_LDAP_BASE_DN}
+    ports:
+      - "127.0.0.1:17170:17170"
+    networks:
+      - ldap
+    volumes:
+      - "lldap_data:/data"
+
+  authelia:
+    image: authelia/authelia:4.37.5
+    environment:
+      - AUTHELIA_JWT_SECRET=${AUTHELIA_JWT_SECRET}
+      - AUTHELIA_STORAGE_ENCRYPTION_KEY=${AUTHELIA_STORAGE_ENCRYPTION_KEY}
+    configs:
+      - source: authelia
+        target: /config/configuration.yml
+    depends_on:
+      - lldap
+    networks:
+      - ldap
+      - authelia
+    volumes:
+      - "authelia_config:/config"
+
+  silicon:
+    image: bityard/silicon
+    networks:
+      - silicon
+    volumes:
+      - silicon_instance:/home/silicon/instance
+
+  caddy:
+    image: docker.io/caddy:2.6.2
+    environment:
+      - AUTH_FQDN=${AUTH_FQDN}
+      - SILICON_FQDN=${SILICON_FQDN}
+    configs:
+      - source: caddyfile
+        target: /etc/caddy/Caddyfile
+    depends_on:
+      - silicon
+      - authelia
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - authelia
+      - silicon
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config

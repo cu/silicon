@@ -1,0 +1,24 @@
+# This is just a list of IP ranges for which Caddy will pass through the
+# X-Forwarded-* headers, because it otherwise won't pass these for security
+# reasons. See:
+# * https://www.authelia.com/integration/proxies/caddy/
+# * https://caddyserver.com/docs/caddyfile/directives/reverse_proxy#trusted_proxies
+(trusted_proxy_list) {
+    trusted_proxies 172.17.0.0/16
+}
+
+{$AUTH_FQDN} {
+    reverse_proxy authelia:9091 {
+        import trusted_proxy_list
+    }
+}
+
+{$SILICON_FQDN} {
+    forward_auth authelia:9091 {
+        uri /api/verify?rd=https://{$AUTH_FQDN}/
+        import trusted_proxy_list
+    }
+    reverse_proxy silicon:5000 {
+        import trusted_proxy_list
+    }
+}
