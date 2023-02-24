@@ -6,6 +6,7 @@ on:
       - docker-compose.yaml
       - .editorconfig
       - '*.md'
+      - 'deploy/**'
 
 env:
   REGISTRY: docker.io
