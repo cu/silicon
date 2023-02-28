@@ -1,10 +1,3 @@
-Todo:
-
-* steps to replace critical values (mainly domain names and secrets)
-* possibly a section on more advanced usage like multple users, groups, and TOTP
-
-----
-
 # Description
 
 This is a set of containers all lashed together with docker compose that give you a broader set of authentication features than Caddy alone with HTTP basic auth. The advantage to deploying Silicon Notes this way is that if you decide to add services to the deployment in the future, doing so is borderline trivial.
@@ -14,10 +7,11 @@ Authelia has loads of features to explore but this example focuses on what is es
 There are four containers in play, and this is what each of them do:
 
 * Silicon Notes, of course, is our wiki-like notes application that we want to host publicly but protect with HTTPS and some level of authentication.
-* Caddy is the web server which serves as a reverse proxy and defers authentication to Authelia.
+* [Caddy] is the web server which serves as a reverse proxy and defers authentication to Authelia.
 * [Authelia] provides the authentication and authorization mechanisms
 * [LLDAP] is a simple, basic [LDAP] server that serves as Authelia's source of truth for user information. (Usernames, full names, email addresses, etc.)
 
+[Caddy]: https://caddyserver.com
 [Authelia]: https://www.authelia.com
 [LLDAP]: https://github.com/nitnelave/lldap
 
@@ -39,7 +33,7 @@ There's not much to the `silicon` container. The application listens for request
 
 ## Caddy
 
-[Caddy](https://caddyserver.com) is a web server with several interesting features. The ones we care about for the moment are:
+Caddy is a web server with several interesting features. The ones we care about for the moment are:
 
 * Simple configuration for a simple use case
 * Reverse proxying
