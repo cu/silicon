@@ -22,8 +22,6 @@ services:
     # Check with: docker run --rm -ti nitnelave/lldap --version
     image: docker.io/nitnelave/lldap@sha256:926c7576b12e90546c10a01349ed5ee8e9921863719e8db5ea15b15957f4639e
     environment:
-      #- UID=####
-      #- GID=####
       #- TZ=####/####
       - LLDAP_JWT_SECRET=${LLDAP_JWT_SECRET}
       - LLDAP_LDAP_USER_PASS=${LLDAP_LDAP_USER_PASS}
@@ -36,7 +34,7 @@ services:
       - "lldap_data:/data"
 
   authelia:
-    image: authelia/authelia:4.37.5
+    image: docker.io/authelia/authelia:4.37.5
     environment:
       - AUTHELIA_JWT_SECRET=${AUTHELIA_JWT_SECRET}
       - AUTHELIA_STORAGE_ENCRYPTION_KEY=${AUTHELIA_STORAGE_ENCRYPTION_KEY}
@@ -52,7 +50,7 @@ services:
       - "authelia_config:/config"
 
   silicon:
-    image: bityard/silicon
+    image: docker.io/bityard/silicon
     networks:
       - silicon
     volumes:
