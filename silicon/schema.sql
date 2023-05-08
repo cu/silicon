@@ -22,28 +22,16 @@ CREATE TABLE relationships (
 CREATE virtual TABLE pages_fts USING FTS5(
     title,
     body,
-    content='pages'
 );
 
 -- Before a page is inserted into the pages table,
--- delete the old matching entry in the FTS table
-CREATE TRIGGER pages_before_insert BEFORE INSERT ON pages
-BEGIN
-    INSERT INTO pages_fts (pages_fts, rowid, title, body)
-        SELECT 'delete', rowid, title, body
-        FROM pages
-        WHERE title = new.title
-        ORDER BY revision
-        DESC
-        LIMIT 1;
-END;
-
--- After a page is inserted into the pages table,
--- insert a matching entry into the FTS table
+-- delete the old matching entry in the FTS table.
+-- Then, insert the new page into the FTS table.
 CREATE TRIGGER pages_after_insert AFTER INSERT ON pages
 BEGIN
-    INSERT INTO pages_fts (rowid, title, body)
-    VALUES (new.rowid, new.title, new.body);
+    DELETE FROM pages_fts WHERE title = new.title;
+    INSERT INTO pages_fts (title, body)
+    VALUES (new.title, new.body);
 END;
 
 -- After a page is deleted from the pages table,
