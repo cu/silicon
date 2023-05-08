@@ -254,6 +254,64 @@ your `.env` file or environment:
 SILICON_EDITOR=textarea
 ```
 
+# Data Export and Import
+
+## SQL
+
+In the event that a database migration is needed, follow these steps:
+
+1. Stop the Silicon instance.
+2. Pull down the latest version of this repository.
+3. Run `scripts/dump.sh > silicon_data.sql`.
+
+To import the data:
+
+4. Move or rename the old `instance/silicon.sqlite`, if it exists.
+5. Run `poetry run flask init-db`.
+6. Run `sqlite3 instance/silicon.sqlite < silicon_data.sql`.
+7. Start the Silicon instance.
+
+Once you are satisfied that there are no issues, you can archive (or delete)
+the old `silicon.sqlite` file and `silicon_data.sql`.
+
+## JSON
+
+If you want to dump your data as JSON (perhaps to import into another system
+or hack on with your own tools), these scripts are not well tested but might do
+the job.
+
+Export:
+
+```sh
+#!/usr/bin/env sh
+
+DB=instance/silicon.sqlite
+
+for table in pages relationships; do
+    sqlite3 $DB -cmd '.mode json' "select * from $table;" > $table.json
+done
+```
+
+Import:
+
+```sh
+#!/usr/bin/env sh
+
+sqlite3 instance/silicon.sqlite << EOF
+INSERT INTO pages (revision, title, body)
+SELECT
+    json_extract(value, '$.revision'),
+    json_extract(value, '$.title'),
+    json_extract(value, '$.body')
+FROM json_each(readfile('pages.json'));
+
+INSERT INTO relationships
+SELECT
+    json_extract(value, '$.title_a'),
+    json_extract(value, '$.title_a')
+FROM json_each(readfile('relationships.json'));
+EOF
+```
 
 # Suggested Contributions
 
