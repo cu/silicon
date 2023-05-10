@@ -12,7 +12,7 @@ Features:
 * Powerful full-text and page title search
 * Page history
 * A table of contents in the left sidebar, where it belongs
-* A quite-usuable mobile layout
+* A quite-usable mobile layout
 * Built-in documentation
 * No-frills UI
 * No big frameworks, just a few smallish dependencies
