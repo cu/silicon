@@ -44,7 +44,7 @@ def add(title, related):
         return
 
     rels = get(title)
-    if related in rels:
+    if related_slug in rels:
         current_app.logger.info(
             f"duplicate relationship: {title}, {related_slug}"
         )
