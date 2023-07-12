@@ -132,14 +132,23 @@ def search():
         )
 
     query = request.args.get('query', '').strip()
+    slugified_query = slugify(query, separator='_')
+
     if not query:
         return render_template_err('No query specified.'), 400
     try:
         title_results, body_results = page.search(request.args['query'])
     except page.SearchError as err:
         return render_template_err(err), 400
+
+    for i in range(len(title_results)):
+        if title_results[i]['title'] == slugified_query:
+            exact_match = title_results.pop(i)
+            title_results.insert(0, exact_match)
+            break
+
     return render_template(
-        'search.html.j2', title=f"Results for '{request.args['query']}'",
+        'search.html.j2', title=f"Results for '{query}'",
         title_results=title_results, body_results=body_results)
 
 
