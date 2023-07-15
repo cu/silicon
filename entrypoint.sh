@@ -4,6 +4,6 @@ set -e
 
 export PATH="/$APP_NAME/bin:$PATH"
 
-flask init-db
+flask --app $APP_NAME init-db
 
 eval "exec $@"

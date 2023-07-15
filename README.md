@@ -130,26 +130,16 @@ Use poetry to create a virtual environment and install the dependencies:
 poetry install
 ```
 
-Flask is configured via environment variables. There is a file called
-`.flaskenv` which sets the name of the app. If you want to run `flask` from
-somewhere else, you will need to set:
-
-```sh
-FLASK_APP=silicon
-```
-
-All other settings can either be set as environment variables or written to a
+Some settings can either be set as environment variables or written to a
 file named `.env` in the project root. For development, this will suffice:
 
 ```sh
-FLASK_ENV=development
 WERKZEUG_DEBUG_PIN=off
 ```
 
 You can set any environment variables mentioned in the Flask or Werkzeug
 docs, but these are some you might care to know about:
 
-* `FLASK_ENV`: `production` (default), or `development`
 * `FLASK_RUN_HOST`: defaults to `127.0.0.1`
 * `FLASK_RUN_PORT`: defaults to `5000`
 * `INSTANCE_PATH`: where the silicon data (in particular the database) is stored
@@ -167,7 +157,7 @@ run the following command. It will create an `instance` directory in the root
 of the project and initialize the SQLite database from `schema.sql`.
 
 ```sh
-poetry run flask init-db
+poetry run flask --app silicon init-db
 ```
 
 ## Running Silicon
@@ -175,7 +165,7 @@ poetry run flask init-db
 Run the project via the `flask` development server:
 
 ```sh
-poetry run flask run
+poetry run flask --app silicon run --debug
 ```
 
 Unless you changed the defaults, you should be able to access the UI on
@@ -267,7 +257,7 @@ In the event that a database migration is needed, follow these steps:
 To import the data:
 
 4. Move or rename the old `instance/silicon.sqlite`, if it exists.
-5. Run `poetry run flask init-db`.
+5. Run `poetry run flask --app silicon init-db`.
 6. Run `sqlite3 instance/silicon.sqlite < silicon_data.sql`.
 7. Start the Silicon instance.
 

@@ -2,7 +2,7 @@ from datetime import datetime
 from html import escape
 import re
 
-from flask import Markup
+from markupsafe import Markup
 
 
 def human_timestamp(timestamp):

@@ -42,7 +42,7 @@ def create_app(test_config=None):
         # ensure the instance folder exists
         os.makedirs(app.instance_path, exist_ok=True)
 
-        if app.config['ENV'] == 'development':
+        if app.debug:
             print(sys.version)
             print(f"Instance path: {app.instance_path}")
 
