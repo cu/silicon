@@ -3,9 +3,9 @@ Model functions for managing page relationships.
 """
 
 from flask import current_app
-from slugify import slugify
 
 from silicon.db import get_db
+from silicon.util import slugify_title
 
 
 def get(title):
@@ -33,7 +33,7 @@ def add(title, related):
     accidentally pasting a whole Shakespeare manuscript into it.
     """
 
-    related_slug = slugify(related, separator="_", max_length=80)
+    related_slug = slugify_title(related)
 
     if len(related_slug) == 0:
         current_app.logger.info(f"got empty string for {title} relative")

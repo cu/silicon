@@ -8,10 +8,10 @@ from flask import (
     request,
     url_for,
 )
-from slugify import slugify
 
 from silicon.j2_filters import human_timestamp, mark_query_results
 from silicon.render_md import md_renderer, toc_renderer
+from silicon.util import slugify_title
 from silicon import page, related
 
 
@@ -30,7 +30,7 @@ def home():
 
 @bp.route('/view/<title>')
 def view(title):
-    title = slugify(title, separator='_')
+    title = slugify_title(title)
     if 'revision' in request.args:
         p = page.read(title, request.args.get('revision'))
     else:
@@ -48,7 +48,7 @@ def view(title):
 
 @bp.route('/edit/<title>', methods=['GET', 'POST'])
 def edit(title):
-    title = slugify(title, separator='_')
+    title = slugify_title(title)
     p = page.read(title)
     p['relatives'] = related.get(title)
     if 'body' in p:
@@ -75,7 +75,7 @@ def edit(title):
 @bp.route('/history/<title>')
 def history(title):
     p = {}
-    p['title'] = slugify(title, separator='_')
+    p['title'] = slugify_title(title)
     p['revisions'] = page.history(p['title'])
     p['count'] = len(p['revisions'])
     if p['count'] == 0:
@@ -85,7 +85,7 @@ def history(title):
 
 @bp.route('/history/<title>/<req_revision>')
 def history_revision(title, req_revision):
-    title = slugify(title, separator='_')
+    title = slugify_title(title)
 
     p = page.read(title, req_revision)
 
@@ -107,7 +107,7 @@ def history_revision(title, req_revision):
 def docs(title):
     p = {}
 
-    p['title'] = slugify(title)
+    p['title'] = slugify_title(title)
 
     doc = Path(__file__).parent / 'docs' / f'{title}.md'
     try:
@@ -132,7 +132,7 @@ def search():
         )
 
     query = request.args.get('query', '').strip()
-    slugified_query = slugify(query, separator='_')
+    slugified_query = slugify_title(query)
 
     if not query:
         return render_template_err('No query specified.'), 400
