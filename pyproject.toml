@@ -16,7 +16,7 @@ mistune = "^2.0.2"
 Pygments = "^2.6.1"
 python-slugify = "^8.0.0"
 python-dotenv = "^1.0.0"
-gunicorn = "^20.1.0"
+gunicorn = "^21.0.0"
 
 [tool.poetry.group.dev.dependencies]
 watchdog = "^2.2.0"
