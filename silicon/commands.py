@@ -1,5 +1,4 @@
 import click
-from flask.cli import with_appcontext
 
 from silicon.db import db_exists, close_db, init_db
 
