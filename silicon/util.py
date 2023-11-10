@@ -1,5 +1,6 @@
 from slugify import slugify
 
+
 def slugify_title(title):
     """
     Consistently slugify article titles.

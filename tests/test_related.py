@@ -48,8 +48,9 @@ def test_duplicate_relationships_fail(client, page):
     relatives = [li.a.string.strip() for li in page(r.data).ul.find_all("li")]
     assert relatives == ['bar']
 
+
 def test_duplicate_slugified_relationships_fail(client, page):
-    """Duplicate relationships w/ different pre-slugified text are not added."""
+    """Duplicate relationships w/different pre-slugified text are not added."""
 
     client.post("/related/foo", data={"relative": "bar_baz"})
     r = client.post("/related/foo", data={"relative": "bar baz"})
