@@ -271,14 +271,14 @@ files = [
 
 [[package]]
 name = "mistune"
-version = "2.0.5"
-description = "A sane Markdown parser with useful plugins and renderers"
+version = "3.0.2"
+description = "A sane and fast Markdown parser with useful plugins and renderers"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7"
 files = [
-    {file = "mistune-2.0.5-py2.py3-none-any.whl", hash = "sha256:bad7f5d431886fcbaf5f758118ecff70d31f75231b34024a1341120340a65ce8"},
-    {file = "mistune-2.0.5.tar.gz", hash = "sha256:0246113cb2492db875c6be56974a7c893333bf26cd92891c85f63151cee09d34"},
+    {file = "mistune-3.0.2-py3-none-any.whl", hash = "sha256:71481854c30fdbc938963d3605b72501f5c10a9320ecd412c121c163a1c7d205"},
+    {file = "mistune-3.0.2.tar.gz", hash = "sha256:fc7f93ded930c92394ef2cb6f04a8aabab4117a91449e72dcc8dfa646a508be8"},
 ]
 
 [[package]]
@@ -517,4 +517,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "664def51656438a7387811904aeb4fb3ebf0dd8c5bef1eb9babe59ba25b386af"
+content-hash = "3436c71a9c3ae214faa95a1b0b25595bacb0120b343b736409df1ba36f01c704"
