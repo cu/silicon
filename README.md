@@ -381,7 +381,7 @@ http://example.com/view/page_title#some-section
 ## Implement a (Better) Task List Plugin
 
 Mistune (the Markdown->HTML renderer) ships with a [task_lists plugin]. It is
-functional, but it renders task list items inside an ordinary `<ol>` as just
+functional, but it renders task list items inside an ordinary `<ul>` as just
 another kind of list item. This means the task list items get prefixed with
 _both_ a bullet point and a checkbox. IMO, this is fairly ugly and the "right"
 way to display a task list item is the have the checkbox replace the bullet
