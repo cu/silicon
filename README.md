@@ -222,14 +222,14 @@ of the following commands:
 
 ```sh
 # If you have `npm` installed locally
-(cd silicon/static && npm install)
+(cd silicon/static && npm ci)
 ```
 
 Or:
 
 ```sh
 # if you have `docker` installed
-docker run -ti --rm -v $PWD/silicon/static:/app -w /app node:alpine npm install
+docker run -ti --rm -v $PWD/silicon/static:/app -w /app node:alpine npm ci
 ```
 
 Currently only a handful of languages are enabled for syntax highlighting, if

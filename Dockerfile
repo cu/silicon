@@ -11,7 +11,7 @@ FROM $NODE_IMAGE AS staging
 COPY ./ /staging/
 WORKDIR /staging/silicon/static
 
-RUN npm install
+RUN npm ci
 
 
 # Build:
