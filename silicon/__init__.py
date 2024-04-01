@@ -49,7 +49,8 @@ def create_app(test_config=None):
         app.config['DATABASE'] = os.path.join(
             app.instance_path, 'silicon.sqlite')
 
-    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', None)
+        app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', None)
+
     if app.config['SECRET_KEY'] is None:
         # try to read the secret key
         secret_key_path = Path(app.instance_path) / 'secret.key'
