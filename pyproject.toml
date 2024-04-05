@@ -11,7 +11,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.9"
-Flask = "^2.3.0"
+Flask = "^3.0.0"
 mistune = "^3.0.2"
 Pygments = "^2.6.1"
 python-slugify = "^8.0.0"
