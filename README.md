@@ -1,3 +1,5 @@
+[![Integration tests](https://github.com/cu/silicon/actions/workflows/tests.yaml/badge.svg)](https://github.com/cu/silicon/actions/workflows/tests.yaml)
+
 # What's all this, then?!
 
 Silicon Notes: A somewhat lightweight, low-friction personal knowledge base.
