@@ -6,10 +6,6 @@ import sys
 from flask import Flask
 
 
-class AppConfigurationError(Exception):
-    pass
-
-
 def create_app(test_config=None):
     """
     Create the application object, sprinkle in some configuration,
