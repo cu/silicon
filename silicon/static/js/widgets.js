@@ -13,7 +13,7 @@ function get_widget(target) {
 
     return {
         element: widget_element,
-        url: widget_element.getAttribute("data-widget-url")
+        url: widget_element.getAttribute("data-widget-url"),
     };
 }
 
@@ -21,7 +21,8 @@ function get_widget(target) {
  * Set up relation add button event.
  */
 function relation_add_button() {
-    document.querySelector("#add-relation-btn")
+    document
+        .querySelector("#add-relation-btn")
         .addEventListener("click", (event) => {
             const relative = window.prompt("Related page title");
 
@@ -33,24 +34,27 @@ function relation_add_button() {
             const widget = get_widget("#related-links");
             fetch(widget.url, {
                 method: "POST",
-                body: new URLSearchParams({relative: relative}),
+                body: new URLSearchParams({ relative: relative }),
                 headers: new Headers({
-                    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+                    "Content-type":
+                        "application/x-www-form-urlencoded; charset=UTF-8",
+                }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error(
+                        `Error fetching ${response.url}, got ${response.status}`
+                    );
                 })
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.text();
-                }
-                throw new Error(`Error fetching ${response.url}, got ${response.status}`);
-            })
-            .then(html => {
-                widget.element.innerHTML = html;
-                relation_delete_buttons();
-            })
-            .catch(err => {
-                console.error(err);
-            });
+                .then((html) => {
+                    widget.element.innerHTML = html;
+                    relation_delete_buttons();
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
         });
 }
 
@@ -58,27 +62,30 @@ function relation_add_button() {
  * Set up relation delete button events.
  */
 function relation_delete_buttons() {
-    const del_btns = document.querySelectorAll(".del-relation-btn")
+    const del_btns = document.querySelectorAll(".del-relation-btn");
     const widget = get_widget("#related-links");
 
-    del_btns.forEach(function(btn) {
+    del_btns.forEach(function (btn) {
         const relative = btn.getAttribute("data-del-relative");
         btn.addEventListener("click", (event) => {
-            const answer = window.confirm(`Delete this page's relationship to ${relative}?`);
+            const answer = window.confirm(
+                `Delete this page's relationship to ${relative}?`
+            );
             if (answer === true) {
                 fetch(`${widget.url}/${relative}`, {
                     method: "DELETE",
-                }).then(response => {
-                    return response.text();
-                }).then(html => {
-                    widget.element.innerHTML = html;
-                    relation_delete_buttons();
                 })
+                    .then((response) => {
+                        return response.text();
+                    })
+                    .then((html) => {
+                        widget.element.innerHTML = html;
+                        relation_delete_buttons();
+                    });
             }
         });
     });
 }
-
 
 /*
  * Set up the table of contents update button.
@@ -89,49 +96,51 @@ function toc_update_button() {
         return;
     }
 
-    document.querySelector("#update-toc").style.visibility = 'visible';
+    document.querySelector("#update-toc").style.visibility = "visible";
 
-    document.querySelector("#update-toc-btn")
-        .addEventListener("click", (event => {
+    document
+        .querySelector("#update-toc-btn")
+        .addEventListener("click", (event) => {
             const widget = get_widget("#toc");
             // get the contents of CodeMirror, or the textarea
             let body_text;
             if (document.querySelector(".CodeMirror")) {
-                body_text = document.querySelector(".CodeMirror").CodeMirror.getValue();
+                body_text = document
+                    .querySelector(".CodeMirror")
+                    .CodeMirror.getValue();
             } else {
                 body_text = document.querySelector("#body-text").value;
             }
 
             fetch(widget.url, {
                 method: "POST",
-                body: new URLSearchParams(
-                    {body: body_text}
-                ),
+                body: new URLSearchParams({ body: body_text }),
                 headers: new Headers({
-                    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+                    "Content-type":
+                        "application/x-www-form-urlencoded; charset=UTF-8",
+                }),
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.text();
+                    }
+                    throw new Error(
+                        `Error fetching ${response.url}, got ${response.status}`
+                    );
                 })
-            })
-            .then(response => {
-                if (response.ok) {
-                    return response.text();
-                }
-                throw new Error(`Error fetching ${response.url}, got ${response.status}`);
-            })
-            .then(html => {
-                widget.element.innerHTML = html;
-            })
-            .catch(err => {
-                console.error(err);
-            });
-
-        }));
+                .then((html) => {
+                    widget.element.innerHTML = html;
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        });
 }
-
 
 /*
  * Set up all the page events.
  */
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
     relation_add_button();
     relation_delete_buttons();
     toc_update_button();
