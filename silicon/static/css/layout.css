@@ -5,8 +5,9 @@
     --nav-button-background: var(--c-blue-light);
     --nav-button-background-hover: var(--color-bg-link-hover);
 
-    --nav-title-text: var(--color-bg-weak);
-    --nav-title-background: var(--color-invert-bg-strong);
+    /* Don't use dark mode colors on title, it's always dark */
+    --nav-title-text: var(--c-gray10);
+    --nav-title-background: var(--c-gray2);
 
     --nav-page-links: var(--color-bg-link);
 }
