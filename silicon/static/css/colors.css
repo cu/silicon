@@ -16,7 +16,7 @@
     --c-invert-gray5: rgb(128, 128, 128);
     --c-invert-gray4: rgb(147, 147, 147);
     --c-invert-gray2: rgb(153, 168, 184);
-    --c-invert-gray0: white;
+    --c-invert-gray0: rgb(239, 239, 239);
 
     --c-blue-light: rgba(51, 122, 183);
     --c-invert-blue-light: rgb(72, 145, 209);
@@ -53,8 +53,8 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-bg-weak: var(--c-invert-gray10);
-        --color-bg-weak2: var(--c-invert-gray9);
+        --color-bg-weak: var(--c-invert-gray9);
+        --color-bg-weak2: var(--c-invert-gray8);
         --color-bg-strong: var(--c-invert-gray8);
         --color-invert-bg-strong: var(--c-invert-gray2);
         --color-fg-error: var(--c-red);
