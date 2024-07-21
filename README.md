@@ -332,23 +332,6 @@ This is pretty standard on wiki-like apps, but it's not a critical feature
 for me so I haven't yet mustered up the fortitude to implement it. (It would
 also likely involve adding a diff library as a dependency.)
 
-## Redirect to Slugified URL
-
-We currently "slugify" the page title in at least two places:
-
-1. When building the URL for an internal page link generated from wiki link
-syntax `[[like this]]` in `render.py`.
-2. When processing requests with page titles in the URLs for certain routes in
-`views.py`.
-
-In the second case, page titles are slugified immediately, meaning every
-instance of the page title is slugified in the HTML. However, the URL will
-still contain the non-slugified title. This is pretty much purely cosmetic,
-but it would be nice if the application could immediately redirect to a
-slugified page title instead, if necessary.
-
-I found lots of ugly ways to do this but nothing I was comfortable shipping.
-
 ## Draft Feature / Autosave / Leap-frog Detection
 
 To prevent the loss of unsaved changes while editing, we use the browser's

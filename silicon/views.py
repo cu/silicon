@@ -30,7 +30,11 @@ def home():
 
 @bp.route('/view/<title>')
 def view(title):
-    title = slugify_title(title)
+    slugified_title = slugify_title(title)
+
+    if slugified_title != title:
+        return redirect(url_for("page.view", title=slugified_title))
+
     if 'revision' in request.args:
         p = page.read(title, request.args.get('revision'))
     else:
@@ -48,7 +52,11 @@ def view(title):
 
 @bp.route('/edit/<title>', methods=['GET', 'POST'])
 def edit(title):
-    title = slugify_title(title)
+    slugified_title = slugify_title(title)
+
+    if slugified_title != title:
+        return redirect(url_for("page.edit", title=slugified_title))
+
     p = page.read(title)
     p['relatives'] = related.get(title)
     if 'body' in p:
