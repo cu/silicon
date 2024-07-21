@@ -1,4 +1,15 @@
 {
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "[javascript]": {
+        "editor.formatOnSave": true
+    },
+    "[css]": {
+        "editor.formatOnSave": true
+    },
+    "[markdown]": {
+        "editor.formatOnSave": false
+    },
+    "[python]": {
+        "editor.formatOnSave": false
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
