@@ -153,6 +153,9 @@ docs, but these are some you might care to know about:
   (and write it to a file in `INSTANCE_PATH`) if one doesn't exist.
 * `SILICON_EDITOR`: When set to `textarea`, this disables the CodeMirror text
 editor when editing pages and uses a standard textarea element instead.
+* `MD_HARD_WRAP`: When set to `true`, all line breaks are converted to `<br>`
+  tags. By default, you must suffix a line with two spaces (`  `) to get a
+  `<br>`.
 
 To initialize the database after the configuration settings have been set,
 run the following command. It will create an `instance` directory in the root
