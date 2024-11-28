@@ -1,3 +1,4 @@
+import os
 from flask import url_for
 from mistune import create_markdown, HTMLRenderer
 from mistune.util import safe_entity
@@ -111,6 +112,7 @@ def md_renderer(text):
     """Render a Markdown document into HTML."""
 
     markdown = create_markdown(
+        hard_wrap=(os.getenv('MD_HARD_WRAP') or "").lower() == "true",
         renderer=CustomRenderer(escape=False),
         plugins=[
             'strikethrough',
