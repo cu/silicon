@@ -1,0 +1,4 @@
+# Prettier does "opinionated" things to unordered lists in Markdown:
+# https://github.com/prettier/prettier/issues/5019
+# https://github.com/prettier/prettier/issues/5308
+**/*.md
