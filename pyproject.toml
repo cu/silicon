@@ -1,6 +1,6 @@
 [project]
 name = "silicon-notes"
-version = "0.1.3"
+version = "0.1.4"
 description = "A personal knowledge base with a wiki-like interface."
 authors = [
     { name = "Charles Ulrich"}
@@ -10,9 +10,9 @@ license = { file = "LICENSE" }
 requires-python = ">=3.9"
 dependencies = [
     "flask~=3.0",
-    "gunicorn~=21.0",
+    "gunicorn~=23.0",
     "mistune~=3.0",
-    "pygments~=2.6.1",
+    "pygments~=2.18",
     "python-dotenv~=1.0",
     "python-slugify~=8.0.0",
 ]
@@ -22,8 +22,8 @@ Repository = "https://github.com/cu/silicon"
 
 [dependency-groups]
 dev = [
-    "beautifulsoup4~=4.11.1",
+    "beautifulsoup4~=4.12",
     "flake8~=7.1",
-    "pytest~=7.4.0",
-    "watchdog~=3.0",
+    "pytest~=8.3.0",
+    "watchdog~=6.0",
 ]
