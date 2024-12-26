@@ -1,6 +1,6 @@
 [project]
 name = "silicon-notes"
-version = "0.1.4"
+version = "0.1.5"
 description = "A personal knowledge base with a wiki-like interface."
 authors = [
     { name = "Charles Ulrich"}
