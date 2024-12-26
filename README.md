@@ -364,3 +364,19 @@ point.
 To do this right, I think task lists should be their own separate kind of list
 rather than just another item type in regular lists. It should be possible to
 accomplish this with a Mistune plugin.
+
+# Release Process
+
+1. Set the `version` string in `pyproject.toml` to the version to be released.
+1. Run `uv lock`.
+1. Commit `pyproject.toml` and `uv.lock`.
+1. Push a tag containing just the version number. The tag has to be pushed before a release can be made. GitHub will use the tag name as the release name, so a tag prefix as in `release-1.2.3` will not be kosher.
+   ```
+   git log -1
+   git tag <version> <commit>
+   git push origin <version>
+   ```
+1. This will kick off an action to build a container for each arch and tag/push:
+   * `latest`
+   * major.minor.patch
+1. Create a release in GitHub containing URLs to docker images.
