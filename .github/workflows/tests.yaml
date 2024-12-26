@@ -14,7 +14,7 @@ jobs:
   integration-tests:
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,7 +26,6 @@ jobs:
 
       - name: Install poetry deps and run tests
         run: |
-          pipx install poetry
-          poetry install
-          poetry run flake8 --show-source
-          poetry run pytest
+          pipx install uv
+          uv run flake8 --show-source --exclude .venv
+          uv run pytest

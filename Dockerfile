@@ -1,73 +1,58 @@
-ARG APP_NAME=silicon
-ARG PYTHON_IMAGE=docker.io/library/python:3.11-slim
+ARG PYTHON_IMAGE=docker.io/library/python:3.13-slim
 ARG NODE_IMAGE=docker.io/library/node:lts-alpine
 
-
-# Staging:
-# * copy the project dir into /staging
-# * install the javascript dependencies
-FROM $NODE_IMAGE AS staging
+### Stage 1: Install JS dependencies
+FROM $NODE_IMAGE AS npm-install
 
 COPY ./ /staging/
 WORKDIR /staging/silicon/static
-
 RUN npm ci
 
-
-# Build:
-# * run tests
-# * build a wheel and constraints file
-# * create a venv in /$APP_NAME
-# * install wheel and dependencies into the venv
+### Stage 2: Install Silicon and dependencies
 FROM $PYTHON_IMAGE AS build
-ARG APP_NAME
-ENV PYTHONUNBUFFERED=1
 
-COPY --from=staging /staging /staging
+# uv settings
+ARG UV_LINK_MODE=copy
+ARG UV_COMPILE_BYTECODE=1
+ARG UV_PYTHON_DOWNLOADS=never
+ARG UV_PROJECT_ENVIRONMENT=/silicon/.venv
+
+COPY --from=npm-install /staging /staging
 WORKDIR /staging
-RUN mkdir instance
 
-RUN pip install --no-cache-dir poetry
-RUN poetry install
-RUN TMP=/dev/shm poetry run pytest
-RUN poetry build --format wheel
-RUN poetry export --format requirements.txt --output constraints.txt --without-hashes
+RUN --mount=type=cache,target=/root/.cache <<EOS sh -ex
+    pip install uv
+    uv sync --locked --no-install-project
+    TMP=/dev/shm uv run pytest
+    mv LICENSE scripts silicon /silicon
+    mv entrypoint.sh /
+EOS
 
-RUN python -m venv /$APP_NAME
-RUN /$APP_NAME/bin/pip install dist/*.whl --constraint constraints.txt
-
-
-# Final stage:
-# * create a user named $APP_NAME
-# * install curl and set healthcheck
-# * create an instance data directory
+### Stage 3: Configure final image
 FROM $PYTHON_IMAGE AS final
 
-ARG APP_NAME
-ENV APP_NAME=$APP_NAME
-ENV FLASK_APP=$APP_NAME:create_app()
-ENV INSTANCE_PATH=/home/$APP_NAME/instance
+ENV FLASK_APP=silicon:create_app()
+ENV INSTANCE_PATH=/home/silicon/instance
 ENV GUNICORN_CMD_ARGS="--bind :5000 --workers 2 --threads 4"
-EXPOSE 5000
 
-COPY --from=build /$APP_NAME /$APP_NAME
-COPY ./entrypoint.sh /
+COPY --from=build /entrypoint.sh /
 RUN chmod +x /entrypoint.sh
+COPY --from=build /silicon /silicon
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && \
-    apt-get install -yq --no-install-recommends curl tini && \
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked <<EOS sh -ex
+    apt-get update
+    apt-get install -yq --no-install-recommends curl tini
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    groupadd --gid 5000 silicon
+    useradd --create-home --uid 5000 --gid 5000 silicon
+EOS
+USER silicon
+WORKDIR /silicon
+
+EXPOSE 5000
 HEALTHCHECK --start-period=10s --timeout=5s \
     CMD curl http://localhost:5000/view/home || exit 1
-
-RUN groupadd --gid 5000 $APP_NAME
-RUN useradd --create-home --uid 5000 --gid 5000 $APP_NAME
-
-USER $APP_NAME
-WORKDIR /home/$APP_NAME
-
-RUN mkdir instance
-
 ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]
-CMD ["gunicorn", "--worker-tmp-dir /dev/shm", "$FLASK_APP"]
+CMD ["/silicon/.venv/bin/gunicorn", "--worker-tmp-dir /dev/shm", "'silicon:create_app()'"]

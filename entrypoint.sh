@@ -2,8 +2,8 @@
 
 set -e
 
-export PATH="/$APP_NAME/bin:$PATH"
+export PATH="/silicon/.venv/bin:$PATH"
 
-flask --app $APP_NAME init-db
+flask --app silicon init-db
 
 eval "exec $@"

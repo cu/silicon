@@ -39,7 +39,7 @@ certain design decisions, see [this blog article](https://blog.bityard.net/artic
 Projects we rely on and appreciate!
 
 * [Python](https://www.python.org/), of course.
-* [Poetry](https://python-poetry.org/) for project management.
+* [uv](https://github.com/astral-sh/uv) for project management.
 * [Flask](https://flask.palletsprojects.com/), the micro-framework.
 * [Mistune](https://github.com/lepture/mistune) to render Markdown into HTML.
 * [Pygments](https://pygments.org/) for syntax highlighting of code blocks.
@@ -52,7 +52,6 @@ Projects we rely on and appreciate!
   [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/) for functional testing.
 * [CodeMirror](https://codemirror.net/) (optional) for editor syntax
   highlighting
-
 
 # Quickstart
 
@@ -106,31 +105,18 @@ data in `/home/silicon/instance`.
 
 ## Prerequisites
 
-This project requires Python 3.9 or greater. On a Debian/Ubuntu system, that
-means the following packages:
+This repo tries to be somewhat flexible about its tools and workflow. However,
+along the happy path you will find some combination of Python 3.9 (or better),
+`uv`, Docker/Podman, and `npm`.
 
-* `python3`
-* `python3-pip` (unless installed via other means)
-* `python3-dev`
-* `python3-venv`
-* `npm` (or `docker`) (optional to enable CodeMirror editor)
+Install [uv](https://github.com/astral-sh/uv) if necessary. If you are not a fan
+of curlpipes, there are many other ways to install it:
 
-Install [Poetry](https://python-poetry.org/) if necessary. Everyone has their
-own way of setting up their Python tooling but I'm a fan of
-[pipx](https://github.com/pypa/pipx):
-
-```sh
-pip3 install --user pipx
-pipx install poetry
-```
+* `pip install --user uv`
+* `pipx install uv`
+* download binaries from the [latest release](https://github.com/astral-sh/uv)
 
 ## Setup
-
-Use poetry to create a virtual environment and install the dependencies:
-
-```sh
-poetry install
-```
 
 Some settings can either be set as environment variables or written to a
 file named `.env` in the project root. For development, this will suffice:
@@ -152,14 +138,14 @@ docs, but these are some you might care to know about:
   of random characters. Setting this is optional as the app will create one
   (and write it to a file in `INSTANCE_PATH`) if one doesn't exist.
 * `SILICON_EDITOR`: When set to `textarea`, this disables the CodeMirror text
-editor when editing pages and uses a standard textarea element instead.
+  editor when editing pages and uses a standard textarea element instead.
 
 To initialize the database after the configuration settings have been set,
 run the following command. It will create an `instance` directory in the root
 of the project and initialize the SQLite database from `schema.sql`.
 
 ```sh
-poetry run flask --app silicon init-db
+uv run flask --app silicon init-db
 ```
 
 ## Running Silicon
@@ -167,7 +153,7 @@ poetry run flask --app silicon init-db
 Run the project via the `flask` development server:
 
 ```sh
-poetry run flask --app silicon run --debug
+uv run flask --app silicon run --debug
 ```
 
 Unless you changed the defaults, you should be able to access the UI on
@@ -175,11 +161,10 @@ http://localhost:5000/
 
 ## Running tests and flake8
 
-To run the tests, install the dev dependencies and run `pytest`:
+To run the tests:
 
 ```sh
-poetry install --with dev
-poetry run pytest
+uv run pytest
 ```
 
 If you have a tmpfs filesystem, you can set the `TMP` environment variable to
@@ -187,15 +172,14 @@ have test databases created there (which is faster and results in less
 wear-and-tear on your disk):
 
 ```sh
-TMP=/dev/shm poetry run pytest
+TMP=/dev/shm uv run pytest
 ```
 
 To make sure all code is formatted to flake8 standards, run `flake8`:
 
 ```sh
-poetry run flake8
+uv run flake8 --exclude .venv
 ```
-
 
 # Production Deployment
 
@@ -259,7 +243,7 @@ In the event that a database migration is needed, follow these steps:
 To import the data:
 
 4. Move or rename the old `instance/silicon.sqlite`, if it exists.
-5. Run `poetry run flask --app silicon init-db`.
+5. Run `uv run flask --app silicon init-db`.
 6. Run `sqlite3 instance/silicon.sqlite < silicon_data.sql`.
 7. Start the Silicon instance.
 
