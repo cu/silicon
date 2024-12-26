@@ -15,6 +15,7 @@ FROM $PYTHON_IMAGE AS build
 ARG UV_LINK_MODE=copy
 ARG UV_COMPILE_BYTECODE=1
 ARG UV_PYTHON_DOWNLOADS=never
+ARG UV_LOCKED=1
 ARG UV_PROJECT_ENVIRONMENT=/silicon/.venv
 
 COPY --from=npm-install /staging /staging
@@ -22,8 +23,9 @@ WORKDIR /staging
 
 RUN --mount=type=cache,target=/root/.cache <<EOS sh -ex
     pip install uv
-    uv sync --locked --no-install-project
+    uv sync --no-install-project
     TMP=/dev/shm uv run pytest
+    uv sync --no-install-project --no-group dev
     mv LICENSE scripts silicon /silicon
     mv entrypoint.sh /
 EOS
