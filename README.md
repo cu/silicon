@@ -55,17 +55,20 @@ Projects we rely on and appreciate!
 
 # Quickstart
 
-This project is configured and deployed much like any other Flask project.
-For details, see the [Flask configuration handling Docs].
+## Running Locally
 
-[Flask configuration handling docs]: https://flask.palletsprojects.com/en/1.1.x/config/
+See the Development section below for steps on running the app locally.
+
+For production, this project is configured and deployed much like any other
+Flask project.  For details, see the [Flask configuration handling Docs].
+
+[Flask configuration handling docs]: https://flask.palletsprojects.com/en/stable/config/
 
 ## Docker or Podman
 
-If you want to take this for a quick spin, the following commands should get
-you going. You obviously need to have [Docker](https://www.docker.com)
-installed. (If you have [Podman](https://podman.io), simply substitute `docker`
-for `podman`.)
+If containers are more your speed, the following commands should get you going.
+You obviously need to have [Docker](https://www.docker.com) installed. (If you
+have [Podman](https://podman.io), simply substitute `docker` for `podman`.)
 
 ```sh
 docker run \
