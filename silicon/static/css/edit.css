@@ -14,8 +14,8 @@
 }
 
 #alerts {
-    background: var(--nav-alert-background);
-    color: var(--nav-alert-text);
+    background: var(--color-bg-weak);
+    color: var(--color-fg-error);
     margin: 1em;
 }
 
