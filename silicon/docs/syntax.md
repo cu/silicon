@@ -170,12 +170,22 @@ Bare URLs are turned into links, as are URLs enclosed in angle brackets.
 ```
 Bare URL: https://www.example.com/
 
-Bare URL with angle brackets: <https://www.example.com>
+URL with angle brackets: <https://www.example.com>
 ```
 
 Bare URL: https://www.example.com/
 
-Bare URL with angle brackets: <https://www.example.com>
+URL with angle brackets: <https://www.example.com>
+
+### Email addresses
+
+Bare Email addresses are not turned into links, but you can use angle brackets to create a link to an email address.
+
+```
+Email address with angle brackets: Bob Example <example@example.com>
+```
+
+Email address with angle brackets: Bob Example <example@example.com>
 
 ### Inline-Style Links
 
