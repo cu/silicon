@@ -31,3 +31,24 @@ dev = [
 
 [tool.poe]
 executor.type = "uv"
+
+[tool.poe.tasks]
+init-db = "flask --app silicon init-db"
+devserver = "flask --app silicon run --debug"
+flake8 = "flake8 --exclude .venv"
+npm-docker = """
+docker run -ti
+           --rm
+           -v ${POE_CONF_DIR}/silicon/static:/app
+           -w /app
+           node:alpine
+           npm ci
+"""
+
+[tool.poe.tasks.test]
+cmd = "pytest"
+env = { TMP = "/dev/shm" }
+
+[tool.poe.tasks.npm]
+cwd = "silicon/static"
+cmd = "npm ci"

@@ -143,46 +143,42 @@ docs, but these are some you might care to know about:
 * `SILICON_EDITOR`: When set to `textarea`, this disables the CodeMirror text
   editor when editing pages and uses a standard textarea element instead.
 
-To initialize the database after the configuration settings have been set,
-run the following command. It will create an `instance` directory in the root
-of the project and initialize the SQLite database from `schema.sql`.
+To initialize the database after the configuration settings have been set, run
+the `init-db` command as described below. It will create an `instance` directory
+in the root of the project and initialize the SQLite database from `schema.sql`.
+
+## Commands
+
+[Poethepoet](https://poethepoet.natn.io/index.html) is used as a task runner.
+There are two ways to use it:
+
+**With `uv run`:**
+
+It is automatically installed as a dev dependency and has some `uv` integration,
+so you can run:
 
 ```sh
-uv run flask --app silicon init-db
+uv run poe <command>
 ```
 
-## Running Silicon
+**Global install**
 
-Run the project via the `flask` development server:
+If you install the `poethepoet` package via `uv tool install` or `pipx install`,
+then you can save yourself some typing:
 
 ```sh
-uv run flask --app silicon run --debug
+poe <command>
 ```
 
-Unless you changed the defaults, you should be able to access the UI on
-http://localhost:5000/
+These are the currently-supported commands. You can browse `pyproject.toml` to
+see how they are defined if you are curious:
 
-## Running tests and flake8
-
-To run the tests:
-
-```sh
-uv run pytest
-```
-
-If you have a tmpfs filesystem, you can set the `TMP` environment variable to
-have test databases created there (which is faster and results in less
-wear-and-tear on your disk):
-
-```sh
-TMP=/dev/shm uv run pytest
-```
-
-To make sure all code is formatted to flake8 standards, run `flake8`:
-
-```sh
-uv run flake8 --exclude .venv
-```
+* `init-db`: Initialize the database.
+* `devserver`: Run a development server on http://localhost:5000/.
+* `test`: Run the integration tests.
+* `flake8`: Run the flake8 checker.
+* `npm`: Install front-end JS dependencies.
+* `npm-docker`: Install front-end JS dependencies via docker.
 
 # Production Deployment
 
@@ -210,15 +206,15 @@ also have to install third-party Javascript/CSS static packages by running ONE
 of the following commands:
 
 ```sh
-# If you have `npm` installed locally
-(cd silicon/static && npm ci)
+# If you have `npm` installed
+uv run poe npm
 ```
 
 Or:
 
 ```sh
 # if you have `docker` installed
-docker run -ti --rm -v $PWD/silicon/static:/app -w /app node:alpine npm ci
+uv run poe npm-docker
 ```
 
 Currently only a handful of languages are enabled for syntax highlighting, if
