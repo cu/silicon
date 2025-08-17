@@ -24,6 +24,10 @@ Repository = "https://github.com/cu/silicon"
 dev = [
     "beautifulsoup4~=4.12",
     "flake8~=7.1",
+    "poethepoet>=0.37.0",
     "pytest~=8.3.0",
     "watchdog~=6.0",
 ]
+
+[tool.poe]
+executor.type = "uv"
