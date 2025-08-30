@@ -52,3 +52,7 @@ env = { TMP = "/dev/shm" }
 [tool.poe.tasks.npm]
 cwd = "silicon/static"
 cmd = "npm ci"
+
+[tool.poe.tasks.export]
+cmd = "flask --app silicon export"
+verbosity = -1

@@ -11,6 +11,13 @@ class SearchError(Exception):
     pass
 
 
+def get_titles():
+    """
+    Returns all page titles as an sqlite3.Cursor object.
+    """
+    return get_db().execute("SELECT DISTINCT title FROM pages;")
+
+
 def read_all():
     """
     Returns all revisions of all pages.

@@ -231,62 +231,39 @@ SILICON_EDITOR=textarea
 
 # Data Export and Import
 
-## SQL
+There are two schools of thought where it comes to data storage on note-taking
+systems:
 
-In the event that a database migration is needed, follow these steps:
+1. Throw everything into plaintext files. This makes the data far easier to
+read/edit with any file browser and text editor and is inherently portable. But
+it forces the app developer to either reimplement many of the nicities that you
+get for free with a database system, or abandon them entirely.
+2. Throw everything into a database (relational or otherwise) because database
+systems tend to take care of most of the heavy lifting. They offer a variety of
+features that fit very well with note-taking, content, and knowledge systems in
+general. The downside is that viewing and exporting the data outside of the
+application itself can get cumbersome in a hurry, especially if you don't
+already know SQL and the app's table structure.
 
-1. Stop the Silicon instance.
-2. Pull down the latest version of this repository.
-3. Run `scripts/dump.sh > silicon_data.sql`.
+Silicon attempts to straddle these two by paying close attention to the goals.
+As a user, I want my data easily accessible outside of the application when
+necessary without jumping through a lot of hoops. But as a developer, I don't
+want to reinvent a perfectly good wheel.
 
-To import the data:
-
-4. Move or rename the old `instance/silicon.sqlite`, if it exists.
-5. Run `uv run flask --app silicon init-db`.
-6. Run `sqlite3 instance/silicon.sqlite < silicon_data.sql`.
-7. Start the Silicon instance.
-
-Once you are satisfied that there are no issues, you can archive (or delete)
-the old `silicon.sqlite` file and `silicon_data.sql`.
-
-## JSON
-
-If you want to dump your data as JSON (perhaps to import into another system
-or hack on with your own tools), these scripts are not well tested but might do
-the job.
-
-Export:
+To that end, Silicon supports robust exporting and importing of data in an
+attempt to get the best of both worlds and to facilitiate any significant
+changes to the storage layer going forward. This is still a work in progress but
+for now, the following commands are supported:
 
 ```sh
-#!/usr/bin/env sh
-
-DB=instance/silicon.sqlite
-
-for table in pages relationships; do
-    sqlite3 $DB -cmd '.mode json' "select * from $table;" > $table.json
-done
+uv run poe export
 ```
 
-Import:
-
-```sh
-#!/usr/bin/env sh
-
-sqlite3 instance/silicon.sqlite << EOF
-INSERT INTO pages (revision, title, body)
-SELECT
-    json_extract(value, '$.revision'),
-    json_extract(value, '$.title'),
-    json_extract(value, '$.body')
-FROM json_each(readfile('pages.json'));
-
-INSERT INTO relationships
-SELECT
-    json_extract(value, '$.title_a'),
-    json_extract(value, '$.title_a')
-FROM json_each(readfile('relationships.json'));
-EOF
-```
+This exports all pages (and all revisions) to an `export` directory under the
+instance path. Each page has its own file named `<page_name>.json`. The JSON
+file structure is documented in `silicon/export.py`. Future versions of this
+command may support exporting individual pages (and revisions) as markdown as
+well as other more flexible forms of export.
 
 # Suggested Contributions
 
