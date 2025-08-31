@@ -70,16 +70,21 @@ def read(title, revision=None):
     return page
 
 
-def write(title, body):
+def write(title, body, revision=None):
     """
-    * Write a new revision (title and body) to the database.
+    * Upsert a new revision (title and body) to the database.
     * If there was a problem, return error message.
     """
     try:
         db = get_db()
-        db.execute(
-            "INSERT INTO pages (revision, title, body) VALUES (?, ?, ?)",
-            (datetime.now().isoformat(), title, body)
+        if not revision:
+            revision = datetime.now().isoformat()
+        db.execute("""
+            INSERT INTO pages (revision, title, body)
+            VALUES (?, ?, ?)
+            ON CONFLICT(revision, title)
+            DO UPDATE SET body = excluded.body
+            """, (revision, title, body)
         )
         db.commit()
     except Exception as err:

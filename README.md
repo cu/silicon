@@ -261,9 +261,24 @@ uv run poe export
 
 This exports all pages (and all revisions) to an `export` directory under the
 instance path. Each page has its own file named `<page_name>.json`. The JSON
-file structure is documented in `silicon/export.py`. Future versions of this
-command may support exporting individual pages (and revisions) as markdown as
-well as other more flexible forms of export.
+file structure is documented in `silicon/export.py`.
+
+To import pages from JSON files in the `export` directory:
+
+```sh
+uv run poe import
+```
+
+This will read all `.json` files from the `export` directory and import them
+into the database. If a database does not already exist, this will create one
+and then perform the import. If a database _does_ exist, it will refuse to
+import unless the `--force` flag is specified. In the case that a specific
+revision of a given page already exists, the body will be overwritten. This
+allows for merging two divergent exports in a "last import wins" fashion.
+
+Future versions of this command may support exporting and importing individual
+pages (and revisions) as markdown as well as other more flexible forms of
+export.
 
 # Suggested Contributions
 

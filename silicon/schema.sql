@@ -1,9 +1,8 @@
--- Because we (generally) keep all revisions, most mutable operations on this
--- will be INSERTs with a few deletes from time to time. No UPDATEs.
 CREATE TABLE pages (
     revision TEXT NOT NULL,
     title TEXT NOT NULL,
-    body TEXT
+    body TEXT,
+    PRIMARY KEY (revision, title)
 );
 
 -- creating the index should be done after the inserts on bulk import of data

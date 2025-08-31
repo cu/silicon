@@ -8,6 +8,7 @@ from flask import current_app
 from silicon.db import close_db, db_exists, init_db
 from silicon.page import get_titles, history, read
 from silicon.related import get as get_related
+from silicon.importer import DbImportError, import_db
 
 
 @click.command('init-db')
@@ -22,7 +23,13 @@ def init_db_command():
 
 
 @click.command('export')
-@click.option('--verbose', '-v', is_flag=True, default=False)
+@click.option(
+    '--verbose',
+    '-v',
+    is_flag=True,
+    default=False,
+    help="Enable verbose output."
+)
 def export_db_command(verbose):
     """
     Export all pages as JSON files to an `export` directory under the instance
@@ -95,8 +102,40 @@ def export_db_command(verbose):
                 click.echo(export_file_path)
 
 
+@click.command('import')
+@click.option(
+    '--verbose',
+    '-v',
+    is_flag=True,
+    default=False,
+    help="Enable verbose output."
+)
+@click.option(
+    '--force',
+    '-f',
+    is_flag=True,
+    default=False,
+    help="Overwrite existing pages."
+)
+def import_db_command(verbose, force):
+    """Import pages from JSON files."""
+
+    if db_exists() and not force:
+        click.echo("Database exists. Use --force to import anyway.", err=True)
+        sys.exit(1)
+
+    if not db_exists():
+        init_db()
+
+    try:
+        import_db(verbose)
+    except DbImportError as e:
+        click.echo(e, err=True)
+        sys.exit(1)
+
 
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
     app.cli.add_command(export_db_command)
+    app.cli.add_command(import_db_command)

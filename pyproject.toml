@@ -56,3 +56,7 @@ cmd = "npm ci"
 [tool.poe.tasks.export]
 cmd = "flask --app silicon export"
 verbosity = -1
+
+[tool.poe.tasks.import]
+cmd = "flask --app silicon import"
+verbosity = -1
