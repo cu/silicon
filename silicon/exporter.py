@@ -6,6 +6,7 @@ from flask import current_app
 
 from silicon.page import get_titles, history, read
 from silicon.related import get as get_related
+from silicon.util import slugify_title
 
 
 def export_db(verbose):
@@ -39,7 +40,7 @@ def export_db(verbose):
         Export a single page as a dictionary.
         """
         page = {}
-        page['title'] = title
+        page['title'] = slugify_title(title)
 
         # get attributes
         page['attributes'] = {}
@@ -66,7 +67,7 @@ def export_db(verbose):
     # write each page dict to a JSON file
     for title_row in get_titles():
         title = title_row['title']
-        export_file_path = export_dir / f"{title}.json"
+        export_file_path = export_dir / f"{slugify_title(title)}.json"
 
         with export_file_path.open('w', encoding='utf-8') as f:
             json.dump(export_page(title), f, ensure_ascii=False, indent=4)
