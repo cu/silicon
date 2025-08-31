@@ -1,15 +1,10 @@
-import json
-from pathlib import Path
 import sys
 
 import click
-from flask import current_app
 
 from silicon.db import close_db, db_exists, init_db
 from silicon.exporter import export_db
 from silicon.importer import DbImportError, import_db
-from silicon.page import get_titles, history, read
-from silicon.related import get as get_related
 
 
 @click.command('init-db')
@@ -43,6 +38,7 @@ def export_db_command(verbose):
     except Exception as e:
         click.echo(f"Error exporting database: {e}", err=True)
         sys.exit(1)
+
 
 @click.command('import')
 @click.option(
