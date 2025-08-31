@@ -35,7 +35,7 @@ executor.type = "uv"
 [tool.poe.tasks]
 init-db = "flask --app silicon init-db"
 devserver = "flask --app silicon run --debug"
-flake8 = "flake8 --exclude .venv"
+flake8 = "flake8 --show-source --exclude .venv"
 npm-docker = """
 docker run -ti
            --rm
