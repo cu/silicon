@@ -261,7 +261,7 @@ uv run poe export
 
 This exports all pages (and all revisions) to an `export` directory under the
 instance path. Each page has its own file named `<page_name>.json`. The JSON
-file structure is documented in `silicon/export.py`.
+file structure is documented in `silicon/exporter.py`.
 
 To import pages from JSON files in the `export` directory:
 
