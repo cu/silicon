@@ -48,7 +48,7 @@ def export_db(verbose):
 
         # get revisions
         revisions_data = []
-        for timestamp in history(title):
+        for timestamp in history(title, order='asc'):
             # for each timestamp, read the specific revision of the page
             # and append its timestamp and body to the revisions_data list
             revision_page = read(title, timestamp)

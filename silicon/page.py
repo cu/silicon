@@ -92,13 +92,20 @@ def write(title, body, revision=None):
         return "Unable to save page"
 
 
-def history(title):
+def history(title, order='desc'):
     """
     Return a list of all revisions of a title.
+
+    `order` is one of 'asc' or 'desc'.
     """
 
+    if order == 'asc':
+        sql_order = 'ASC'
+    else:
+        sql_order = 'DESC'
+
     revisions = get_db().execute(
-        "SELECT revision FROM pages WHERE title=? ORDER BY revision DESC",
+        f"SELECT revision FROM pages WHERE title=? ORDER BY revision {sql_order}",
         (title,)
     ).fetchall()
 
