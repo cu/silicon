@@ -72,8 +72,8 @@ def read(title, revision=None):
 
 def write(title, body, revision=None):
     """
-    * Upsert a new revision (title and body) to the database.
-    * If there was a problem, return error message.
+    Upsert a new revision (title and body) to the database.
+    If there was a problem, return error message.
     """
     try:
         db = get_db()
