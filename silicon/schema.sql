@@ -1,14 +1,14 @@
+-- We do not open sqlite3 in WAL mode, because:
+-- 1. Raw database performance is not exactly a critical goal here.
+-- 2. WAL mode creates two small files every time the database is open. This is
+--    not a big burden, but it seems worth avoiding if there's no actual
+--    benefit.
+
 CREATE TABLE pages (
     revision TEXT NOT NULL,
     title TEXT NOT NULL,
     body TEXT,
     PRIMARY KEY (revision, title)
-);
-
--- creating the index should be done after the inserts on bulk import of data
-CREATE INDEX pages_idx ON pages (
-  revision,
-  title
 );
 
 -- Page relationships
@@ -20,7 +20,7 @@ CREATE TABLE relationships (
 -- The full-text search table
 CREATE virtual TABLE pages_fts USING FTS5(
     title,
-    body,
+    body
 );
 
 -- Before a page is inserted into the pages table,
@@ -33,10 +33,10 @@ BEGIN
     VALUES (new.title, new.body);
 END;
 
--- After a page is deleted from the pages table,
--- delete the matching entry from the FTS table
-CREATE TRIGGER pages_after_delete AFTER DELETE ON pages
+-- Same trigger, but for an UPDATE (used in the `page.write()` upsert)
+CREATE TRIGGER pages_after_update AFTER UPDATE ON pages
 BEGIN
-    INSERT INTO pages_fts (pages_fts, rowid, title, body)
-    VALUES ('delete', old.rowid, old.title, old.body);
+    DELETE FROM pages_fts WHERE title = new.title;
+    INSERT INTO pages_fts (title, body)
+    VALUES (new.title, new.body);
 END;
