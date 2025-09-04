@@ -16,11 +16,11 @@ def get(title):
     """
     c = get_db()
     c.row_factory = None
-    rels = c.execute(
-        "SELECT title_b FROM relationships WHERE title_a = ? "
-        "UNION ALL "
-        "SELECT title_a FROM relationships WHERE title_b = ?",
-        (title, title)
+    rels = c.execute("""
+        SELECT title_b FROM relationships WHERE title_a = ?
+        UNION ALL
+        SELECT title_a FROM relationships WHERE title_b = ?
+        """, (title, title)
         ).fetchall()
     return sorted([r[0] for r in rels])
 
@@ -75,12 +75,12 @@ def delete(title, related):
 
     try:
         db = get_db()
-        db.execute(
-            "DELETE FROM relationships WHERE "
-            "(title_a = ? and title_b = ?) "
-            "OR "
-            "(title_b = ? and title_a = ?)",
-            (title, related, title, related)
+        db.execute("""
+            DELETE FROM relationships WHERE
+            (title_a = ? and title_b = ?)
+            OR
+            (title_b = ? and title_a = ?)
+            """, (title, related, title, related)
         )
         db.commit()
     except Exception as err:

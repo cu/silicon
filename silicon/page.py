@@ -15,7 +15,7 @@ def get_titles():
     """
     Returns all page titles as an sqlite3.Cursor object.
     """
-    return get_db().execute("SELECT DISTINCT title FROM pages;")
+    return get_db().execute("SELECT DISTINCT title FROM pages")
 
 
 def read_all():
@@ -39,24 +39,24 @@ def read(title, revision=None):
     page = {}
 
     if revision is None:
-        db_row = get_db().execute(
-            "SELECT revision, body "
-            "FROM pages "
-            "WHERE title=? "
-            "ORDER BY revision "
-            "DESC "
-            "LIMIT 1",
-            (title,)
+        db_row = get_db().execute("""
+            SELECT revision, body
+            FROM pages
+            WHERE title=?
+            ORDER BY revision
+            DESC
+            LIMIT 1
+            """, (title,)
         ).fetchone()
     else:
-        db_row = get_db().execute(
-            "SELECT revision, body "
-            "FROM pages "
-            "WHERE title=? AND revision=? "
-            "ORDER BY revision "
-            "DESC "
-            "LIMIT 1",
-            (title, revision)
+        db_row = get_db().execute("""
+            SELECT revision, body
+            FROM pages
+            WHERE title=? AND revision=?
+            ORDER BY revision
+            DESC
+            LIMIT 1
+            """, (title, revision)
         ).fetchone()
 
     page = {}
@@ -104,9 +104,12 @@ def history(title, order='desc'):
     else:
         sql_order = 'DESC'
 
-    revisions = get_db().execute(
-        f"SELECT revision FROM pages WHERE title=? ORDER BY revision {sql_order}",
-        (title,)
+    revisions = get_db().execute(f"""
+        SELECT revision
+        FROM pages
+        WHERE title=?
+        ORDER BY revision {sql_order}
+        """, (title,)
     ).fetchall()
 
     return [r['revision'] for r in revisions]
@@ -148,30 +151,30 @@ def search(query):
     filtered_query = filter_query(query)
 
     try:
-        title_results = get_db().execute(
-            "SELECT "
-            "  title, "
-            "  snippet(pages_fts, 0, '__mark__', '__/mark__', '...', 10) "
-            "AS snippet "
-            "FROM pages_fts "
-            "WHERE pages_fts "
-            "MATCH ? "
-            "ORDER BY rank "
-            "LIMIT 50",
-            (f'title:{filtered_query}',)
+        title_results = get_db().execute("""
+            SELECT
+              title,
+              snippet(pages_fts, 0, '__mark__', '__/mark__', '...', 10)
+            AS snippet
+            FROM pages_fts
+            WHERE pages_fts
+            MATCH ?
+            ORDER BY rank
+            LIMIT 50
+            """, (f'title:{filtered_query}',)
         ).fetchall()
 
-        body_results = get_db().execute(
-            "SELECT "
-            "  title, "
-            "  snippet(pages_fts, 1, '__mark__', '__/mark__', '...', 64) "
-            "AS snippet "
-            "FROM pages_fts "
-            "WHERE pages_fts "
-            "MATCH ? "
-            "ORDER BY rank "
-            "LIMIT 50",
-            (f"body:{filtered_query}",)
+        body_results = get_db().execute("""
+            SELECT
+              title,
+              snippet(pages_fts, 1, '__mark__', '__/mark__', '...', 64)
+            AS snippet
+            FROM pages_fts
+            WHERE pages_fts
+            MATCH ?
+            ORDER BY rank
+            LIMIT 50
+            """, (f"body:{filtered_query}",)
         ).fetchall()
     except OperationalError as err:
         raise SearchError(f"Search Error: {err}")
