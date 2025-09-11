@@ -20,11 +20,11 @@ def export_db(verbose):
             "related": ["example_page", "another_page"],
         "revisions": [
             {
-                "timestamp": "2023-11-10T08:02:07.654479",
+                "revision": "2023-11-10T08:02:07.654479",
                 "body": "Content of the second revision."
             },
             {
-                "timestamp": "2024-05-22T21:27:07.849579",
+                "revision": "2024-05-22T21:27:07.849579",
                 "body": "Content of the first revision."
             }
         ]
@@ -48,12 +48,12 @@ def export_db(verbose):
 
         # get revisions
         revisions_data = []
-        for timestamp in history(title, order='asc'):
-            # for each timestamp, read the specific revision of the page
-            # and append its timestamp and body to the revisions_data list
-            revision_page = read(title, timestamp)
+        for revision in history(title, order='asc'):
+            # for each revision, read the specific revision of the page
+            # and append its revision and body to the revisions_data list
+            revision_page = read(title, revision)
             revisions_data.append({
-                "timestamp": revision_page['revision'],
+                "revision": revision_page['revision'],
                 "body": revision_page['body']
             })
         page['revisions'] = revisions_data

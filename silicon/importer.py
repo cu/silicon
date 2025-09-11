@@ -50,7 +50,7 @@ def import_db(verbose):
                 f"Malformed JSON in {json_file.name}: missing key {e}")
 
         for revision in revisions:
-            write_page(title, revision['body'], revision['timestamp'])
+            write_page(title, revision['body'], revision['revision'])
 
         for related_page in related_pages:
             add_related(title, related_page)
