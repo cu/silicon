@@ -6,9 +6,6 @@ from silicon import page
 from silicon.related import add as add_related
 from silicon.related import get as get_related
 
-# TODO: 'timestamp' in the JSONS needs to be 'revision' to match our
-# existing model.
-
 
 def test_export_command(app, runner):
     """
