@@ -2,50 +2,44 @@ import os
 from pathlib import Path
 import secrets
 import sys
+import tempfile
 
 from flask import Flask
 
 
-def create_app(test_config=None):
+def create_app(testing=False):
     """
     Create the application object, sprinkle in some configuration,
     add our commands, add views, and return the app.
 
-    Note that Flask has a system for putting config files into the instance
-    path but we are opting to use environment variables instead, to avoid
-    having to manage configuration in different places.
+    Flask has a system for putting config files into the instance path but we
+    are opting to use environment variables instead, to avoid having to manage
+    configuration in multiple places.
 
-    `app.instance_path` is the directory where the database and secret key are
-    stored.
+    `app.instance_path` is the directory where the database, secret key, export
+    directory, and other user data are stored.
 
     Flask requires a secret key for session handling. If one was provided in
     the environment, we use that. Otherwise, we try to read one from a file
     in the instance path. If that fails, we generate a new key and write it out
     to disk.
     """
-    instance_path = os.getenv('INSTANCE_PATH', None)
 
-    if instance_path is not None:
+    if testing:
+        instance_path = tempfile.mkdtemp()
         app = Flask(__name__, instance_path=instance_path)
+        app.config['TESTING'] = True
+        app.config['SECRET_KEY'] = "test"
     else:
-        # Flask defaults to setting `instance_path` to a directory named
-        # `instance` next to the package.
         app = Flask(__name__)
-
-    if test_config:
-        app.config.update(test_config)
-    else:
-        # ensure the instance folder exists
         os.makedirs(app.instance_path, exist_ok=True)
-
-        if app.debug:
-            print(sys.version)
-            print(f"Instance path: {app.instance_path}")
-
-        app.config['DATABASE'] = os.path.join(
-            app.instance_path, 'silicon.sqlite')
-
         app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', None)
+
+    if app.debug:
+        print(sys.version)
+        print(f"Instance path: {app.instance_path}")
+
+    app.config['DATABASE'] = os.path.join(app.instance_path, 'silicon.sqlite')
 
     if app.config['SECRET_KEY'] is None:
         # try to read the secret key
