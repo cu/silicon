@@ -161,6 +161,23 @@ so you can run:
 uv run poe <command>
 ```
 
+## Debugging Tests
+
+The `test` command ultimately just calls `pytest`, so you can use all of its
+command-line arguments. This one is commonly used to debug misbehaving tests:
+
+```sh
+uv run poe test -x --pdb -s
+```
+
+Here's what those flags mean:
+
+* `-x`: Exit on first failed test.
+* `--pdb`: Drop to PDB on failure.
+* `-s`: Workaround [a bug] which makes PDB unresponsive to input.
+
+[a bug]: https://github.com/pytest-dev/pytest/issues/12888
+
 **Global install**
 
 If you install the `poethepoet` package via `uv tool install` or `pipx install`,
