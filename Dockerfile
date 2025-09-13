@@ -22,11 +22,11 @@ COPY --from=npm-install /staging /staging
 WORKDIR /staging
 
 RUN --mount=type=cache,target=/root/.cache <<EOS sh -ex
-    pip install uv
+    pip install --no-cache-dir uv
     uv sync --no-install-project
     TMP=/dev/shm uv run pytest
     uv sync --no-install-project --no-group dev
-    mv LICENSE scripts silicon /silicon
+    mv LICENSE silicon /silicon
     mv entrypoint.sh /
 EOS
 
@@ -55,6 +55,6 @@ WORKDIR /silicon
 
 EXPOSE 5000
 HEALTHCHECK --start-period=10s --timeout=5s \
-    CMD curl http://localhost:5000/view/home || exit 1
+    CMD curl --fail http://localhost:5000/view/home || exit 1
 ENTRYPOINT ["/usr/bin/tini", "--", "/entrypoint.sh"]
 CMD ["/silicon/.venv/bin/gunicorn", "--worker-tmp-dir /dev/shm", "'silicon:create_app()'"]
