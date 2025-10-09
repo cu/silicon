@@ -325,16 +325,11 @@ The HTML specification is maintained by the W3C.
 
 To specify a block of pre-formatted text to be rendered in a monospace font, put it between two triple-backticks, each on their own line.
 
-You can also prefix each line by four spaces to achieve the same effect.
-
 <pre>
 ```
 1 2 3 4 5
 a b c e f
 g h i j k
-
-    l m n o p
-    q r s t u
 ```
 </pre>
 
@@ -343,6 +338,13 @@ g h i j k
 a b c e f
 g h i j k
 ```
+
+You can also prefix each line by four spaces to achieve the same effect.
+
+<pre>
+    l m n o p
+    q r s t u
+</pre>
 
     l m n o p
     q r s t u
