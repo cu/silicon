@@ -161,6 +161,13 @@ so you can run:
 uv run poe <command>
 ```
 
+For example, to run the development server:
+
+```sh
+uv poe run init-db
+uv poe run devserver
+```
+
 ## Debugging Tests
 
 The `test` command ultimately just calls `pytest`, so you can use all of its
