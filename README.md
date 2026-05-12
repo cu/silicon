@@ -19,9 +19,6 @@ Features:
 * No-frills UI
 * No big frameworks, just a few smallish dependencies
 
-For the rationale on why this was created and paper-thin justifications on
-certain design decisions, see [this blog article](https://blog.bityard.net/articles/2022/December/the-design-of-silicon-notes-with-cartoons).
-
 <a href="https://gist.githubusercontent.com/cu/addb3a5f6ba1de11b8fb5eedd212d82a/raw/58e80468acbdd832d012fd776afac6d58357cbb3/view_full.png">
   <img src="https://gist.githubusercontent.com/cu/addb3a5f6ba1de11b8fb5eedd212d82a/raw/58e80468acbdd832d012fd776afac6d58357cbb3/view_full.png" width="400" height="275">
 </a>
@@ -57,7 +54,12 @@ Projects we rely on and appreciate!
 
 ## Running Locally
 
-See the Development section below for steps on running the app locally.
+For the impatient:
+
+* [Install uv](https://docs.astral.sh/uv/#installation)
+* Run `uv run poe init-db`
+* Run `uv run poe devserver`
+* Go to http://localhost:5000/
 
 For production, this project is configured and deployed much like any other
 Flask project.  For details, see the [Flask configuration handling Docs].
@@ -109,8 +111,8 @@ data in `/home/silicon/instance`.
 ## Prerequisites
 
 This repo tries to be somewhat flexible about its tools and workflow. However,
-along the happy path you will find some combination of Python 3.9 (or better),
-`uv`, Docker/Podman, and `npm`.
+along the happy path you will find some combination of Python, `uv`,
+Docker/Podman, and `npm`.
 
 Install [uv](https://github.com/astral-sh/uv) if necessary. If you are not a fan
 of curlpipes, there are many other ways to install it:
@@ -159,13 +161,6 @@ so you can run:
 
 ```sh
 uv run poe <command>
-```
-
-For example, to run the development server:
-
-```sh
-uv poe run init-db
-uv poe run devserver
 ```
 
 ## Debugging Tests
