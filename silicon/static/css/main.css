@@ -1,3 +1,9 @@
+:root {
+    --article-pre-background: var(--color-bg-weak2);
+    --article-table-border: var(--color-border-weak);
+    --article-header-underline: var(--color-border-strong);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -8,7 +14,8 @@ html {
     box-sizing: border-box;
 }
 
-body, html {
+body,
+html {
     overflow-x: hidden;
     line-height: 1.4;
 }
@@ -17,9 +24,13 @@ body {
     margin: 0;
     min-height: 100%;
     font-family: sans-serif;
+    background-color: var(--color-bg-weak);
+    color: var(--color-fg-text);
 }
 
-article, nav, section {
+article,
+nav,
+section {
     display: block;
 }
 
@@ -32,12 +43,12 @@ a:hover {
 }
 
 a.internal-link {
-    color: var(--article-internal-link);
+    color: var(--color-fg-link-internal);
     text-decoration: none;
 }
 
 a.internal-link:visited {
-    color: var(--article-internal-link);
+    color: var(--color-fg-link-internal);
 }
 
 a.internal-link:hover {
@@ -45,14 +56,19 @@ a.internal-link:hover {
 }
 
 article a {
-    color: var(--article-external-link);
+    color: var(--color-fg-link-external);
 }
 
 article a:visited {
-    color: var(--article-external-link-visited);
+    color: var(--color-fg-link-visited);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
     font-weight: normal;
@@ -64,10 +80,18 @@ h1 {
     border-bottom: 1px solid var(--article-header-underline);
 }
 
-h2 { font-size: 1.5rem; }
-h3 { font-size: 1.35rem; }
-h4 { font-size: 1.20rem; }
-h5 { font-size: 1.05rem; }
+h2 {
+    font-size: 1.5rem;
+}
+h3 {
+    font-size: 1.35rem;
+}
+h4 {
+    font-size: 1.2rem;
+}
+h5 {
+    font-size: 1.05rem;
+}
 
 h6 {
     font-size: 1rem;
@@ -82,13 +106,13 @@ blockquote {
 }
 
 code {
-    color: var(--article-code-text);
+    color: var(--color-fg-text);
     background-color: var(--article-pre-background);
 }
 
 pre {
     background-color: var(--article-pre-background);
-    border: 1px solid var(--article-pre-border);
+    border: 1px solid var(--color-border-weak);
     border-radius: 0.5em;
     margin-bottom: 0.5em;
     padding: 0.5em;
@@ -96,7 +120,7 @@ pre {
 }
 
 pre code {
-    color: var(--article-pre-text);
+    color: var(--color-fg-text);
     background-color: var(--article-pre-background);
 }
 
@@ -110,7 +134,7 @@ article table th {
     font-weight: bold;
     border: 1px solid var(--article-table-border);
     padding: 0.25em;
-    background: var(--article-background);
+    background: var(--color-bg-weak);
 }
 
 article table td {
@@ -119,11 +143,11 @@ article table td {
 }
 
 article table tr:hover {
-    background: var(--article-table-hover);
+    background: var(--color-bg-strong);
 }
 
 article table tr:nth-child(odd) {
-    background: var(--article-table-stripe);
+    background: var(--color-bg-weak2);
 }
 
 article dl dt {

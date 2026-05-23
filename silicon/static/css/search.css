@@ -7,6 +7,6 @@
 }
 
 #search-tips code {
-    color: var(--nav-text);
-    background: var(--nav-title-text);
+    color: var(--color-fg-text-weak);
+    background: var(--color-bg-weak);
 }

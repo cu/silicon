@@ -1,3 +1,17 @@
+:root {
+    --nav-text: var(--color-fg-text-weak);
+    --nav-background: var(--color-bg-strong);
+    --nav-button-text: var(--color-invert-fg-text);
+    --nav-button-background: var(--c-blue-light);
+    --nav-button-background-hover: var(--color-bg-link-hover);
+
+    /* Don't use dark mode colors on title, it's always dark */
+    --nav-title-text: var(--c-gray10);
+    --nav-title-background: var(--c-gray2);
+
+    --nav-page-links: var(--color-bg-link);
+}
+
 .grid-for-nav {
     position: absolute;
     width: 100%;
@@ -118,11 +132,21 @@
     list-style-type: decimal;
     padding-left: 2em;
 }
-#toc ol ol { list-style-type: upper-alpha; }
-#toc ol ol ol { list-style-type: upper-roman; }
-#toc ol ol ol ol { list-style-type: lower-alpha; }
-#toc ol ol ol ol ol { list-style-type: lower-roman; }
-#toc ol ol ol ol ol ol { list-style-type: lower-greek; }
+#toc ol ol {
+    list-style-type: upper-alpha;
+}
+#toc ol ol ol {
+    list-style-type: upper-roman;
+}
+#toc ol ol ol ol {
+    list-style-type: lower-alpha;
+}
+#toc ol ol ol ol ol {
+    list-style-type: lower-roman;
+}
+#toc ol ol ol ol ol ol {
+    list-style-type: lower-greek;
+}
 
 .nav-bottom {
     display: block;
@@ -153,7 +177,8 @@
     margin: 0.5em;
 }
 
-.nav-button, .menu-toggle {
+.nav-button,
+.menu-toggle {
     background: var(--nav-button-background);
     color: var(--nav-button-text);
     font-size: 14px;
@@ -168,7 +193,8 @@
     padding-right: 2em;
 }
 
-.nav-button:hover, .menu-toggle:hover {
+.nav-button:hover,
+.menu-toggle:hover {
     background: var(--nav-button-background-hover);
     text-decoration: none;
 }
@@ -198,10 +224,11 @@
 }
 
 .del-relation-btn {
-    color: var(--nav-alert-background);
+    color: var(--color-bg-error);
 }
 
-.widget-title-btn:hover, .del-relation-btn:hover {
+.widget-title-btn:hover,
+.del-relation-btn:hover {
     text-decoration: underline;
     cursor: pointer;
 }
@@ -219,7 +246,8 @@
         clear: both;
     }
 
-    .nav-top::after, .nav-top::before {
+    .nav-top::after,
+    .nav-top::before {
         display: table;
         content: "";
     }
@@ -255,7 +283,8 @@
         width: auto;
     }
 
-    .nav-page-title, .nav-bottom {
+    .nav-page-title,
+    .nav-bottom {
         display: none;
     }
 
