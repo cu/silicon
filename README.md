@@ -106,6 +106,10 @@ buildah build --format docker -t docker.io/bityard/silicon .
 Silicon will listen on port 5000 (plaintext HTTP) and stores all application
 data in `/home/silicon/instance`.
 
+# One-Click Deploy
+
+[![Deploy on RepoCloud](https://d16t0pc4846x52.cloudfront.net/deploylobe.svg)](https://repocloud.io/details/Silicon%20Notes/)
+
 # Development
 
 ## Prerequisites
